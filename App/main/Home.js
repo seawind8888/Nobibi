@@ -208,7 +208,7 @@ class Home extends Component {
 }
 const styles = StyleSheet.create({
     center_item_wrap: {
-        marginTop: 8,
+        marginTop: 7,
         alignSelf: 'center',
         alignItems: 'center',
         width: 250,
