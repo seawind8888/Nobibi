@@ -196,7 +196,7 @@ const styles=StyleSheet.create({
 
     },
     item_view_center_title:{
-        fontSize:32,
+        fontSize:33,
         color:'red',
         marginTop:5
     },
