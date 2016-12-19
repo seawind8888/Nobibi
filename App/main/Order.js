@@ -55,7 +55,9 @@ var {height,width} = Dimensions.get('window');
 
 class Order extends Component {
 
-    constructor(props) {
+
+
+  constructor(props) {
         super(props);
         this.onPressItem=this.onPressItem.bind(this);
         this.renderItem = this.renderItem.bind(this); 
@@ -66,6 +68,7 @@ class Order extends Component {
          orders :ORDER_DATA.data,
       }
     }
+
 
   onEndReached(typeId) {
      

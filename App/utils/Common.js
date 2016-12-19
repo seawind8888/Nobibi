@@ -1,6 +1,6 @@
 'use strict';
 
-let HOST= 'http://10.18.3.32:8080/';
+let HOST= 'http://localhost:8000/cmfx';
 
 export function requestData(url,method,body){
   return new Promise((resolve, reject) => {
@@ -38,6 +38,7 @@ export function request(url, method, body) {
         } else {
           isOk = false;
         }
+        alert(response);
         return response.json();
       })
       .then((responseData) => {

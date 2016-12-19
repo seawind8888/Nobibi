@@ -19,6 +19,7 @@ import ShortLineTwo from '../../component/ShortLineTwo';
 import ResetPwd from  './ResetPwd';
 import FetchHttpClient, { form,header } from 'fetch-http-client';
 import {HOST,LOGIN_ACTION} from  '../../common/Request';
+import { request } from  '../../utils/Common';
 import { toastShort } from '../../utils/ToastUtil';
 import {NativeModules} from 'react-native';
 var EncryptionModule = NativeModules.EncryptionModule;
@@ -44,6 +45,23 @@ class Login extends Component {
       const {navigator} = this.props;
       return NaviGoBack(navigator);
   }
+  loginVerify(){
+      return fetch('http://localhost:8000/cmfx/users/login',{
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: 'user_login=admin&user_pass=tony8823'
+      }).then((res) => {
+          // this.getLoading().hide();
+          return res.json()
+      }).then((resJson) => {
+          console.log(resJson)
+      }).catch((error) => {
+          // this.getLoading().hide();
+          toastShort(2)
+      })
+  }
   //用户登录/注册
   buttonRegisterOrLoginAction(position){
       const {navigator} = this.props;
@@ -57,36 +75,42 @@ class Login extends Component {
                toastShort('密码不能为空...');
                return;
            }
-           this.getLoading().show();
-           EncryptionModule.MD5ByCallBack(password,(msg)=>{
-               client.addMiddleware(form());
-                     client.addMiddleware(request => {
-                     request.options.headers['appkey'] = '8a9283a0567d5bea01567d5beaf90000';
-                  });
-              client.post(LOGIN_ACTION, {
-                  form: {
-                    username: username,
-                    password: msg,
-                 },
-              }).then(response => {
-                return response.json();
-              }).then((result)=>{
-                 this.getLoading().dismiss(); 
-                 if(result.code === '0'){
-                     //登录成功..
-                     toastShort('登录成功...'); 
-                     NaviGoBack(navigator);
-                 }else{
-                     toastShort(result.msg);
-                 }
-              }).catch((error) => {
-                this.getLoading().dismiss();  
-                toastShort('网络连接异常...');
-              });
-             },(error)=>{
-               this.getLoading().dismiss();  
-               toastShort('密码加密失败...');
-           });
+          request('/users/login','POST','user_login=admin&user_pass=tony8823');
+          {
+              console.log(responseData)
+          }
+           // this.getLoading().show();
+           // this.loginVerify();
+           // EncryptionModule.MD5ByCallBack(password,(msg)=>{
+           //     client.addMiddleware(form());
+           //           client.addMiddleware(request => {
+           //           request.options.headers['appkey'] = '8a9283a0567d5bea01567d5beaf90000';
+           //        });
+           //    client.post(LOGIN_ACTION, {
+           //        form: {
+           //          username: username,
+           //          password: msg,
+           //       },
+           //    }).then(response => {
+           //      return response.json();
+           //    }).then((result)=>{
+           //       this.getLoading().dismiss();
+           //       if(result.code === '0'){
+           //           //登录成功..
+           //           toastShort('登录成功...');
+           //           NaviGoBack(navigator);
+           //       }else{
+           //           toastShort(result.msg);
+           //       }
+           //    }).catch((error) => {
+           //      this.getLoading().dismiss();
+           //      toastShort('网络连接异常...');
+           //    });
+           //   },(error)=>{
+           //     this.getLoading().dismiss();
+           //     toastShort('密码加密失败...');
+           // });
+
            
       }else if(position === 1){
            //用户注册
@@ -180,10 +204,9 @@ class Login extends Component {
                 </View>
                 <TouchableOpacity onPress={() => {this.buttonRegisterOrLoginAction(0)}} 
                                   style={{justifyContent:'center',marginTop:13,alignItems:'center'}}>
-                    <Image source={require('../../imgs/logre/ic_login_btn.png')} 
-                           style={{width:300,height:40,justifyContent:'center',alignItems:'center'}}>
+                    <View style={{width:300,height:40,backgroundColor:'#3b3738',justifyContent:'center',alignItems:'center'}}>
                           <Text style={{color:'white'}}>登录</Text>
-                    </Image>
+                    </View>
                 </TouchableOpacity>
                 <View style={{alignItems:'flex-end',marginTop:13}}>
                     <TouchableOpacity onPress={()=>{this.findPwdAction()}} style={{marginRight:10}}>
