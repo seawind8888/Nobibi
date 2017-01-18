@@ -59,14 +59,14 @@ class User extends Component {
     itemActionIndex(position) {
         const {navigator} = this.props;
         if (position === 0) {
+
+        } else if (position === 1) {
             InteractionManager.runAfterInteractions(() => {
                 navigator.push({
                     component: Prepaid,
                     name: 'Prepaid'
                 });
             });
-        } else if (position === 1) {
-
         } else if (position === 2) {
             InteractionManager.runAfterInteractions(() => {
                 navigator.push({
@@ -133,7 +133,6 @@ class User extends Component {
                                     <Text style={{color:'#ddd'}}>¥999999999</Text>
                                 </View>
                             </View>
-
                             <View style={styles.modify_item}>
                                 <ImageButton icon={require('../imgs/ic_center_modify.png')} title='编辑'
                                              onPress={()=>{this.itemModifyAction()}}
@@ -144,10 +143,10 @@ class User extends Component {
 
                     <View style={styles.top_line}></View>
                     <CenterItem title='充值' icon={require('../imgs/ic_center_chongzhi.png')}
-                                onPress={()=>this.itemActionIndex(0)}/>
+                                onPress={()=>this.itemActionIndex(1)}/>
                     <View style={styles.top_line}></View>
                     <CenterItem title='提现' icon={require('../imgs/ic_center_tixian.png')}
-                                onPress={()=>this.itemActionIndex(0)}/>
+                                onPress={()=>this.itemActionIndex(1)}/>
                     <View style={styles.top_line}></View>
 
                     <View style={[styles.top_line,{marginTop:10}]}></View>
