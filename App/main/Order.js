@@ -220,7 +220,7 @@ const styles = StyleSheet.create({
         height: 40
     },
     item_view_bottom_price_v: {
-        flex: 1,
+        flex: 1.5,
         justifyContent: 'center',
         alignItems: 'center'
     },

@@ -56,9 +56,9 @@ class rootApp extends React.Component {
                     configureScene={this.configureScene}
                     renderScene={this.renderScene}
                     initialRoute={{
-            component: AppMain,
-            name: 'AppMain'
-          }}
+                        component: AppMain,
+                        name: 'AppMain'
+                    }}
                 />
             </View>
         );
