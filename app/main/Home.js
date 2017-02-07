@@ -17,7 +17,7 @@ import{
 import ViewPager from 'react-native-viewpager';
 import {IndicatorViewPager, PagerDotIndicator} from 'rn-viewpager';
 import ShortLine from '../component/ShortLine';
-import OrderSingle from './OrderSingle';
+import OrderSingle from './InvestmentSingle';
 var {height, width} = Dimensions.get('window');
 var item_width = (width - 1) / 2;
 

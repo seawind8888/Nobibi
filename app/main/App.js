@@ -11,11 +11,10 @@ import {
     Platform
 } from 'react-native';
 
-import Splash from './main/Ready';
-import AppMain from './main/AppMain';
-import {NaviGoBack} from './utils/CommonUtils';
-export const STATUS_BAR_HEIGHT = (Platform.OS === 'ios' ? 20 : 25)
-export const ABOVE_LOLIPOP = Platform.Version && Platform.Version > 19
+import Splash from './Ready';
+import AppMain from './AppMain';
+import {NaviGoBack} from '../utils/CommonUtils';
+export const STATUS_BAR_HEIGHT = (Platform.OS === 'ios' ? 20 : 0)
 var _navigator;
 class rootApp extends React.Component {
     constructor(props) {
@@ -23,7 +22,6 @@ class rootApp extends React.Component {
         this.renderScene = this.renderScene.bind(this);
         this.goBack = this.goBack.bind(this);
         BackAndroid.addEventListener('hardwareBackPress', this.goBack);
-        /*registerApp('wx331c28ad7ffd35b0');*/
     }
 
     goBack() {

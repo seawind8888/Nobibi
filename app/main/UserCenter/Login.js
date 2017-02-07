@@ -75,7 +75,7 @@ class Login extends Component {
                toastShort('密码不能为空...');
                return;
            }
-          request('/users/login','POST','user_login=admin&user_pass=tony8823');
+          request('/users/login','POST','user_login=admin&user_pass=111111');
           {
               console.log(responseData)
           }

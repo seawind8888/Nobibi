@@ -13,9 +13,9 @@ import TabNavigator from 'react-native-tab-navigator';
 
 
 import Home from './Home';
-import Order from './Order';
+import Order from './Invest';
 import Cart from './Find';
-import Center from './User';
+import Center from './UserCenter';
 
 
 

@@ -177,13 +177,12 @@ class User extends Component {
                         icon={require('../imgs/ic_center_more.png')}
                         onPress={()=>this.itemActionIndex(5)}/>
                     <View style={styles.top_line}></View>
-
-                    <TouchableWithoutFeedback
-                        style={{height:45,width:width,backgroundColor:'#dc2e2e',marginTop:10,justifyContent:'center',}}>
-                        <View>
-                            <Text style={{alignSelf:'center',color:'#ffffff'}}>退出登录</Text>
+                    <TouchableOpacity onPress={() => {this.buttonRegisterOrLoginAction(0)}}
+                                      style={{justifyContent:'center',marginTop:13,alignItems:'center'}}>
+                        <View style={{width:300,height:40,backgroundColor:'#3b3738',justifyContent:'center',alignItems:'center'}}>
+                            <Text style={{color:'white'}}>退出登录</Text>
                         </View>
-                    </TouchableWithoutFeedback>
+                    </TouchableOpacity>
                 </ScrollView>
             </View>
         );

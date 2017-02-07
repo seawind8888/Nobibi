@@ -8,5 +8,5 @@ import React, { Component } from 'react';
 import {
     AppRegistry,
 } from 'react-native';
-import rootApp from './App/app';
+import rootApp from './app/root';
 AppRegistry.registerComponent('lanmaolicai', () => rootApp);

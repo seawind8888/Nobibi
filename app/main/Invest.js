@@ -49,7 +49,7 @@ const ORDER_DATA = {
         "price": '5000元起投'
     }]
 };
-import OrderSingle from './OrderSingle';
+import OrderSingle from './InvestmentSingle';
 
 var {height, width} = Dimensions.get('window');
 

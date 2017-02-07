@@ -84,7 +84,7 @@ class Charge extends Component {
   /**
    * Render a separator between rows
    */
-  _renderSeparatorView(sectionID: number, rowID: number, adjacentRowHighlighted: bool) {
+  _renderSeparatorView(sectionID, rowID, adjacentRowHighlighted) {
     return (
       <View key={`${sectionID}-${rowID}`} style={styles.separator} />
     );
