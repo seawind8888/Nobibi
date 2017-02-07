@@ -32,7 +32,7 @@ class rootApp extends React.Component {
         let Component = route.component;
         _navigator = navigator;
         return (
-            <Component navigator={navigator} route={route}/>
+            <Component navigator={navigator} route={route} {...route.passProps}/>
         );
     }
 
@@ -50,7 +50,7 @@ class rootApp extends React.Component {
                 />
                 <Navigator
                     ref='navigator'
-                    style={styles.navigator}
+                    style={{flex: 1}}
                     configureScene={this.configureScene}
                     renderScene={this.renderScene}
                     initialRoute={{
@@ -62,11 +62,6 @@ class rootApp extends React.Component {
         );
     }
 }
-let styles = StyleSheet.create({
-    navigator: {
-        flex: 1
-    }
-});
 
 export default rootApp;
 

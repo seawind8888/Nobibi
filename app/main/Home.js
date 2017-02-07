@@ -6,6 +6,7 @@ import React, {Component} from 'react';
 
 import{
     View,
+    Alert,
     Text,
     Dimensions,
     Image,
@@ -18,6 +19,7 @@ import ViewPager from 'react-native-viewpager';
 import {IndicatorViewPager, PagerDotIndicator} from 'rn-viewpager';
 import ShortLine from '../component/ShortLine';
 import OrderSingle from './InvestmentSingle';
+import HomePageItem from '../component/HomePageItem'
 var {height, width} = Dimensions.get('window');
 var item_width = (width - 1) / 2;
 
@@ -57,7 +59,6 @@ class Home extends Component {
         });
         this.onPressItem = this.onPressItem.bind(this);
         this.centerItemAction = this.centerItemAction.bind(this);
-        this.topItemAction = this.topItemAction.bind(this);
         this.state = {
             dataSource: dataSource.cloneWithPages(BANNER_IMGS),
             orders: ORDER_DATA.data
@@ -67,32 +68,13 @@ class Home extends Component {
 
     centerItemAction(position) {
         if (position === 0) {
-
+            Alert.alert('标题','新手指引')
         } else if (position === 1) {
-
+            Alert.alert('标题','平台数据')
         } else if (position === 2) {
-
+            Alert.alert('标题','邀请有礼')
         } else if (position === 3) {
-
-        }
-    }
-
-    topItemAction(position) {
-        const {navigator} = this.props;
-        if (position === 0) {
-            InteractionManager.runAfterInteractions(() => {
-                navigator.push({
-                    component: City,
-                    name: 'City'
-                });
-            });
-        } else if (position === 1) {
-            InteractionManager.runAfterInteractions(() => {
-                navigator.push({
-                    component: Search,
-                    name: 'Search'
-                });
-            });
+            Alert.alert('标题','敬请期待')
         }
     }
 
@@ -122,22 +104,29 @@ class Home extends Component {
 
     render() {
         return (
-            <View style={{backgroundColor:'#f5f5f5',flex:1}}>
-                <ScrollView style={{flex:1}} showsVerticalScrollIndicator={false}>
+            <View style={{backgroundColor: '#f5f5f5', flex: 1}}>
+                <ScrollView style={{flex: 1}} showsVerticalScrollIndicator={false}>
                     <ViewPager
-                        style={{height:200,width:width}}
+                        style={{height: 200, width: width}}
                         dataSource={this.state.dataSource}
                         renderPage={this._renderPage}
                         isLoop={true}
                         autoPlay={true}/>
-                    <View style={{marginTop:8}}>
-                        <TouchableWithoutFeedback onPress={()=>{this.onPressItem(this.state.orders)}}>
-                            <View style={{flexDirection:'row',backgroundColor:'white',paddingTop:20,paddingBottom:20}}>
-                                <View style={{flex:1,marginLeft:8,justifyContent:'center',alignItems:'center'}}>
-                                    <Text style={{fontSize:18,marginTop:5}}>新手团</Text>
-                                    <Text style={{fontSize:28,color:'red',marginTop:5}}>12%</Text>
-                                    <Text style={{fontSize:14,color:'#808080',marginTop:5}}>预期年化收益</Text>
-                                    <Text style={{fontSize:14,color:'#ff8848',marginTop:5}}>新手专享|每日付息|多重保障</Text>
+                    <View style={{marginTop: 8}}>
+                        <TouchableWithoutFeedback onPress={()=> {
+                            this.onPressItem(this.state.orders)
+                        }}>
+                            <View style={{
+                                flexDirection: 'row',
+                                backgroundColor: 'white',
+                                paddingTop: 20,
+                                paddingBottom: 20
+                            }}>
+                                <View style={{flex: 1, marginLeft: 8, justifyContent: 'center', alignItems: 'center'}}>
+                                    <Text style={{fontSize: 18, marginTop: 5}}>新手团</Text>
+                                    <Text style={{fontSize: 28, color: 'red', marginTop: 5}}>12%</Text>
+                                    <Text style={{fontSize: 14, color: '#808080', marginTop: 5}}>预期年化收益</Text>
+                                    <Text style={{fontSize: 14, color: '#ff8848', marginTop: 5}}>新手专享|每日付息|多重保障</Text>
                                     <View style={styles.center_item_wrap}>
                                         <Text style={styles.center_item_tv}>立即投资</Text>
                                     </View>
@@ -146,59 +135,55 @@ class Home extends Component {
                             </View>
                         </TouchableWithoutFeedback>
                     </View>
-                    <View style={{marginTop:8,backgroundColor:'white'}}>
-                        <View style={{flexDirection:'row',height:100}}>
-                            <View style={{flexDirection:'row',width:item_width,marginTop:25}}>
-                                <Image source={CENTER_IMGS[2]} style={{width:40,height:35,marginLeft:20,marginTop:3}}/>
-                                <View style={{marginLeft:10,marginTop:5}}>
-                                    <Text style={{fontSize:16}}>新手指引</Text>
-                                    <Text style={{color:'#999',fontSize:12,marginTop:5}}>三部进阶理财高手</Text>
-                                </View>
-                            </View>
-                            <Image source={require('../imgs/home/ic_home_shu.png')} style={{height:80,marginTop:10}}/>
-                            <View style={{flexDirection:'row',width:item_width,marginTop:25}}>
-                                <Image source={CENTER_IMGS[1]} style={{width:40,height:40,marginLeft:20,marginTop:3}}/>
-                                <View style={{marginLeft:10,marginTop:5}}>
-                                    <Text style={{fontSize:16}}>平台数据</Text>
-                                    <Text style={{color:'#999',fontSize:12,marginTop:5}}>安全可靠数据保障</Text>
-                                </View>
-
-                            </View>
+                    <View style={{marginTop: 8, backgroundColor: 'white'}}>
+                        <View style={{flexDirection: 'row', height: 100}}>
+                            <HomePageItem
+                                title="新手指引"
+                                content="三部进阶理财高手"
+                                icon={CENTER_IMGS[0]}
+                                onPress={()=>{this.centerItemAction(0)}}
+                            />
+                            <Image source={require('../imgs/home/ic_home_shu.png')}
+                                   style={{height: 80, marginTop: 10}}/>
+                            <HomePageItem
+                                title="平台数据"
+                                content="安全可靠数据保障"
+                                icon={CENTER_IMGS[1]}
+                                onPress={()=>{this.centerItemAction(1)}}
+                            />
                         </View>
                         <ShortLine/>
-                        <View style={{flexDirection:'row',height:100}}>
-                            <View style={{flexDirection:'row',width:item_width,marginTop:30}}>
-                                <Image source={CENTER_IMGS[0]} style={{width:40,height:40,marginLeft:20}}/>
-                                <View style={{marginLeft:10,marginTop:5}}>
-                                    <Text style={{fontSize:16}}>邀请有礼</Text>
-                                    <Text style={{color:'#999',fontSize:12,marginTop:5}}>邀请好友送红包</Text>
-                                </View>
-                            </View>
-                            <Image source={require('../imgs/home/ic_home_shu.png')} style={{height:80,marginTop:10}}/>
-                            <View style={{flexDirection:'row',width:item_width,marginTop:30}}>
-                                <Image source={CENTER_IMGS[3]} style={{width:40,height:40,marginLeft:20}}/>
-                                <View style={{marginLeft:10,marginTop:5}}>
-                                    <Text style={{fontSize:16}}>敬请期待</Text>
-                                    <Text style={{color:'#999',fontSize:12,marginTop:5}}>更多活动敬请期待</Text>
-                                </View>
-                            </View>
+                        <View style={{flexDirection: 'row', height: 100}}>
+                            <HomePageItem
+                                title="邀请有礼"
+                                content="邀请好友送红包"
+                                icon={CENTER_IMGS[2]}
+                                onPress={()=>{this.centerItemAction(2)}}
+                            />
+                            <Image source={require('../imgs/home/ic_home_shu.png')}
+                                   style={{height: 80, marginTop: 10}}/>
+                            <HomePageItem
+                                title="敬请期待"
+                                content="更多活动敬请期待"
+                                icon={CENTER_IMGS[3]}
+                                onPress={()=>{this.centerItemAction(3)}}
+                            />
                         </View>
                     </View>
-
-                    <View style={{marginTop:8,flexDirection:'row'}}>
-                        <View style={{width:item_width,alignItems: 'center'}}>
-                            <Text style={{fontSize:16,fontWeight:'bold'}}>123,456,789</Text>
-                            <Text style={{fontSize:12,color:'#cacaca',marginTop:5}}>用户累计投资(元)</Text>
+                    <View style={{marginTop: 8, flexDirection: 'row'}}>
+                        <View style={{width: item_width, alignItems: 'center'}}>
+                            <Text style={{fontSize: 16, fontWeight: 'bold'}}>123,456,789</Text>
+                            <Text style={{fontSize: 12, color: '#cacaca', marginTop: 5}}>用户累计投资(元)</Text>
                         </View>
-                        <Image source={require('../imgs/home/ic_home_shu.png')} style={{height:40}}/>
-                        <View style={{width:item_width,alignItems: 'center'}}>
-                            <Text style={{fontSize:16,fontWeight:'bold'}}>123,456,789</Text>
-                            <Text style={{fontSize:12,color:'#cacaca',marginTop:5}}>用户累计赚取(元)</Text>
+                        <Image source={require('../imgs/home/ic_home_shu.png')} style={{height: 40}}/>
+                        <View style={{width: item_width, alignItems: 'center'}}>
+                            <Text style={{fontSize: 16, fontWeight: 'bold'}}>123,456,789</Text>
+                            <Text style={{fontSize: 12, color: '#cacaca', marginTop: 5}}>用户累计赚取(元)</Text>
                         </View>
                     </View>
                     <TouchableWithoutFeedback>
-                        <View style={{alignItems: 'center',marginTop:20,marginBottom:10}}>
-                            <Text style={{fontSize:14,color:'#3b3738'}}>了解更多</Text>
+                        <View style={{alignItems: 'center', marginTop: 20, marginBottom: 10}}>
+                            <Text style={{fontSize: 14, color: '#3b3738'}}>了解更多</Text>
                         </View>
                     </TouchableWithoutFeedback>
                 </ScrollView>

@@ -49,11 +49,11 @@ const ORDER_DATA = {
         "price": '5000元起投'
     }]
 };
-import OrderSingle from './InvestmentSingle';
+import InvestmentSingle from './InvestmentSingle';
 
 var {height, width} = Dimensions.get('window');
 
-class Order extends Component {
+class Invest extends Component {
 
 
     constructor(props) {
@@ -78,8 +78,8 @@ class Order extends Component {
         const {navigator} = this.props;
         InteractionManager.runAfterInteractions(() => {
             navigator.push({
-                component: OrderSingle,
-                name: 'OrderSingle',
+                component: InvestmentSingle,
+                name: 'InvestmentSingle',
                 order
             });
         });
@@ -248,4 +248,4 @@ const styles = StyleSheet.create({
         lineHeight: 20,
     }
 });
-export default Order;
+export default Invest;

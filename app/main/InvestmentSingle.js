@@ -20,7 +20,7 @@ import ShortLineTwo from '../component/ShortLineTwo';
 
 var {height, width} = Dimensions.get('window');
 
-class OrderSingle extends React.Component {
+class InvestmentSingle extends React.Component {
     constructor(props) {
         super(props);
         this.buttonBackAction = this.buttonBackAction.bind(this);
@@ -109,4 +109,4 @@ let styles = StyleSheet.create({
         height: 15,
     },
 });
-export default OrderSingle
+export default InvestmentSingle
