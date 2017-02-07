@@ -5,7 +5,7 @@
 
 ###1.第一步
 ```
-git clone https://github.com/jiangqqlmj/lanmaolicai.git
+git clone https://github.com/seawind8888/lanmaolicai.git
 ```
 ###2.第二步
 ```
