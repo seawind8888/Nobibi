@@ -3,10 +3,10 @@
  */
 import { combineReducers } from 'redux';
 
-import Star from './starReducer';
+import Login from './loginReducer';
 
 const rootReducer = combineReducers({
-    Star
+    Login
 })
 
 export default rootReducer

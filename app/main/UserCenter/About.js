@@ -12,7 +12,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-import { NaviGoBack } from '../../utils/CommonUtils';
+import { NaviGoBack } from '../../common/CommonUtils';
 
 class About extends React.Component {
   constructor(props) {

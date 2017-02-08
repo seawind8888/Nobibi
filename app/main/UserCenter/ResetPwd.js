@@ -11,7 +11,7 @@ import{
     TextInput,
 } from 'react-native';
 
-import { NaviGoBack } from '../../utils/CommonUtils';
+import { NaviGoBack } from '../../common/CommonUtils';
 import ShortLineTwo from '../../component/ShortLineTwo';
 
 var username = '';

@@ -2,5 +2,10 @@
  * Created by haifeng on 17/1/10.
  */
 
-export const INIT_ITEM = 'INIT_ITEM';
-export const STAR_ITEM = 'STAR_ITEM';
+export const HOST = 'http://localhost:8000/cmfx/';
+
+export const LOGIN_ACTION = 'users/login';
+
+export const LOGIN_INITIAL = 'LOGIN_INITIAL';
+
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';

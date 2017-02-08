@@ -9,7 +9,7 @@ import{
     StyleSheet,
     InteractionManager,
 } from 'react-native';
-import {NaviGoBack} from '../../utils/CommonUtils';
+import {NaviGoBack} from '../../common/CommonUtils';
 import ShortLine from '../../component/ShortLine';
 import ShareToFriend from './ShareToFriend';
 

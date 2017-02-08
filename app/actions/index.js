@@ -2,54 +2,38 @@
  * Created by haifeng on 17/1/10.
  */
 
-import * as types from '../constants/actionTypes';
-import Util from '../common/utils';
+import {HOST, LOGIN_ACTION, LOGIN_SUCCESS}  from '../constants/actionTypes';
+import {toastShort} from '../common/ToastUtil';
+import FetchHttpClient, {form, header} from 'fetch-http-client';
+const client = new FetchHttpClient(HOST);
 
-export function itemInit(listLength) {
-    return {
-        type: types.INIT_ITEM,
-        listLength
-    }
-}
-
-export function starItem(index) {
-    return {
-        type: types.STAR_ITEM,
-        index
-    }
-}
-
-export function collectionItem() {
-    return {
-        type: types.COLLECTION_ITEM
-    }
-}
-
-export function fetchNewsList() {
-    let URL = 'http://tz88.com.cn/cmfx/posts/all';
-
+export let userLogin = (username, password) => {
     return dispatch => {
-        dispatch(NewsInit());
-
-        Util.get(URL, (response) => {
-            dispatch(NewsFetch(response));
-        }, (error) => {alert(error)
-            console.log(`Fetch food info error: ${error}`);
-            dispatch(NewsFetch([]))
-        })
+        client.addMiddleware(form());
+        client.post(LOGIN_ACTION, {
+            form: {
+                user_login: username,
+                user_pass: password,
+            },
+        }).then(response => {
+            return response.json();
+        }).then((result)=> {
+            if (result.status === 'success') {
+                //登录成功..
+                dispatch(loginSuccess(result.data));
+                toastShort(result.msg);
+            } else {
+                toastShort(result.msg);
+            }
+        }).catch((error) => {
+            toastShort('网络发生错误,请重试!')
+        });
     }
 }
 
-
-
-function NewsInit() {
+let loginSuccess = (userInfo) => {
     return {
-        type:types.INIT_LIST
-    }
-}
-function NewsFetch(news) {
-    return {
-        type:types.LOAD_LIST,
-        news
+        type: LOGIN_SUCCESS,
+        userInfo
     }
 }

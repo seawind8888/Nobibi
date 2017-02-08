@@ -11,8 +11,8 @@ import{
     Dimensions,
     TouchableWithoutFeedback,
 } from 'react-native';
-import { NaviGoBack } from '../../utils/CommonUtils';
-import { toastShort } from '../../utils/ToastUtil';
+import { NaviGoBack } from '../../common/CommonUtils';
+import { toastShort } from '../../common/ToastUtil';
 const shareIconWechat = require('../..//imgs/share_icon_wechat.png');
 const shareIconMoments = require('../../imgs/share_icon_moments.png');
 

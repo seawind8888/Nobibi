@@ -15,7 +15,7 @@ import{
     InteractionManager,
 } from 'react-native';
 
-import { NaviGoBack } from '../../utils/CommonUtils';
+import { NaviGoBack } from '../../common/CommonUtils';
 import { CHARGE_DATA } from '../../common/VirtualData';
 import ChargeModify from './ChargeModify';
 

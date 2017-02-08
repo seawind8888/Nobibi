@@ -12,7 +12,7 @@ import{
     StyleSheet,
     ScrollView
 } from 'react-native';
-import {NaviGoBack} from '../utils/CommonUtils';
+import {NaviGoBack} from '../common/CommonUtils';
 
 var {height, width} = Dimensions.get('window');
 class NewsSingle extends Component {

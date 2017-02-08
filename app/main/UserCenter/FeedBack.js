@@ -14,7 +14,7 @@ import{
     TextInput,
 } from 'react-native';
 
-import { NaviGoBack } from '../../utils/CommonUtils';
+import { NaviGoBack } from '../../common/CommonUtils';
 
 var content = '';
 var contact = '';
