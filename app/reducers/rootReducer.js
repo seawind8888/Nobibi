@@ -3,10 +3,10 @@
  */
 import { combineReducers } from 'redux';
 
-import Login from './loginReducer';
+import News from './newsReducer';
 
 const rootReducer = combineReducers({
-    Login
+    News
 })
 
 export default rootReducer

@@ -14,14 +14,10 @@ import{
 } from 'react-native';
 //(Platform.OS === 'ios') ? '' : '';
 import {NaviGoBack} from '../../common/CommonUtils';
-import {userLogin} from '../../actions/index'
-import Register from './Register';
-import ShortLineTwo from '../../component/ShortLineTwo';
-import ResetPwd from  './ResetPwd';
 import {toastShort} from '../../common/ToastUtil';
-import {NativeModules} from 'react-native';
-
-import Loading from '../../component/Loading';
+import ShortLineTwo from '../../component/ShortLineTwo';
+import Register from './Register';
+import ResetPwd from  './ResetPwd';
 
 
 class Login extends Component {
@@ -44,27 +40,9 @@ class Login extends Component {
         return NaviGoBack(navigator);
     }
 
-    // loginVerify() {
-    //     return fetch('http://localhost:8000/cmfx/users/login', {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/x-www-form-urlencoded',
-    //         },
-    //         body: 'user_login=admin&user_pass=1111'
-    //     }).then((res) => {
-    //         // this.getLoading().hide();
-    //         return res.json()
-    //     }).then((resJson) => {
-    //         console.log(resJson)
-    //     }).catch((error) => {
-    //         // this.getLoading().hide();
-    //         toastShort(2)
-    //     })
-    // }
-
     //用户登录/注册
     buttonRegisterOrLoginAction(position) {
-        const {navigator, dispatch} = this.props;
+        const {navigator} = this.props;
         if (position === 0) {
             //用户登录
             if (this.state.username === '') {
@@ -75,7 +53,7 @@ class Login extends Component {
                 toastShort('密码不能为空...');
                 return;
             }
-            dispatch(userLogin(this.state.username, this.state.password));
+            toastShort('登录成功');
         } else if (position === 1) {
             //用户注册
             InteractionManager.runAfterInteractions(() => {
@@ -103,11 +81,6 @@ class Login extends Component {
 
     thirdPartLoginAction(position) {
 
-    }
-
-    //获取加载进度组件
-    getLoading() {
-        return this.refs['loading'];
     }
 
     render() {

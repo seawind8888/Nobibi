@@ -1,26 +1,27 @@
 /**
- * Created by haifeng on 16/10/7.
+ * Created by haifeng on 17/1/20.
  */
 import React, {Component} from 'react';
-import{
-    View,
-    Text,
-    TouchableOpacity,
-    Image,
-    Dimensions,
-    InteractionManager,
+import {
+    AppRegistry,
     StyleSheet,
-    ScrollView
+    Text,
+    View,
+    Dimensions,
+    Image,
+    WebView,
+    TouchableOpacity
 } from 'react-native';
+
 import {NaviGoBack} from '../common/CommonUtils';
 
-var {height, width} = Dimensions.get('window');
-class NewsSingle extends Component {
+let {height, width} = Dimensions.get('window');
+
+class WebViewContainer extends Component {
     constructor(props) {
         super(props);
         this.buttonBackAction = this.buttonBackAction.bind(this);
         this.state = {}
-
     }
 
     buttonBackAction() {
@@ -28,12 +29,14 @@ class NewsSingle extends Component {
         return NaviGoBack(navigator);
     }
 
+    componentWillMount() {
+    }
+
     render() {
-        const {navigator, route} = this.props;
-        let iconUrl = JSON.parse(route.order.smeta);
+        const {route} = this.props;
         return (
-            <View style={{backgroundColor:'#fff',flex:1}}>
-                <View style={{height:60,backgroundColor:'#3b3738',paddingTop:10,flexDirection:'row'}}>
+            <View style={{flex:1}} >
+                <View style={{height: 60, backgroundColor: '#3b3738', paddingTop: 10, flexDirection: 'row'}}>
                     <TouchableOpacity onPress={() => {this.buttonBackAction()}}
                                       style={{width:48,height:48,alignItems:'center',justifyContent:'center'}}>
                         <Image
@@ -46,18 +49,16 @@ class NewsSingle extends Component {
                     </View>
                     <View style={{width:48,height:48}}/>
                 </View>
-                <ScrollView style={{flex:1}} showsVerticalScrollIndicator={false}>
-                    <View style={{padding:10}}>
-                        <Text style={{fontSize:26}}>{route.order.post_title}</Text>
-                        <Image style={{width:width-20,height:200,marginTop:20}} source={{uri:iconUrl.thumb}}/>
-                        <View >
-                            <Text style={{marginTop:20,fontSize:14,lineHeight:20}}>{route.order.post_content}</Text>
-                        </View>
-                    </View>
-                </ScrollView>
+                <View style={{flex:1}}>
+                    <WebView
+                        style={{flex: 1}}
+                        source={{uri: route.news.post_source}}
+                    >
+                    </WebView>
+                </View>
             </View>
         );
     }
 }
-const styles = StyleSheet.create({});
-export default NewsSingle
+
+export default WebViewContainer

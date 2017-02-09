@@ -13,7 +13,11 @@ import{
     StyleSheet,
     ListView
 } from 'react-native';
+import WebViewContainer from './WebViewContainer';
 import NewsSingle from './NewsSingle';
+import {connect} from 'react-redux';
+import {newsInit} from '../actions/newsAction';
+import * as Progress from 'react-native-progress';
 const ORDER_DATA = {
     "api": "GetOrderHistory",
     "v": "1.0",
@@ -78,21 +82,26 @@ class Find extends Component {
     }
 
     componentDidMount() {
-
     }
 
-    onPressItem(order) {
+    componentWillMount() {
+        const {dispatch} = this.props;
+        dispatch(newsInit())
+    }
+
+    onPressItem(news) {
         const {navigator} = this.props;
         InteractionManager.runAfterInteractions(() => {
             navigator.push({
-                component: NewsSingle,
-                name: 'NewsSingle',
-                order
+                component: WebViewContainer,
+                name: 'WebViewContainer',
+                news
             });
         });
     }
 
     renderContent(dataSource) {
+        console.log(dataSource);
         return (
             <ListView
                 initialListSize={1}
@@ -105,20 +114,21 @@ class Find extends Component {
         );
     }
 
-    renderItem(order) {
+    renderItem(news,rowID) {
+        let iconUrl = JSON.parse(news.smeta);
         return (
             <View>
                 <View style={styles.item_view_zhanwei}></View>
-                <TouchableWithoutFeedback onPress={()=>{this.onPressItem(order)}}>
+                <TouchableWithoutFeedback onPress={()=>{this.onPressItem(news)}}>
                     <View style={{backgroundColor:'#ffffff'}}>
                         <View style={styles.item_view_center}>
-                            <Text style={{color:'black',fontSize:16}}>{order.shopName}</Text>
+                            <Text style={{color:'black',fontSize:16}}>{news.post_title}</Text>
                         </View>
                         <View style={styles.item_view_center_msg}>
                             <View style={styles.item_view_center_title_img}>
-                                <Image source={order.icon} style={styles.item_view_center_title}/>
+                                <Image source={{uri:iconUrl.thumb}} style={styles.item_view_center_title}/>
                                 <View style={{width:width-95,marginLeft:10}}>
-                                    <Text style={styles.item_view_center_time}>{order.time}</Text>
+                                    <Text style={styles.item_view_center_time}>{news.post_excerpt}</Text>
                                 </View>
                             </View>
                         </View>
@@ -129,6 +139,8 @@ class Find extends Component {
     }
 
     render() {
+        const {News} = this.props;
+        console.log(News);
         return (
             <View style={{flex:1,backgroundColor:'#f5f5f5'}}>
                 <View style={{height:60,backgroundColor:'#3b3738',flexDirection:'row',paddingTop:10}}>
@@ -136,11 +148,17 @@ class Find extends Component {
                         <Text style={{fontSize:18,color:'white',alignSelf:'center'}}>发现</Text>
                     </View>
                 </View>
-
-                <View style={{flex:1}}>
-                    {this.renderContent(this.state.dataSource.cloneWithRows(
-                        this.state.orders === undefined ? [] : this.state.orders))}
-                </View>
+                { News.isLoading ?
+                    <View style={{flex:1,alignItems: 'center', justifyContent: 'center'}}>
+                        <Progress.Circle size={40} indeterminate={true}/>
+                    </View>
+                    :
+                    <View style={{flex:1}}>
+                        {/*{this.renderContent(this.state.dataSource.cloneWithRows(*/}
+                            {/*this.state.orders === undefined ? [] : this.state.orders))}*/}
+                        {this.renderContent(this.state.dataSource.cloneWithRows(News.news))}
+                    </View>
+                }
             </View>
         );
     }
@@ -225,4 +243,16 @@ const styles = StyleSheet.create({
         color: 'black'
     }
 });
-export default Find;
+
+export default connect((state) => {
+    const {News} = state;
+    return {
+        News
+    }
+})(Find);
+// export default connect((state) => {
+//     console.log(state);
+//     return {
+//         news: state.news
+//     }
+// })(Find);

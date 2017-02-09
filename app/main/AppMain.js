@@ -14,7 +14,7 @@ import TabNavigator from 'react-native-tab-navigator';
 
 import Home from './Home';
 import Order from './Invest';
-import Cart from './Find';
+import Find from './Find';
 import Center from './UserCenter';
 
 
@@ -60,7 +60,7 @@ class AppMain extends Component {
                     renderSelectedIcon={() => <Image source={require("../imgs/ic_tab_cart_press.png")}
                                                      style={styles.iconStyle}/>}
                     onPress={() => this.setState({selectedTab: 'cart'})}>
-                    <Cart {...this.props}/>
+                    <Find {...this.props}/>
                 </TabNavigator.Item>
                 <TabNavigator.Item
                     title="我"

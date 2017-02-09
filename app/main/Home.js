@@ -15,11 +15,10 @@ import{
     ScrollView,
     InteractionManager,
 } from 'react-native';
-import ViewPager from 'react-native-viewpager';
-import {IndicatorViewPager, PagerDotIndicator} from 'rn-viewpager';
+import Swiper from 'react-native-swiper';
 import ShortLine from '../component/ShortLine';
+import HomePageItem from '../component/HomePageItem';
 import OrderSingle from './InvestmentSingle';
-import HomePageItem from '../component/HomePageItem'
 var {height, width} = Dimensions.get('window');
 var item_width = (width - 1) / 2;
 
@@ -54,13 +53,9 @@ const ORDER_DATA = {
 class Home extends Component {
     constructor(props) {
         super(props);
-        var dataSource = new ViewPager.DataSource({
-            pageHasChanged: (p1, p2) => p1 !== p2,
-        });
         this.onPressItem = this.onPressItem.bind(this);
         this.centerItemAction = this.centerItemAction.bind(this);
         this.state = {
-            dataSource: dataSource.cloneWithPages(BANNER_IMGS),
             orders: ORDER_DATA.data
         };
 
@@ -68,13 +63,13 @@ class Home extends Component {
 
     centerItemAction(position) {
         if (position === 0) {
-            Alert.alert('标题','新手指引')
+            Alert.alert('标题', '新手指引')
         } else if (position === 1) {
-            Alert.alert('标题','平台数据')
+            Alert.alert('标题', '平台数据')
         } else if (position === 2) {
-            Alert.alert('标题','邀请有礼')
+            Alert.alert('标题', '邀请有礼')
         } else if (position === 3) {
-            Alert.alert('标题','敬请期待')
+            Alert.alert('标题', '敬请期待')
         }
     }
 
@@ -106,12 +101,26 @@ class Home extends Component {
         return (
             <View style={{backgroundColor: '#f5f5f5', flex: 1}}>
                 <ScrollView style={{flex: 1}} showsVerticalScrollIndicator={false}>
-                    <ViewPager
-                        style={{height: 200, width: width}}
-                        dataSource={this.state.dataSource}
-                        renderPage={this._renderPage}
-                        isLoop={true}
-                        autoPlay={true}/>
+                    <Swiper height={200}
+                            autoplay={true}
+                            bounces={true}
+                            dot={<View style={styles.customDot}/>}
+                            activeDot={< View style={styles.customActiveDot}/>}
+                            paginationStyle={{bottom: 10}}
+                    >
+                        <View style={styles.slide}>
+                            <Image style={styles.slideImage} source={BANNER_IMGS[0]} resizeMode="stretch"/>
+                        </View>
+                        <View style={styles.slide}>
+                            <Image style={styles.slideImage} source={BANNER_IMGS[1]} resizeMode="stretch"/>
+                        </View>
+                        <View style={styles.slide}>
+                            <Image style={styles.slideImage} source={BANNER_IMGS[2]} resizeMode="stretch"/>
+                        </View>
+                        <View style={styles.slide}>
+                            <Image style={styles.slideImage} source={BANNER_IMGS[3]} resizeMode="stretch"/>
+                        </View>
+                    </Swiper>
                     <View style={{marginTop: 8}}>
                         <TouchableWithoutFeedback onPress={()=> {
                             this.onPressItem(this.state.orders)
@@ -141,7 +150,9 @@ class Home extends Component {
                                 title="新手指引"
                                 content="三部进阶理财高手"
                                 icon={CENTER_IMGS[0]}
-                                onPress={()=>{this.centerItemAction(0)}}
+                                onPress={()=> {
+                                    this.centerItemAction(0)
+                                }}
                             />
                             <Image source={require('../imgs/home/ic_home_shu.png')}
                                    style={{height: 80, marginTop: 10}}/>
@@ -149,7 +160,9 @@ class Home extends Component {
                                 title="平台数据"
                                 content="安全可靠数据保障"
                                 icon={CENTER_IMGS[1]}
-                                onPress={()=>{this.centerItemAction(1)}}
+                                onPress={()=> {
+                                    this.centerItemAction(1)
+                                }}
                             />
                         </View>
                         <ShortLine/>
@@ -158,7 +171,9 @@ class Home extends Component {
                                 title="邀请有礼"
                                 content="邀请好友送红包"
                                 icon={CENTER_IMGS[2]}
-                                onPress={()=>{this.centerItemAction(2)}}
+                                onPress={()=> {
+                                    this.centerItemAction(2)
+                                }}
                             />
                             <Image source={require('../imgs/home/ic_home_shu.png')}
                                    style={{height: 80, marginTop: 10}}/>
@@ -166,7 +181,9 @@ class Home extends Component {
                                 title="敬请期待"
                                 content="更多活动敬请期待"
                                 icon={CENTER_IMGS[3]}
-                                onPress={()=>{this.centerItemAction(3)}}
+                                onPress={()=> {
+                                    this.centerItemAction(3)
+                                }}
                             />
                         </View>
                     </View>
@@ -209,6 +226,29 @@ const styles = StyleSheet.create({
         flex: 1,
         height: 200,
         width: width
+    },
+    slideImage:{
+        width:width,
+        height:200
+    },
+    customDot: {
+        backgroundColor: '#ccc',
+        height: 6,
+        width: 6,
+        marginLeft: 2,
+        marginRight: 2,
+        marginTop: 10,
+        borderRadius: 3
+    },
+
+    customActiveDot: {
+        backgroundColor: 'white',
+        height: 6,
+        width: 6,
+        marginLeft: 2,
+        marginRight: 2,
+        marginTop: 10,
+        borderRadius: 3
     }
 });
 export default Home;

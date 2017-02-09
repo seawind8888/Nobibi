@@ -15,15 +15,12 @@ import{
 
 import { NaviGoBack } from '../../common/CommonUtils';
 import ShortLineTwo from '../../component/ShortLineTwo';
-
-import FetchHttpClient, { form,header } from 'fetch-http-client';
 import {HOST,REGISTER_ACTION} from  '../../common/Request';
 import {NativeModules} from 'react-native';
 var EncryptionModule = NativeModules.EncryptionModule;
 
 import Loading from '../../component/Loading';
 
-const client = new FetchHttpClient(HOST);
 
 
 var username = '';
