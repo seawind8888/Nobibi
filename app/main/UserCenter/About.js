@@ -27,19 +27,19 @@ class About extends React.Component {
   render() {
     return (
        <View style={{backgroundColor:'#fff',flex:1}}>
-          <View style={{height:48,backgroundColor:'black',flexDirection:'row'}}>
-                <TouchableOpacity onPress={() => {this.buttonBackAction()}} 
-                                  style={{width:48,height:48,alignItems:'center',justifyContent:'center'}}>
-                    <Image 
+                <View style={{height: 60, backgroundColor: '#389e7f',flexDirection:'row',paddingTop:10}}>
+                    <TouchableOpacity onPress={() => {this.buttonBackAction()}} 
+                                     style={{justifyContent:'center',alignItems:'center',height:48,width:48}}>
+                       <Image 
                           style={{width:13,height:20}}
                           source={require('../../imgs/ic_center_back.png')}
-                     />
-                </TouchableOpacity>  
-                <View style={{flex:1,alignItems:'center',justifyContent:'center'}}>
-                    <Text style={{fontSize:18,color:'white',alignSelf:'center'}}>问题报告</Text>   
-                </View> 
-                <View style={{width:48,height:48}}/> 
-          </View>
+                       />
+                    </TouchableOpacity>  
+                    <View style={{flex:1,alignItems:'center',justifyContent:'center'}}>
+                       <Text style={{fontSize:18,color:'white',alignSelf:'center'}}>关于我们</Text>   
+                    </View>  
+                    <View style={{width:48,height:48}}/>
+                </View>
           <View style={{alignItems:'center',marginTop:10}}>
              <Image source={require('../../imgs/ic_center_more_icon.png')} style={{width:110,height:110}}/>
              <Text style={styles.text_version}>版本:V1.0</Text>

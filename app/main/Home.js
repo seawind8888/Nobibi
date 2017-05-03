@@ -12,35 +12,28 @@ import {
     Image,
     StyleSheet,
     TouchableWithoutFeedback,
+    RefreshControl,
     ScrollView,
     InteractionManager
 } from 'react-native';
 import Swiper from 'react-native-swiper';
 import ShortLine from '../component/ShortLine';
 import HomePageItem from '../component/HomePageItem';
-import OrderSingle from './InvestmentSingle';
-var {height, width} = Dimensions.get('window');
-var item_width = (width - 1) / 2;
+import InvestmentSingle from './InvestmentSingle';
+import {connect} from 'react-redux';
+import {investFetch} from '../actions/investAction';
+const {height, width} = Dimensions.get('window');
+const item_width = (width - 1) / 2;
 
 const BANNER_IMGS = [require('../imgs/home/1.jpg'), require('../imgs/home/2.png'), require('../imgs/home/3.jpg'), require('../imgs/home/4.png')];
-const CENTER_IMGS = [require('../imgs/home/img_1.png'), require('../imgs/home/img_2.png'), require('../imgs/home/img_6.png'), require('../imgs/home/img_3.png'), require('../imgs/home/img_5.png'), require('../imgs/home/img_4.png')];
-const ORDER_DATA = {
-    "api": "GetOrderHistory",
-    "v": "1.0",
-    "code": "0",
-    "msg": "success",
-    "data": [
-        {
-            "id": 1,
-            "shopName": "新手团",
-            "orderStauts": 1,
-            "icon": "",
-            "title": '12%',
-            "time": "预期年化收益",
-            "price": '1元起投'
-        }
-    ]
-};
+const CENTER_IMGS = [
+    require('../imgs/home/img_1.png'),
+    require('../imgs/home/img_2.png'),
+    require('../imgs/home/img_6.png'),
+    require('../imgs/home/img_3.png'),
+    require('../imgs/home/img_5.png'),
+    require('../imgs/home/img_4.png')
+];
 
 class Home extends Component {
     constructor(props) {
@@ -51,32 +44,43 @@ class Home extends Component {
         this.centerItemAction = this
             .centerItemAction
             .bind(this);
-        this.state = {
-            orders: ORDER_DATA.data
-        };
+        this.onScrollDown = this
+            .onScrollDown
+            .bind(this);
+        this.state = {};
 
+    }
+    componentWillMount() {
+        return this.onScrollDown()
+    }
+
+    //下拉刷新
+    onScrollDown() {
+        const {dispatch} = this.props;
+        dispatch(investFetch())
     }
 
     centerItemAction(position) {
         if (position === 0) {
-            Alert.alert('标题', '新手指引')
+            Alert.alert('提示', '新手指引')
         } else if (position === 1) {
-            Alert.alert('标题', '平台数据')
+            Alert.alert('提示', '平台数据')
         } else if (position === 2) {
-            Alert.alert('标题', '邀请有礼')
+            Alert.alert('提示', '邀请有礼')
         } else if (position === 3) {
-            Alert.alert('标题', '敬请期待')
+            Alert.alert('提示', '敬请期待')
         }
     }
 
     onPressItem(order) {
         const {navigator} = this.props;
         InteractionManager.runAfterInteractions(() => {
-            navigator.push({component: OrderSingle, name: 'OrderSingle', order});
+            navigator.push({component: InvestmentSingle, name: 'InvestmentSingle', order});
         });
     }
 
     render() {
+        const {Invest} = this.props;
         return (
             <View
                 style={{
@@ -86,7 +90,15 @@ class Home extends Component {
                 <ScrollView
                     style={{
                     flex: 1
-                }}
+                    }}
+
+                    refreshControl={
+                        <RefreshControl
+                            refreshing={Invest.isLoading}
+                            onRefresh={() => this.onScrollDown() }
+                            title="正在加载中……"
+                            color="#ccc"/>
+                    }
                     showsVerticalScrollIndicator={false}>
                     <Swiper
                         height={160}
@@ -167,7 +179,7 @@ class Home extends Component {
                     }}>
                         <TouchableWithoutFeedback
                             onPress={() => {
-                            this.onPressItem(this.state.orders)
+                            this.onPressItem(Invest.investList[0])
                         }}>
                             <View
                                 style={{
@@ -275,7 +287,7 @@ class Home extends Component {
                                 onPress={() => {
                                 this.centerItemAction(2)
                             }}/>
-                            
+
                         </View>
                         <ShortLine/>
                         <View
@@ -303,6 +315,72 @@ class Home extends Component {
                             }}/>
                         </View>
                     </View>
+                    <View
+                        style={{
+                        flexDirection: 'row'
+                    }}>
+                        <View
+                            style={{
+                            flex: 1,
+                            alignItems: 'center',
+                            flexWrap: 'wrap',
+                            paddingTop: 10
+                        }}>
+                            <Image
+                                style={{
+                                width: 30,
+                                height: 30,
+                                marginBottom: 5
+                            }}
+                                source={require('../imgs/home/bottom_1.png')}/>
+                            <Text
+                                style={{
+                                color: '#515151',
+                                fontSize: 12
+                            }}>投资海量分散</Text>
+                        </View>
+                        <View
+                            style={{
+                            flex: 1,
+                            alignItems: 'center',
+                            flexWrap: 'wrap',
+                            paddingTop: 10
+                        }}>
+                            <Image
+                                style={{
+                                width: 30,
+                                height: 30,
+                                marginBottom: 5
+                            }}
+                                source={require('../imgs/home/bottom_2.png')}/>
+                            <Text
+                                style={{
+                                color: '#515151',
+                                fontSize: 12
+                            }}>投资海量分散</Text>
+                        </View>
+                        <View
+                            style={{
+                            flex: 1,
+                            alignItems: 'center',
+                            flexWrap: 'wrap',
+                            paddingTop: 10
+                        }}>
+                            <Image
+                                style={{
+                                width: 30,
+                                height: 30,
+                                marginBottom: 5
+                            }}
+                                source={require('../imgs/home/bottom_3.png')}/>
+                            <Text
+                                style={{
+                                color: '#515151',
+                                fontSize: 12
+                            }}>银行级风控人才</Text>
+                        </View>
+
+                    </View>
                     <TouchableWithoutFeedback>
                         <View
                             style={{
@@ -313,7 +391,7 @@ class Home extends Component {
                             <Text
                                 style={{
                                 fontSize: 14,
-                                color: '#3b3738'
+                                color: '#389e7f'
                             }}>了解更多</Text>
                         </View>
                     </TouchableWithoutFeedback>
@@ -366,4 +444,7 @@ const styles = StyleSheet.create({
         borderRadius: 3
     }
 });
-export default Home;
+export default connect((state) => {
+    const {Invest} = state;
+    return {Invest}
+})(Home);

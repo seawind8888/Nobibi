@@ -13,7 +13,7 @@ import TabNavigator from 'react-native-tab-navigator';
 
 
 import Home from './Home';
-import Order from './Invest';
+import Invest from './Invest';
 import Find from './Find';
 import Center from './UserCenter';
 
@@ -42,24 +42,24 @@ class AppMain extends Component {
                 </TabNavigator.Item>
                 <TabNavigator.Item
                     title="投资"
-                    selected={this.state.selectedTab === 'order'}
+                    selected={this.state.selectedTab === 'invest'}
                     selectedTitleStyle={styles.selectedTextStyle}
                     titleStyle={styles.textStyle}
                     renderIcon={() => <Image source={require("../imgs/tab_order.png")} style={styles.iconStyle}/>}
                     renderSelectedIcon={() => <Image source={require("../imgs/tab_order_press.png")}
                                                      style={styles.iconStyle}/>}
-                    onPress={() => this.setState({selectedTab: 'order'})}>
-                    <Order {...this.props}/>
+                    onPress={() => this.setState({selectedTab: 'invest'})}>
+                    <Invest {...this.props}/>
                 </TabNavigator.Item>
                 <TabNavigator.Item
                     title="发现"
-                    selected={this.state.selectedTab === 'cart'}
+                    selected={this.state.selectedTab === 'find'}
                     selectedTitleStyle={styles.selectedTextStyle}
                     titleStyle={styles.textStyle}
                     renderIcon={() => <Image source={require("../imgs/tab_find.png")} style={styles.iconStyle}/>}
                     renderSelectedIcon={() => <Image source={require("../imgs/tab_find_press.png")}
                                                      style={styles.iconStyle}/>}
-                    onPress={() => this.setState({selectedTab: 'cart'})}>
+                    onPress={() => this.setState({selectedTab: 'find'})}>
                     <Find {...this.props}/>
                 </TabNavigator.Item>
                 <TabNavigator.Item

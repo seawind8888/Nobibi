@@ -6,23 +6,23 @@ import * as types from '../actions/actionTypes';
 
 const initialState = {
     isLoading:true,
-    newsList:[]
+    investList:[]
 };
 
-let NewsReducer = (state = initialState, action) => {
+let InvestReducer = (state = initialState, action) => {
 
     switch (action.type) {
-        case types.FETCH_NEWS_INIT:
+        case types.FETCH_INVEST_INIT:
             return state;
-        case types.FETCH_NEWS_LIST:
+        case types.FETCH_INVEST_LIST:
             return {
                 ...state,
                 isLoading: false,
-                newsList: action.response.data
+                investList: action.response.data
             }
         default:
             return state
     }
 }
 
-export default NewsReducer;
+export default InvestReducer;

@@ -36,7 +36,7 @@ class WebViewContainer extends Component {
         const {route} = this.props;
         return (
             <View style={{flex:1}} >
-                <View style={{height: 60, backgroundColor: '#3b3738', paddingTop: 10, flexDirection: 'row'}}>
+                <View style={{height: 60, backgroundColor: '#389e7f', paddingTop: 10, flexDirection: 'row'}}>
                     <TouchableOpacity onPress={() => {this.buttonBackAction()}}
                                       style={{width:48,height:48,alignItems:'center',justifyContent:'center'}}>
                         <Image

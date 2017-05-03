@@ -49,9 +49,9 @@ class FeebBack extends Component {
   render() {
         return (
              <View style={{backgroundColor:'#f5f5f5',flex:1}}>
-                <View style={{height:60,backgroundColor:'#3b3738',flexDirection:'row'}}>
+                <View style={{height: 60, backgroundColor: '#389e7f',flexDirection:'row',paddingTop:10}}>
                     <TouchableOpacity onPress={() => {this.buttonBackAction()}} 
-                                      style={{width:48,height:48,alignItems:'center',justifyContent:'center'}}>
+                                     style={{justifyContent:'center',alignItems:'center',height:48,width:48}}>
                        <Image 
                           style={{width:13,height:20}}
                           source={require('../../imgs/ic_center_back.png')}
@@ -59,8 +59,8 @@ class FeebBack extends Component {
                     </TouchableOpacity>  
                     <View style={{flex:1,alignItems:'center',justifyContent:'center'}}>
                        <Text style={{fontSize:18,color:'white',alignSelf:'center'}}>问题报告</Text>   
-                    </View> 
-                    <View style={{width:48,height:48}}/> 
+                    </View>  
+                    <View style={{width:48,height:48}}/>
                 </View>
                 <View style={{backgroundColor:'white',marginTop:10}}>
                      <View style={styles.fd_content_style}>

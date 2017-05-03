@@ -127,7 +127,7 @@ class Charge extends Component {
   render() {
         return (
              <View style={{backgroundColor:'#f5f5f5',flex:1}}>
-                <View style={{height:60,backgroundColor:'#3b3738',flexDirection:'row',paddingTop:10}}>
+                <View style={{height:60,backgroundColor:'#389e7f',flexDirection:'row',paddingTop:10}}>
                     <TouchableOpacity onPress={() => {this.buttonBackAction()}} 
                                       style={{width:48,height:48,alignItems:'center',justifyContent:'center'}}>
                        <Image 

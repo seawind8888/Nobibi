@@ -104,7 +104,7 @@ class User extends Component {
         return (
             <View style={{flex: 1, backgroundColor: '#f5f5f5'}}>
 
-                <View style={{height: 60, backgroundColor: '#3b3738', flexDirection: 'row', paddingTop: 10}}>
+                <View style={{height: 60, backgroundColor: '#389e7f', flexDirection: 'row', paddingTop: 10}}>
                     <View style={{flex: 1}}></View>
                     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
                         <Text style={{fontSize: 18, color: 'white', alignSelf: 'center'}}>我的</Text>
@@ -152,7 +152,7 @@ class User extends Component {
                                 onPress={()=>this.itemActionIndex(1)}/>
                     <View style={styles.top_line}></View>
                     <CenterItem title='提现' icon={require('../imgs/ic_center_tixian.png')}
-                                onPress={()=>this.itemActionIndex(1)}/>
+                                onPress={()=>this.itemActionIndex(2)}/>
                     <View style={styles.top_line}></View>
 
                     <View style={[styles.top_line, {marginTop: 10}]}></View>
@@ -190,7 +190,7 @@ class User extends Component {
                         <View style={{
                             width: 300,
                             height: 40,
-                            backgroundColor: '#3b3738',
+                            backgroundColor: '#389e7f',
                             justifyContent: 'center',
                             alignItems: 'center'
                         }}>

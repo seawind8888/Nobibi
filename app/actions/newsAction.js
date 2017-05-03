@@ -4,7 +4,7 @@
 import * as types from './actionTypes';
 import Util from '../common/Common';
 
-export let newsInit = () => {
+export let newsFetch = () => {
     let URL = 'http://tz88.com.cn/cmfx/posts/all';
     return dispatch => {
         Util.get(URL, (response) => {
@@ -25,7 +25,7 @@ let fetchNewsList = (response) => {
 
 let fetchNewsError = () => {
     return {
-        type: types.FETCH_NEWS_ERROR,
+        type: types.FETCH_NEWS_INIT,
     }
 }
 

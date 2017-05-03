@@ -9,6 +9,7 @@ import {
     View,
     Text,
     StyleSheet,
+    TouchableWithoutFeedback,
     TouchableOpacity,
     ListView,
     ScrollView,
@@ -37,7 +38,7 @@ class InvestmentSingle extends React.Component {
         const {navigator, route} = this.props;
         return (
             <View style={{backgroundColor:'#fff',flex:1}}>
-                <View style={{height:60,backgroundColor:'#3b3738',paddingTop:10,flexDirection:'row'}}>
+                <View style={{height:60,backgroundColor:'#389e7f',paddingTop:10,flexDirection:'row'}}>
                     <TouchableOpacity onPress={() => {this.buttonBackAction()}}
                                       style={{width:48,height:48,alignItems:'center',justifyContent:'center'}}>
                         <Image
@@ -88,9 +89,11 @@ class InvestmentSingle extends React.Component {
                             </View>
                         </View>
                         <ShortLineTwo/>
-                        <TouchableOpacity style={styles.item_layout}>
-                            <Text style={{color:'#ffffff',fontSize:18}}>立即投资</Text>
-                        </TouchableOpacity>
+                        <TouchableWithoutFeedback>
+                            <View style={styles.item_layout}>
+                                <Text style={{color:'#ffffff',fontSize:18}}>立即投资</Text>
+                            </View>
+                        </TouchableWithoutFeedback>
                     </View>
                 </View>
             </View>
@@ -99,10 +102,11 @@ class InvestmentSingle extends React.Component {
 }
 let styles = StyleSheet.create({
     item_layout: {
-        backgroundColor:'#e60404',
+        backgroundColor:'#389e7f',
         height: 45,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        padding: 10
     },
     item_view_icon: {
         width: 10,

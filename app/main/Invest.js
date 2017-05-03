@@ -5,53 +5,18 @@ import{
     Text,
     ListView,
     TouchableWithoutFeedback,
+    RefreshControl,
     StyleSheet,
     Image,
     Dimensions,
     InteractionManager
 } from 'react-native';
-const ORDER_DATA = {
-    "api": "GetOrderHistory",
-    "v": "1.0",
-    "code": "0",
-    "msg": "success",
-    "data": [{
-        "id": 1,
-        "shopName": "新手团",
-        "orderStauts": 1,
-        "icon": "",
-        "title": '12%',
-        "time": "预期年化收益",
-        "price": '1元起投'
-    }, {
-        "id": 1,
-        "shopName": "节节发",
-        "orderStauts": 0,
-        "icon": "",
-        "title": '8%',
-        "time": "预期年化收益",
-        "price": '5000元起投'
-    }, {
-        "id": 1,
-        "shopName": "经典团",
-        "orderStauts": 0,
-        "icon": "",
-        "title": '7%~12%',
-        "time": "预期年化收益",
-        "price": '10000元起投'
-    }, {
-        "id": 1,
-        "shopName": "季季翻",
-        "orderStauts": 0,
-        "icon": "",
-        "title": '7%',
-        "time": "预期年化收益",
-        "price": '5000元起投'
-    }]
-};
+import {connect} from 'react-redux';
+import {investFetch} from '../actions/investAction';
 import InvestmentSingle from './InvestmentSingle';
 
-var {height, width} = Dimensions.get('window');
+
+const {height, width} = Dimensions.get('window');
 
 class Invest extends Component {
 
@@ -60,17 +25,22 @@ class Invest extends Component {
         super(props);
         this.onPressItem = this.onPressItem.bind(this);
         this.renderItem = this.renderItem.bind(this);
+        this.onScrollDown = this.onScrollDown.bind(this);
         this.state = {
             dataSource: new ListView.DataSource({
                 rowHasChanged: (row1, row2) => row1 !== row2,
-            }),
-            orders: ORDER_DATA.data,
+            })
         }
     }
 
+    componentWillMount() {
+       return this.onScrollDown()
+    }
 
-    onEndReached(typeId) {
-
+    //下拉刷新
+    onScrollDown() {
+        const {dispatch} = this.props;
+        dispatch(investFetch())
     }
 
     //点击列表每一项响应按钮
@@ -87,6 +57,7 @@ class Invest extends Component {
 
     //进行渲染数据
     renderContent(dataSource) {
+        const {Invest} = this.props;
         return (
             <ListView
                 initialListSize={1}
@@ -95,6 +66,13 @@ class Invest extends Component {
                 style={{backgroundColor: '#f5f5f5', flex: 1}}
                 onEndReachedThreshold={10}
                 enableEmptySections={true}
+                refreshControl={
+                        <RefreshControl
+                            refreshing={Invest.isLoading}
+                            onRefresh={() => this.onScrollDown() }
+                            title="正在加载中……"
+                            color="#ccc"/>
+                }
                 showsVerticalScrollIndicator={false}
             />
         );
@@ -109,19 +87,23 @@ class Invest extends Component {
                     this.onPressItem(order)
                 }}>
                     <View style={{backgroundColor: 'white'}}>
-                        <View style={styles.item_view_center}>
-                            <Text style={{color: 'black', fontSize: 16}}>{order.shopName}</Text>
+                        <View style={styles.item_view_top}>
+                            <Text style={{color: 'black', fontSize: 16}}>{order.name}</Text>
                             <View style={styles.item_view_center_status}>
                                 <Image source={require('../imgs/order/ic_order_status.png')}
                                        style={styles.item_view_center_status_tv_img}>
                                     <Text
-                                        style={styles.item_view_center_status_tv}>{order.orderStauts === 1 ? '新手专享' : '投资返现'}</Text>
+                                        style={styles.item_view_center_status_tv}>{order.stauts === 1 ? '新手专享' : '投资返现'}</Text>
                                 </Image>
                             </View>
                         </View>
                         <View style={styles.item_view_center_msg}>
                             <View style={styles.item_view_center_title_img}>
                                 <Text style={styles.item_view_center_title}>{order.title}</Text>
+                                <Text style={styles.item_view_center_time}>预期年化收益</Text>
+                            </View>
+                            <View style={styles.item_view_center_info}>
+                                <Text style={styles.item_view_center_info_top}>{order.quit}</Text>
                                 <Text style={styles.item_view_center_time}>{order.time}</Text>
                             </View>
                         </View>
@@ -143,16 +125,16 @@ class Invest extends Component {
     }
 
     render() {
+        const {Invest} = this.props;
         return (
             <View style={{backgroundColor: '#f5f5f5', flex: 1}}>
                 <View style={{height: 60, backgroundColor: '#389e7f', flexDirection: 'column', paddingTop: 10}}>
                     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-                        <Text style={{fontSize: 18, color: 'white', alignSelf: 'center'}}>订单</Text>
+                        <Text style={{fontSize: 18, color: 'white', alignSelf: 'center'}}>投资</Text>
                     </View>
                 </View>
                 <View style={{flex: 1}}>
-                    {this.renderContent(this.state.dataSource.cloneWithRows(
-                        this.state.orders === undefined ? [] : this.state.orders))}
+                    {this.renderContent(this.state.dataSource.cloneWithRows(Invest.investList))}
                 </View>
             </View>
         );
@@ -163,7 +145,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#f5f5f5',
         height: 8
     },
-    item_view_center: {
+    item_view_top: {
         flexDirection: 'row',
         height: 35,
         marginLeft: 20,
@@ -192,8 +174,9 @@ const styles = StyleSheet.create({
     },
     item_view_center_msg: {
         flexDirection: 'row',
-        height: 70,
-        alignItems: 'flex-start'
+        height: 60,
+        marginBottom: 10,
+        alignItems: 'flex-end'
     },
     item_view_center_icon: {
         width: 50,
@@ -201,9 +184,17 @@ const styles = StyleSheet.create({
         marginLeft: 10
     },
     item_view_center_title_img: {
-        flexDirection: 'column',
+        flex:1,
         marginLeft: 20
-
+    },
+    item_view_center_info: {
+        marginRight: 20
+    },
+    item_view_center_info_top: {
+        fontSize: 20,
+        paddingBottom:5,
+        color: '#000000',
+        textAlign: 'right'
     },
     item_view_center_title: {
         fontSize: 33,
@@ -238,14 +229,19 @@ const styles = StyleSheet.create({
         width: 120,
         height: 30,
         backgroundColor: '#389e7f',
-        borderWidth:5,
-        borderRadius: 3
+                borderRadius: 10
     },
     item_view_bottom_again: {
         fontSize: 14,
         textAlign: 'center',
         color: '#ffffff',
-        lineHeight: 20,
+        lineHeight: 30,
     }
 });
-export default Invest;
+
+export default connect((state) => {
+    const {Invest} = state;
+    return {
+        Invest
+    }
+})(Invest);

@@ -4,9 +4,11 @@
 import { combineReducers } from 'redux';
 
 import News from './newsReducer';
+import Invest from './investReducer';
 
 const rootReducer = combineReducers({
-    News
+    News,
+    Invest
 })
 
 export default rootReducer
