@@ -1,6 +1,6 @@
 'use strict';
 import React, {Component} from 'react';
-import{
+import {
     View,
     Text,
     ListView,
@@ -15,26 +15,30 @@ import {connect} from 'react-redux';
 import {investFetch} from '../actions/investAction';
 import InvestmentSingle from './InvestmentSingle';
 
-
 const {height, width} = Dimensions.get('window');
 
 class Invest extends Component {
 
-
     constructor(props) {
         super(props);
-        this.onPressItem = this.onPressItem.bind(this);
-        this.renderItem = this.renderItem.bind(this);
-        this.onScrollDown = this.onScrollDown.bind(this);
+        this.onPressItem = this
+            .onPressItem
+            .bind(this);
+        this.renderItem = this
+            .renderItem
+            .bind(this);
+        this.onScrollDown = this
+            .onScrollDown
+            .bind(this);
         this.state = {
             dataSource: new ListView.DataSource({
-                rowHasChanged: (row1, row2) => row1 !== row2,
+                rowHasChanged: (row1, row2) => row1 !== row2
             })
         }
     }
 
     componentWillMount() {
-       return this.onScrollDown()
+        return this.onScrollDown()
     }
 
     //下拉刷新
@@ -47,11 +51,7 @@ class Invest extends Component {
     onPressItem(order) {
         const {navigator} = this.props;
         InteractionManager.runAfterInteractions(() => {
-            navigator.push({
-                component: InvestmentSingle,
-                name: 'InvestmentSingle',
-                order
-            });
+            navigator.push({component: InvestmentSingle, name: 'InvestmentSingle', order});
         });
     }
 
@@ -63,19 +63,43 @@ class Invest extends Component {
                 initialListSize={1}
                 dataSource={dataSource}
                 renderRow={this.renderItem}
-                style={{backgroundColor: '#f5f5f5', flex: 1}}
+                style={{
+                backgroundColor: '#f5f5f5',
+                flex: 1
+            }}
                 onEndReachedThreshold={10}
                 enableEmptySections={true}
-                refreshControl={
-                        <RefreshControl
-                            refreshing={Invest.isLoading}
-                            onRefresh={() => this.onScrollDown() }
-                            title="正在加载中……"
-                            color="#ccc"/>
-                }
-                showsVerticalScrollIndicator={false}
-            />
+                refreshControl={< RefreshControl refreshing = {
+                Invest.isLoading
+            }
+            onRefresh = {
+                () => this.onScrollDown()
+            }
+            title = "正在加载中……" color = "#ccc" />}
+                showsVerticalScrollIndicator={false}/>
         );
+    }
+    renderButton(status) {
+        if (status == 2) {
+            return (
+                <View style={styles.item_view_bottom_btn_prepare}>
+                    <Text style={styles.item_view_bottom_again}>立即预约</Text>
+                </View>
+            )
+        } else if (status == 1) {
+            return (
+                <View style={styles.item_view_bottom_btn}>
+                    <Text style={styles.item_view_bottom_again}>立即投资</Text>
+                </View>
+
+            )
+        } else {
+            return (
+                <View style={styles.item_view_bottom_btn_stop}>
+                    <Text style={styles.item_view_bottom_again}>已满标</Text>
+                </View>
+            )
+        }
     }
 
     //渲染每一项的数据
@@ -83,23 +107,46 @@ class Invest extends Component {
         return (
             <View>
                 <View style={styles.item_view_zhanwei}></View>
-                <TouchableWithoutFeedback onPress={()=> {
+                <TouchableWithoutFeedback
+                    onPress={() => {
                     this.onPressItem(order)
                 }}>
-                    <View style={{backgroundColor: 'white'}}>
+                    <View
+                        style={{
+                        backgroundColor: 'white'
+                    }}>
                         <View style={styles.item_view_top}>
-                            <Text style={{color: 'black', fontSize: 16}}>{order.name}</Text>
+                            <Text
+                                style={{
+                                color: 'black',
+                                fontSize: 16
+                            }}>{order.name}</Text>
                             <View style={styles.item_view_center_status}>
-                                <Image source={require('../imgs/order/ic_order_status.png')}
-                                       style={styles.item_view_center_status_tv_img}>
-                                    <Text
-                                        style={styles.item_view_center_status_tv}>{order.stauts === 1 ? '新手专享' : '投资返现'}</Text>
+                                <Image
+                                    source={require('../imgs/order/ic_order_status.png')}
+                                    style={styles.item_view_center_status_tv_img}>
+                                    <Text style={styles.item_view_center_status_tv}>{order.tag === 1
+                                            ? '新手专享'
+                                            : '投资返现'}</Text>
                                 </Image>
                             </View>
                         </View>
                         <View style={styles.item_view_center_msg}>
                             <View style={styles.item_view_center_title_img}>
-                                <Text style={styles.item_view_center_title}>{order.title}</Text>
+                                <View
+                                    style={{
+                                    flexDirection: 'row',
+                                    alignItems: 'flex-end'
+                                }}>
+                                    <Text style={styles.item_view_center_title}>{order.yield}</Text>
+                                    <Text
+                                        style={{
+                                        color: 'red',
+                                        fontSize: 14,
+                                        marginLeft: 2,
+                                        marginBottom: 5
+                                    }}>%</Text>
+                                </View>
                                 <Text style={styles.item_view_center_time}>预期年化收益</Text>
                             </View>
                             <View style={styles.item_view_center_info}>
@@ -107,15 +154,17 @@ class Invest extends Component {
                                 <Text style={styles.item_view_center_time}>{order.time}</Text>
                             </View>
                         </View>
-                        <Image source={require('../imgs/order/ic_order_heng_shi.png')} style={{width: width}}/>
+                        <Image
+                            source={require('../imgs/order/ic_order_heng_shi.png')}
+                            style={{
+                            width: width
+                        }}/>
                         <View style={styles.item_view_bottom}>
                             <View style={styles.item_view_bottom_price_v}>
                                 <Text style={styles.item_view_bottom_price}>{order.price}</Text>
                             </View>
                             <View style={styles.item_view_bottom_again_v}>
-                                <View style={styles.item_view_bottom_btn}>
-                                    <Text style={styles.item_view_bottom_again}>立即投资</Text>
-                                </View>
+                                {this.renderButton(order.status)}
                             </View>
                         </View>
                     </View>
@@ -127,13 +176,35 @@ class Invest extends Component {
     render() {
         const {Invest} = this.props;
         return (
-            <View style={{backgroundColor: '#f5f5f5', flex: 1}}>
-                <View style={{height: 60, backgroundColor: '#389e7f', flexDirection: 'column', paddingTop: 10}}>
-                    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-                        <Text style={{fontSize: 18, color: 'white', alignSelf: 'center'}}>投资</Text>
+            <View
+                style={{
+                backgroundColor: '#f5f5f5',
+                flex: 1
+            }}>
+                <View
+                    style={{
+                    height: 60,
+                    backgroundColor: '#389e7f',
+                    flexDirection: 'column',
+                    paddingTop: 10
+                }}>
+                    <View
+                        style={{
+                        flex: 1,
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                    }}>
+                        <Text
+                            style={{
+                            fontSize: 18,
+                            color: 'white',
+                            alignSelf: 'center'
+                        }}>投资</Text>
                     </View>
                 </View>
-                <View style={{flex: 1}}>
+                <View style={{
+                    flex: 1
+                }}>
                     {this.renderContent(this.state.dataSource.cloneWithRows(Invest.investList))}
                 </View>
             </View>
@@ -184,27 +255,26 @@ const styles = StyleSheet.create({
         marginLeft: 10
     },
     item_view_center_title_img: {
-        flex:1,
-        marginLeft: 20
+        flex: 1,
+        marginLeft: 20,
+        marginTop: 5
     },
     item_view_center_info: {
         marginRight: 20
     },
     item_view_center_info_top: {
         fontSize: 20,
-        paddingBottom:5,
+        paddingBottom: 5,
         color: '#000000',
         textAlign: 'right'
     },
     item_view_center_title: {
         fontSize: 33,
-        color: 'red',
-        marginTop: 5
+        color: 'red'
     },
     item_view_center_time: {
         color: '#777',
-        fontSize: 12,
-        marginTop: 5
+        fontSize: 12
     },
     item_view_bottom: {
         flexDirection: 'row',
@@ -212,7 +282,7 @@ const styles = StyleSheet.create({
     },
     item_view_bottom_price_v: {
         flex: 1.5,
-        marginLeft:20,
+        marginLeft: 20,
         justifyContent: 'center',
         alignItems: 'flex-start'
     },
@@ -229,19 +299,29 @@ const styles = StyleSheet.create({
         width: 120,
         height: 30,
         backgroundColor: '#389e7f',
-                borderRadius: 10
+        borderRadius: 10
+    },
+    item_view_bottom_btn_prepare: {
+        width: 120,
+        height: 30,
+        backgroundColor: '#ff8848',
+        borderRadius: 10
+    },
+    item_view_bottom_btn_stop: {
+        width: 120,
+        height: 30,
+        backgroundColor: '#dddddd',
+        borderRadius: 10
     },
     item_view_bottom_again: {
         fontSize: 14,
         textAlign: 'center',
         color: '#ffffff',
-        lineHeight: 30,
+        lineHeight: 30
     }
 });
 
 export default connect((state) => {
     const {Invest} = state;
-    return {
-        Invest
-    }
+    return {Invest}
 })(Invest);
