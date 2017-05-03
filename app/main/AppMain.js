@@ -34,8 +34,8 @@ class AppMain extends Component {
                     selected={this.state.selectedTab === 'home'}
                     selectedTitleStyle={styles.selectedTextStyle}
                     titleStyle={styles.textStyle}
-                    renderIcon={() => <Image source={require("../imgs/ic_tab_home.png")} style={styles.iconStyle}/>}
-                    renderSelectedIcon={() => <Image source={require("../imgs/ic_tab_home_press.png")}
+                    renderIcon={() => <Image source={require("../imgs/tab_home.png")} style={styles.iconStyle}/>}
+                    renderSelectedIcon={() => <Image source={require("../imgs/tab_home_press.png")}
                                                      style={styles.iconStyle}/>}
                     onPress={() => this.setState({selectedTab: 'home'})}>
                     <Home {...this.props}/>
@@ -45,8 +45,8 @@ class AppMain extends Component {
                     selected={this.state.selectedTab === 'order'}
                     selectedTitleStyle={styles.selectedTextStyle}
                     titleStyle={styles.textStyle}
-                    renderIcon={() => <Image source={require("../imgs/ic_tab_order.png")} style={styles.iconStyle}/>}
-                    renderSelectedIcon={() => <Image source={require("../imgs/ic_tab_order_press.png")}
+                    renderIcon={() => <Image source={require("../imgs/tab_order.png")} style={styles.iconStyle}/>}
+                    renderSelectedIcon={() => <Image source={require("../imgs/tab_order_press.png")}
                                                      style={styles.iconStyle}/>}
                     onPress={() => this.setState({selectedTab: 'order'})}>
                     <Order {...this.props}/>
@@ -56,8 +56,8 @@ class AppMain extends Component {
                     selected={this.state.selectedTab === 'cart'}
                     selectedTitleStyle={styles.selectedTextStyle}
                     titleStyle={styles.textStyle}
-                    renderIcon={() => <Image source={require("../imgs/ic_tab_cart.png")} style={styles.iconStyle}/>}
-                    renderSelectedIcon={() => <Image source={require("../imgs/ic_tab_cart_press.png")}
+                    renderIcon={() => <Image source={require("../imgs/tab_find.png")} style={styles.iconStyle}/>}
+                    renderSelectedIcon={() => <Image source={require("../imgs/tab_find_press.png")}
                                                      style={styles.iconStyle}/>}
                     onPress={() => this.setState({selectedTab: 'cart'})}>
                     <Find {...this.props}/>
@@ -67,8 +67,8 @@ class AppMain extends Component {
                     selected={this.state.selectedTab === 'center'}
                     selectedTitleStyle={styles.selectedTextStyle}
                     titleStyle={styles.textStyle}
-                    renderIcon={() => <Image source={require("../imgs/ic_tab_center.png")} style={styles.iconStyle}/>}
-                    renderSelectedIcon={() => <Image source={require("../imgs/ic_tab_center_press.png")}
+                    renderIcon={() => <Image source={require("../imgs/tab_center.png")} style={styles.iconStyle}/>}
+                    renderSelectedIcon={() => <Image source={require("../imgs/tab_center_press.png")}
                                                      style={styles.iconStyle}/>}
                     onPress={() => this.setState({selectedTab: 'center'})}>
                     <Center {...this.props}/>
@@ -79,17 +79,17 @@ class AppMain extends Component {
 }
 const styles = StyleSheet.create({
     TabNavigator: {
-        backgroundColor: '#3b3738'
+        backgroundColor: '#ffffff'
     },
     iconStyle: {
         width: 26,
         height: 26,
     },
     textStyle: {
-        color: '#ffffff',
+        color: '#515151',
     },
     selectedTextStyle: {
-        color: '#ffffff',
+        color: '#389e7f',
     }
 });
 export default AppMain;

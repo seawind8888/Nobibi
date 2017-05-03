@@ -13,24 +13,15 @@ import {
 
 import Splash from './Ready';
 import AppMain from './AppMain';
-import {NaviGoBack} from '../common/CommonUtils';
 export const STATUS_BAR_HEIGHT = (Platform.OS === 'ios' ? 20 : 0)
-var _navigator;
 class rootApp extends React.Component {
     constructor(props) {
         super(props);
-        this.renderScene = this.renderScene.bind(this);
-        this.goBack = this.goBack.bind(this);
-        BackAndroid.addEventListener('hardwareBackPress', this.goBack);
-    }
-
-    goBack() {
-        return NaviGoBack(_navigator);
+        // BackAndroid.addEventListener('hardwareBackPress', this.goBack);
     }
 
     renderScene(route, navigator) {
         let Component = route.component;
-        _navigator = navigator;
         return (
             <Component navigator={navigator} route={route} {...route.passProps}/>
         );

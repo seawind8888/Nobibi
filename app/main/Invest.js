@@ -145,7 +145,7 @@ class Invest extends Component {
     render() {
         return (
             <View style={{backgroundColor: '#f5f5f5', flex: 1}}>
-                <View style={{height: 60, backgroundColor: '#3b3738', flexDirection: 'column', paddingTop: 10}}>
+                <View style={{height: 60, backgroundColor: '#389e7f', flexDirection: 'column', paddingTop: 10}}>
                     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
                         <Text style={{fontSize: 18, color: 'white', alignSelf: 'center'}}>订单</Text>
                     </View>
@@ -221,8 +221,9 @@ const styles = StyleSheet.create({
     },
     item_view_bottom_price_v: {
         flex: 1.5,
+        marginLeft:20,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'flex-start'
     },
     item_view_bottom_price: {
         color: '#aaa',
@@ -236,10 +237,9 @@ const styles = StyleSheet.create({
     item_view_bottom_btn: {
         width: 120,
         height: 30,
-        backgroundColor: '#3b3738',
-        borderColor: '#3b3738',
+        backgroundColor: '#389e7f',
         borderWidth:5,
-        borderRadius: 5
+        borderRadius: 3
     },
     item_view_bottom_again: {
         fontSize: 14,
