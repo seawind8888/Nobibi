@@ -37,7 +37,8 @@ class InvestmentSingle extends React.Component {
     }
     renderButton(status) {
         if (status == 1) {
-            <TouchableOpacity>
+            return (
+                <TouchableOpacity>
                     <View style={styles.bottom_button}>
                         <Text
                             style={{
@@ -45,7 +46,8 @@ class InvestmentSingle extends React.Component {
                             fontSize: 18
                         }}>立即投资</Text>
                     </View>
-            </TouchableOpacity>
+                </TouchableOpacity>
+            )
         } else if (status == 2) {
             return (
                 <TouchableOpacity>
