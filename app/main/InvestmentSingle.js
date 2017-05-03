@@ -29,7 +29,6 @@ class InvestmentSingle extends React.Component {
             .bind(this);
         this.state = {}
     }
-
     //返回
     buttonBackAction() {
         const {navigator} = this.props;
