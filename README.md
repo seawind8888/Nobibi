@@ -24,6 +24,6 @@ Mac OS X:react-native run-ios or  xcode open project and run project
 ```
 ## 运行效果 
 <br/>
-![image](https://github.com/seawind8888/lanmaolicai/blob/master/screenshot/gif_1.gif)
-![image](https://github.com/seawind8888/lanmaolicai/blob/master/screenshot/gif_2.gif)
-![image](https://github.com/seawind8888/lanmaolicai/blob/master/screenshot/gif_3.gif)
+![image] (https://github.com/seawind8888/lanmaolicai/blob/master/screenshot/gif_1.gif)
+![image] (https://github.com/seawind8888/lanmaolicai/blob/master/screenshot/gif_2.gif)
+![image] (https://github.com/seawind8888/lanmaolicai/blob/master/screenshot/gif_3.gif)
