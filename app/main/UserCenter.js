@@ -21,6 +21,7 @@ import ImageButton from '../component/ImageButton';
 import ModifyInformation from './UserCenter/ModifyInformation';
 import Charge from './UserCenter/Charge';
 import Prepaid from './UserCenter/Prepaid';
+import Withdraw from './UserCenter/Withdraw';
 
 var {height, width} =  Dimensions.get('window');
 
@@ -70,13 +71,17 @@ class User extends Component {
         } else if (position === 2) {
             InteractionManager.runAfterInteractions(() => {
                 navigator.push({
+                    component: Withdraw,
+                    name: 'Withdraw'
+                });
+            });
+        } else if (position === 3) {
+            InteractionManager.runAfterInteractions(() => {
+                navigator.push({
                     component: Charge,
                     name: 'Charge'
                 });
             });
-
-        } else if (position === 3) {
-
         } else if (position === 4) {
 
         } else if (position === 5) {
@@ -164,7 +169,7 @@ class User extends Component {
                     <CenterItem
                         title='银行卡'
                         icon={require('../imgs/ic_center_card.png')}
-                        onPress={()=>this.itemActionIndex(2)}/>
+                        onPress={()=>this.itemActionIndex(3)}/>
                     <View style={[styles.top_line, styles.center_line]}></View>
                     <CenterItem
                         title='体验金'

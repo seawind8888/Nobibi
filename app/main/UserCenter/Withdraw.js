@@ -78,7 +78,7 @@ class Prepaid extends Component {
                             fontSize: 18,
                             color: 'white',
                             alignSelf: 'center'
-                        }}>充值</Text>
+                        }}>提现</Text>
                     </View>
                     <View
                         style={{
@@ -116,11 +116,10 @@ class Prepaid extends Component {
                                 style={{
                                 color: '#ffffff',
                                 fontSize: 18
-                            }}>立即充值</Text>
+                            }}>立即提现</Text>
                         </View>
                     </TouchableOpacity>
                 </View>
-
             </View>
         );
     }

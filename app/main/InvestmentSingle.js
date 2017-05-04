@@ -6,6 +6,7 @@ import React from 'react';
 import {
     Dimensions,
     Image,
+    Alert,
     View,
     Text,
     StyleSheet,
@@ -27,7 +28,12 @@ class InvestmentSingle extends React.Component {
         this.buttonBackAction = this
             .buttonBackAction
             .bind(this);
-        this.state = {}
+        this.bottomButtonAction = this
+            .bottomButtonAction
+            .bind(this);
+        this.state = {
+            amoutOfMoney: 0
+        }
     }
     //返回
     buttonBackAction() {
@@ -37,7 +43,7 @@ class InvestmentSingle extends React.Component {
     renderButton(status) {
         if (status == 1) {
             return (
-                <TouchableOpacity>
+                <TouchableWithoutFeedback onPress={() => this.bottomButtonAction(status)}>
                     <View style={styles.bottom_button}>
                         <Text
                             style={{
@@ -45,11 +51,11 @@ class InvestmentSingle extends React.Component {
                             fontSize: 18
                         }}>立即投资</Text>
                     </View>
-                </TouchableOpacity>
+                </TouchableWithoutFeedback >
             )
         } else if (status == 2) {
             return (
-                <TouchableOpacity>
+                <TouchableWithoutFeedback onPress= {() => this.bottomButtonAction(status)}>
                     <View style={styles.bottom_button_prepare}>
                         <Text
                             style={{
@@ -57,11 +63,11 @@ class InvestmentSingle extends React.Component {
                             fontSize: 18
                         }}>立即预约</Text>
                     </View>
-                </TouchableOpacity>
+                </TouchableWithoutFeedback>
             )
         } else {
             return (
-                <TouchableOpacity>
+                <TouchableWithoutFeedback>
                     <View style={styles.bottom_button_stop}>
                         <Text
                             style={{
@@ -69,9 +75,17 @@ class InvestmentSingle extends React.Component {
                             fontSize: 18
                         }}>已满标</Text>
                     </View>
-                </TouchableOpacity>
+                </TouchableWithoutFeedback>
             )
         }
+    }
+    bottomButtonAction(status) {
+        if (status == 1) {
+            Alert.alert('提示', '投资成功')
+        } else {
+            Alert.alert('提示', '预约成功')
+        }
+
     }
 
     render() {
@@ -216,6 +230,7 @@ class InvestmentSingle extends React.Component {
                                     marginTop: 10
                                 }}>投资金额</Text>
                                 <TextInput
+                                    onChangeText={(text) => this.setState({amoutOfMoney: text})}
                                     style={{
                                     height: 45,
                                     marginTop: 10,
@@ -270,22 +285,29 @@ class InvestmentSingle extends React.Component {
                             <Text
                                 style={{
                                 marginLeft: 10
-                            }}>总计¥5000</Text>
+                            }}>余额-0.00/0.00</Text>
                             <View
                                 style={{
                                 flex: 1,
                                 alignItems: 'flex-end',
+                                flexDirection: 'row',
+                                justifyContent: 'flex-end',
                                 marginRight: 10
                             }}>
                                 <Text
                                     style={{
                                     fontSize: 14,
+                                    marginRight: 5,
+                                    color: '#000000'
+                                }}>还需支付(元)</Text>
+                                <Text
+                                    style={{
+                                    fontSize: 14,
                                     color: 'red'
-                                }}>总计¥5000</Text>
+                                }}>{this.state.amoutOfMoney}</Text>
                             </View>
                         </View>
-                        <ShortLineTwo/>
-                        {this.renderButton(route.order.status)}
+                        <ShortLineTwo/>{this.renderButton(route.order.status)}
                     </View>
                 </View>
             </View>
