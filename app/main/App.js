@@ -13,7 +13,7 @@ import {
 
 import Splash from './Ready';
 import AppMain from './AppMain';
-export const STATUS_BAR_HEIGHT = (Platform.OS === 'ios' ? 20 : 0)
+export const STATUS_BAR_HIDDEN = (Platform.OS === 'ios' ? false : true)
 class rootApp extends React.Component {
     constructor(props) {
         super(props);
@@ -36,8 +36,9 @@ class rootApp extends React.Component {
             <View style={{flex: 1}}>
                 <StatusBar
                     barStyle='light-content'
+                    hidden={STATUS_BAR_HIDDEN}
                     backgroundColor='transparent'
-                    style={{height: STATUS_BAR_HEIGHT}}
+                    style={{height: 0}}
                 />
                 <Navigator
                     ref='navigator'

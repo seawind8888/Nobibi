@@ -298,26 +298,28 @@ const styles = StyleSheet.create({
     item_view_bottom_btn: {
         width: 120,
         height: 30,
+        justifyContent: 'center',
         backgroundColor: '#389e7f',
-        borderRadius: 10
+        borderRadius: 4
     },
     item_view_bottom_btn_prepare: {
         width: 120,
         height: 30,
+        justifyContent: 'center',
         backgroundColor: '#ff8848',
-        borderRadius: 10
+        borderRadius: 4
     },
     item_view_bottom_btn_stop: {
         width: 120,
         height: 30,
+        justifyContent: 'center',
         backgroundColor: '#dddddd',
-        borderRadius: 10
+        borderRadius: 4
     },
     item_view_bottom_again: {
         fontSize: 14,
         textAlign: 'center',
-        color: '#ffffff',
-        lineHeight: 30
+        color: '#ffffff'
     }
 });
 
