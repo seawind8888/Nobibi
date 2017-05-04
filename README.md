@@ -22,11 +22,8 @@ Mac OS X:react-native run-android  or Windows OS:react-native start and react-na
 2.运行iOS版本
 Mac OS X:react-native run-ios or  xcode open project and run project
 ```
-## 运行效果 
-<br/>
-![image] (https://github.com/seawind8888/lanmaolicai/blob/master/screenshot/gif_1.gif)
-![image] (https://github.com/seawind8888/lanmaolicai/blob/master/screenshot/gif_2.gif)
-![image] (https://github.com/seawind8888/lanmaolicai/blob/master/screenshot/gif_3.gif)
- ![image](https://github.com/seawind8888/v2ex_demo/blob/master/screenshot/v2ex_app1.gif) 
- ![image](https://github.com/seawind8888/v2ex_demo/blob/master/screenshot/v2ex_app2.gif) 
- ![image](https://github.com/seawind8888/v2ex_demo/blob/master/screenshot/v2ex_app3.gif) 
+运行效果
+
+![image](https://github.com/seawind8888/lanmaolicai/blob/master/screenshot/gif_1.gif)
+![image](https://github.com/seawind8888/lanmaolicai/blob/master/screenshot/gif_2.gif)
+![image](https://github.com/seawind8888/lanmaolicai/blob/master/screenshot/gif_3.gif)
