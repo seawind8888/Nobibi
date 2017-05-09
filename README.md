@@ -5,11 +5,11 @@
 
 ### 1.第一步
 ```
-git clone https://github.com/seawind8888/lanmaolicai.git
+git clone https://github.com/seawind8888/react-native-P2P.git
 ```
 ### 2.第二步
 ```
-cd lanmaolicai
+cd react-native-P2P
 ```
 ### 3.第三步
 ```
