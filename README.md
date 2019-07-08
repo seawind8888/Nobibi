@@ -1,4 +1,4 @@
-# Nobibi-next
+# Nobibi
 
 > 想用 Javascript 统一世界？先从 Nobibi 开始吧（Love & peace）
 > 这并不是一个切图仔的痴人说梦，因为并不是所有语言都能 0.1 + 0.2 = 0.30000000000000004（skr）
