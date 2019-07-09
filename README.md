@@ -6,10 +6,12 @@
 ## 关于 Nobibi(纯属废话)
 
 ```lua
-小时候老师就教育我们，少说 bi 话 bi，多做 ban 事 zhuan,长大之后才发现，那些会说 bi 话 bi 的都成了领 sha 导 bi,而我依然只会做事 coding
-也许我生来就不会说 bi 话 bi,算了，那我就不 no 说 bi 话 bi 了
-可能话说多了，反而是坏事（多管闲事多吃 pi,少管闲事少拉 xi）
+小时候老师就教育我们，少说(bi)话(bi)，多做(ban)事(zhuan),长大之后才发现，那些会说(bi)话(bi)的都成了领(sha)导(bi),而我依然只会做事(coding)
+也许我生来就不会说(bi)话(bi),算了，那我就不(no)说(bi)话(bi)了
+可能话说多了，反而是坏事（多管闲事多吃pi,少管闲事少拉xi）
 ```
+
+（废话少说）Nobibi 是一个纯 JS 的开源社区（Nextjs+antd+Express）,初衷是看到了 antd 的[comment 组件](https://ant.design/components/comment-cn/)(其实是 css 弱爆了)，不用白不用啊，直接开搞
 
 ## 相关项目
 
@@ -75,6 +77,10 @@ npm run start:pm2
 ![image](/screenshot/screenshot1.png)
 ![image](/screenshot/screenshot2.png)
 ![image](/screenshot/screenshot3.png)
+
+### 后台
+
+![image](/preview/demo.gif)
 
 ## 目录结构
 
