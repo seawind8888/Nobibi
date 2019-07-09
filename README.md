@@ -13,10 +13,10 @@
 
 ## 相关项目
 
-[Nobibi-api](https://github.com/seawind8888/Nobibi-api) - Nobibi 后台接口
-[Nobibi-admin](https://github.com/seawind8888/Nobibi-admin) - Nobibi 管理后台
-Nobibi-taro - Nobibi 小程序（待开发）
-Nobibi-nuxt - 看心情
+- [Nobibi-api](https://github.com/seawind8888/Nobibi-api) - Nobibi 后台接口
+- [Nobibi-admin](https://github.com/seawind8888/Nobibi-admin) - Nobibi 管理后台
+- Nobibi-taro - Nobibi 小程序（待开发）
+- Nobibi-nuxt - 看心情
 
 ## 运行项目
 

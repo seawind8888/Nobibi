@@ -8,7 +8,7 @@ import createStore from '../redux/store';
 import NoLayout from '../components/NoLayout';
 import '../assets/self-styles.less';
 import { RouterTitle } from '../constants/ConstTypes';
-
+import "antd/dist/antd.less";
 
 class NextApp extends App {
   
