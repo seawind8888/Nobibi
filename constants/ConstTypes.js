@@ -5,7 +5,8 @@
 export const RouterTitle = {
   '/': 'Home',
   '/topicDetail': 'TopicDetail',
-  '/login': 'Login',
-  '/register': 'Register',
-  '/topicEdit': 'TopicEdit'
+  '/login': 'Nobibi | 登录',
+  '/register': 'Nobibi | 注册',
+  '/topicEdit': 'Nobibi | 发布主题',
+  '/modifyUser': 'Nobibi | 修改用户信息'
 };

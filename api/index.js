@@ -28,6 +28,13 @@ export const changePassApi = (params) => {
     data: params
   });
 };
+export const modifyUserApi = (params) => {
+  return fetch({
+    method: 'patch',
+    url: '/api/user/updateUser',
+    data: params
+  });
+};
 
 export const getUserInfo = (params) => {
   return fetch({

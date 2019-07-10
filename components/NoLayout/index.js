@@ -28,7 +28,6 @@ class NoLayout extends Component {
     super(props);
     this.handleChangeCollapsed = this.handleChangeCollapsed.bind(this);
     this.handleSelectMenu = this.handleSelectMenu.bind(this);
-    this.handleSelectUserItem = this.handleSelectUserItem.bind(this);
     this.state = {
       collapsed: true
     };
@@ -65,13 +64,14 @@ class NoLayout extends Component {
    
   }
   async handleSelectUserItem(e) {
-    const {dispatch} = this.props;
+   
     switch (e.key) {
       case 'signOut':
+        
         var res = await userLogOut();
         if (res.success) {
           message.success(res.message);
-          dispatch({
+          this.props.dispatch({
             type: 'USER_SIGN_OUT'
           });
         }
@@ -79,6 +79,9 @@ class NoLayout extends Component {
         break;
       case 'changePass':
         Router.push('/changePass');
+        break;
+      case 'changeUserInfo':
+        Router.push('/modifyUser');
         break;
       
     }

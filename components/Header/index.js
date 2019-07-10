@@ -30,6 +30,10 @@ class Header extends Component {
       <Menu
         onClick={onUserClick}>
         <Menu.Item
+          key='changeUserInfo'>
+          修改资料
+        </Menu.Item>
+        <Menu.Item
           key='changePass'>
           修改密码
         </Menu.Item>

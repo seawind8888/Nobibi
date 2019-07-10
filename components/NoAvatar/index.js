@@ -9,7 +9,7 @@ const NoAvatar = (props) => {
   } 
   if (props.avatar.length > 7) {
     return (
-      <Avatar icon='user' size={props.size} />
+      <Avatar icon='user' src={props.avatar} size={props.size} />
     );
   } 
   return (
@@ -27,11 +27,12 @@ const NoAvatar = (props) => {
 NoAvatar.propTypes = {
   size: PropTypes.number,
   avatar:PropTypes.string,
-  userName: PropTypes.string.isRequired,
+  userName: PropTypes.string,
 };
 
 NoAvatar.defaultProps = {
   avatar: '',
-  size: 52
+  size: 52,
+  userName: ''
 };
 export default NoAvatar;
