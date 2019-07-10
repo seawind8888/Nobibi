@@ -9,10 +9,10 @@
 （纯属 bibi）小时候老师教育我们，少说（bi）话（bi），多做（ban）事（zhuan）,长大才发现，那些说（bi）话（bi）的都成了领（sha）导（bi）,而我依然只会做（ban）事（zhuan）
 也许我生来就不会说（bi）话（bi）,算了，那我就不（no）说（bi）话（bi）了
 话说多了，反而是坏事（多管闲事多吃 pi，少管闲事少拉 xi）
- Nobibi 是一个切图仔全栈梦的开始（呸呸！害 bibi）
- ...
 ```
 
+Nobibi 是一个切图仔全栈梦的开始（呸呸！害 bibi）
+...
 （Acton！）
 Nobibi 是一个纯 JS 的全栈开源社区，前台基于 nextjs，后台基于 Ant Deignt Pro 开发，接口是常规的 express+mongo。
 起初是看到 antd 的[comment 组件](https://ant.design/components/comment-cn/)（这么美的组件，也许就只差一个社区...）
