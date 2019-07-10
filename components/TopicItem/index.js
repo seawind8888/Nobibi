@@ -27,7 +27,7 @@ const TopicItem = (props) => {
           </Link>
         </h1>
         <div className='bottom-info'>
-          <Tag>{props.category[0]}</Tag>·
+          <Tag color={props.categoryColor}>{props.categoryName}</Tag>·
           <span className='info-item'>{props.userName}</span>·
           <span className='info-item'>{timer(Date.parse(props.updateTime))}</span>
         </div>
@@ -40,7 +40,8 @@ TopicItem.propTypes = {
   id:PropTypes.string.isRequired,
   avatar:PropTypes.string,
   title: PropTypes.string.isRequired,
-  category: PropTypes.array.isRequired,
+  categoryName: PropTypes.string.isRequired,
+  categoryColor: PropTypes.string.isRequired,
   userName: PropTypes.string.isRequired,
   updateTime: PropTypes.string.isRequired
 };

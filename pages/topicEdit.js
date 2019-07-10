@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import Router from 'next/router';
 import TopicEditor from '../components/TopicEditor';
+import { find } from 'lodash';
 
 class TopicEdit extends PureComponent {
     static propTypes = {
@@ -17,7 +18,16 @@ class TopicEdit extends PureComponent {
       channelList: []
     }
     state = {
-      content: null
+      content: null,
+      categoryColor: ''
+    }
+    handleSelectCategory = (e) => {
+      const { channelList } = this.props;
+      const _category =  find(channelList, ['categoryName', e]);
+      this.setState({
+        categoryColor:_category.categoryColor
+      });
+      
     }
     handleSubmit = async (e) => {
       const {form} = this.props;
@@ -28,10 +38,10 @@ class TopicEdit extends PureComponent {
        
         }
         const { userInfo } = this.props;
-        const { content } = this.state;
+        const { content, categoryColor } = this.state;
      
         const _params = values;
-        _params.category = [_params.category];
+        _params.categoryColor = categoryColor;
         _params.userName = userInfo.userName;
         _params.userAvatar = userInfo.avatar;
         _params.status = "PUBLISH";
@@ -70,7 +80,7 @@ class TopicEdit extends PureComponent {
               )}
             </Form.Item>
             <Form.Item label='频道'>
-              {getFieldDecorator('category', {
+              {getFieldDecorator('categoryName', {
                 rules: [
                   {
                     required: true,
@@ -79,7 +89,7 @@ class TopicEdit extends PureComponent {
                 ],
               })(
                 <Select 
-                  onChange={this.handleSelectName}>
+                  onChange={this.handleSelectCategory}>
                   {channelList.map(e => (
                     <Select.Option 
                       value={e.categoryName}

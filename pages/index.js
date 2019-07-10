@@ -36,6 +36,8 @@ class Home extends PureComponent {
                   category={e.category}
                   userName={e.userName}
                   updateTime={e.updateTime}
+                  categoryName={e.categoryName}
+                  categoryColor={e.categoryColor}
                 ></TopicItem>
               );
             })
