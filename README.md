@@ -4,7 +4,7 @@
 
 ## 关于 Nobibi
 
-Nobibi 是一款轻量级开源社区，包含前后台，前台使用 ant-design 组件库及为优化 SEO ，使用 [next.js](https://github.com/zeit/next.js) 服务端渲染框，后台系统基于[Ant Design Pro](https://pro.ant.design/index-cn)搭建开发，接口为 express+mongo
+Nobibi 是一款轻量级开源社区，包含前后台，前台使用 ant-design 组件库及为优化 SEO ，使用 [next.js](https://github.com/zeit/next.js) 服务端渲染框，后台系统基于[Ant Design Pro](https://pro.ant.design/index-cn)搭建开发，后端接口为 express+mongo
 
 ## 快速开始
 
@@ -106,6 +106,8 @@ ant-cms-admin
 
 - [x] 注册
 - [x] 登录
+- [x] 修改密码
+- [x] 修改资料
 - [x] 发布主题
 - [x] 评论主题
 - [x] 主题频道切换

@@ -4,6 +4,7 @@ import NoAvatar from '../components/NoAvatar';
 import CommentList from '../components/CommentList';
 import { getTopicList } from '../api';
 import timer from '../utils/timer';
+import Head from 'next/head';
 
 
 
@@ -27,6 +28,9 @@ class TopicDetail extends PureComponent {
       const { topicInfo} = this.props;
       return (
         <Fragment>
+          <Head>
+            <title>{topicInfo.topicTitle}</title>
+          </Head>
           <div className='main-inside-container topic-detail-container'>
             <h1 className='detail-title'>{topicInfo.topicTitle}</h1>
             <div className='main-info-container'>
