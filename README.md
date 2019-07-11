@@ -2,6 +2,10 @@
 
 > Nobibi 是一款轻量级开源社区，快速搭建属于自己的社区
 
+## 关于 Nobibi
+
+Nobibi 是一款轻量级开源社区，包含前后台，前台使用 ant-design 组件库及为优化 SEO ，使用 [next.js](https://github.com/zeit/next.js) 服务端渲染框，后台系统基于[Ant Design Pro](https://pro.ant.design/index-cn)搭建开发，接口为 express+mongo
+
 ## 快速开始
 
 > 保证已启动 api 项目[Nobibi-api](https://github.com/seawind8888/Nobibi-api)
@@ -30,7 +34,7 @@ npm run start
 - [Nobibi-api](https://github.com/seawind8888/Nobibi-api) - Nobibi 后台接口
 - [Nobibi-admin](https://github.com/seawind8888/Nobibi-admin) - Nobibi 管理后台
 - Nobibi-taro - Nobibi 小程序（待开发）
-- Nobibi-nuxt - 看心情
+- Nobibi-nuxt - （待开发）
 
 ## 示例项目
 
@@ -68,9 +72,6 @@ npm run start:pm2
 ```
 
 ## 技术选型
-
-前台：考虑到 SEO，以及友好 ant-design 组件，所以使用 nextjs 服务端渲染框
-后台：基于阿里的[Ant Design Pro](https://pro.ant.design/)中台架构搭建（umijs+dvajs+antd）
 
 ![image](/screenshot/Nobibi-structure.png)
 
