@@ -1,5 +1,5 @@
 
-import {  all, call, take, put, fork } from 'redux-saga/effects';
+import {  all, call, take, put, fork, select } from 'redux-saga/effects';
 import {  getUserInfo, getTopicList, getChannelList } from '../../api';
 
 import {
@@ -32,10 +32,25 @@ export function* userSignOut() {
 export function* topicList() {
   while (true) {
     const { payload = {}} = yield take(FETCH_TOPIC_LIST);
+   
+    if (!payload.categoryName) {
+      const { topic } = yield select();
+      if (payload.categoryName) {
+        payload.categoryName = topic.categoryName;
+      }
+    }
+    if (payload.categoryName === 'home') {
+      delete payload.categoryName;
+    }
+   
     const { data } = yield call(getTopicList, payload);
+    
     yield put({
       type: FETCH_TOPIC_LIST_SUCCESS,
-      data
+      data: {
+        ...data,
+        categoryName: payload.categoryName
+      }
     });
   }
 }

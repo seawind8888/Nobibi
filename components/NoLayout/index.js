@@ -55,12 +55,10 @@ class NoLayout extends Component {
   handleSelectMenu(e) {
     const {dispatch} = this.props;
     Router.push('/');
-    if (e.key !== 'home') {
-      dispatch({
-        type: 'FETCH_TOPIC_LIST',
-        payload: {category: e.key}
-      });
-    } 
+    dispatch({
+      type: 'FETCH_TOPIC_LIST',
+      payload: {categoryName: e.key}
+    });
    
   }
   async handleSelectUserItem(e) {

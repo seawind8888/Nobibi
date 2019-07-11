@@ -69,6 +69,9 @@ npm run start:pm2
 
 ## 技术选型
 
+前台：考虑到 SEO，以及友好 ant-design 组件，所以使用 nextjs 服务端渲染框
+后台：基于阿里的[Ant Design Pro](https://pro.ant.design/)中台架构搭建（umijs+dvajs+antd）
+
 ![image](/screenshot/Nobibi-structure.png)
 
 ## 目录结构
