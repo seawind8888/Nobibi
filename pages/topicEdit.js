@@ -38,6 +38,7 @@ class TopicEdit extends PureComponent {
           message.error('请输入内容');
           return;
         }
+        _params.desc = content.toRAW(true).blocks[0].text.slice(0, 50);
         _params.content = content.toHTML();
         const {success} = await createTopic(_params);
         if (success) {

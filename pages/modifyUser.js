@@ -14,11 +14,11 @@ function getBase64(img, callback) {
 function beforeUpload(file) {
   const isJPG = file.type === 'image/jpeg';
   if (!isJPG) {
-    message.error('You can only upload JPG file!');
+    message.error('只能上传图片!');
   }
-  const isLt2M = file.size / 1024 / 1024 < 2;
+  const isLt2M = file.size / 48 / 48 < 2;
   if (!isLt2M) {
-    message.error('Image must smaller than 2MB!');
+    message.error('图片需小于48KB!');
   }
   return isJPG && isLt2M;
 }

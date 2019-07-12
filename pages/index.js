@@ -7,8 +7,11 @@ import { Pagination } from 'antd';
 class Home extends PureComponent {
   static propTypes = {
     topicListInfo: PropTypes.array.isRequired,
-    topicListTotal: PropTypes.number.isRequired,
+    topicListTotal: PropTypes.number,
     dispatch: PropTypes.func.isRequired
+  }
+  static defaultProps = {
+    topicListTotal: 0
   }
   static async getInitialProps ({ctx}) {
     const { store } = ctx;
@@ -48,13 +51,6 @@ class Home extends PureComponent {
                   <TopicItem
                     topicInfo={e}
                     key={i}
-                    // avatar={e.userAvatar}
-                    // id={e._id}
-                    // title={e.topicTitle}
-                    // userName={e.userName}
-                    // updateTime={e.updateTime}
-                    // categoryName={e.categoryName}
-                    // praiseNum={e.praiseNum}
                   ></TopicItem>
                 );
               })

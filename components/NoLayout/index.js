@@ -61,15 +61,15 @@ class NoLayout extends Component {
     });
    
   }
-  async handleSelectUserItem(e) {
-   
+  handleSelectUserItem = async (e) => {
+    const { dispatch } = this.props;
     switch (e.key) {
       case 'signOut':
       
         var res = await userLogOut();
         if (res.success) {
           message.success(res.message);
-          this.props.dispatch({
+          dispatch({
             type: 'USER_SIGN_OUT'
           });
         }

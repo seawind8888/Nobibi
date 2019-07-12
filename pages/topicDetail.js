@@ -7,6 +7,8 @@ import { getTopicList, getPraiseInfo, actionPraise } from '../api';
 import timer from '../utils/timer';
 import Head from 'next/head';
 import {connect} from 'react-redux';
+import Cookies from 'js-cookie';
+import Router from 'next/router';
 
 
 
@@ -24,6 +26,7 @@ class TopicDetail extends PureComponent {
         topicInfo: _topic.data.list[0]
       };
     }
+   
     constructor(props) {
       super(props);
     }
@@ -40,16 +43,19 @@ class TopicDetail extends PureComponent {
         topicId: topicInfo._id
       });
       this.setState({
-        praiseNum: data.total
+        praiseNum: data
       });
     }
     handleControlPraise = async (type) => {
+      if (!Cookies.get('username')){
+        Router.push('/login');
+        return;
+      }
       const { topicInfo, userInfo} = this.props;
       const data = await actionPraise({
         type: type,
         topicId: topicInfo._id,
-        userName: userInfo.userName,
-        praiseNum: this.state.praiseNum
+        userName: userInfo.userName
       });
       if (data.success) {
         message.success(data.message);

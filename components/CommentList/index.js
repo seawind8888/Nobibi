@@ -6,6 +6,8 @@ import PropTypes from 'prop-types';
 import timer from '../../utils/timer';
 import {connect} from 'react-redux';
 import NoAvatar from '../NoAvatar';
+import Cookies from 'js-cookie';
+import Router from 'next/router';
 
 class CommentList extends PureComponent {
   static propTypes = {
@@ -40,6 +42,10 @@ class CommentList extends PureComponent {
  
 
   handleSubmit = async () => {
+    if (!Cookies.get('username')){
+      Router.push('/login');
+      return;
+    }
     const { topicTitle, topicId, userInfo } = this.props;
     if (!this.state.content) {
       return;
@@ -92,7 +98,7 @@ class CommentList extends PureComponent {
       <div>
         {comments.length > 0 && <List
           dataSource={comments}
-          header={`${comments.length} ${comments.length > 1 ? 'replies' : 'reply'}`}
+          header='回复'
           itemLayout='horizontal'
           renderItem={item => 
             <Comment 
