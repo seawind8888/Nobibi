@@ -90,3 +90,19 @@ export const addComment = (params) => {
     data: params
   });
 };
+
+export const actionPraise = (params) => {
+  return fetch({
+    method: 'post',
+    url: '/api/praise/praiseAction',
+    data: params
+  });
+};
+
+export const getPraiseInfo = (params) => {
+  return fetch({
+    method: 'get',
+    url: '/api/praise/getPraiseInfo',
+    params: params
+  });
+};

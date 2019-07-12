@@ -5,49 +5,52 @@ import Link from 'next/link';
 import PropTypes from 'prop-types';
 import timer from '../../utils/timer';
 
-const TopicItem = (props) => {
+const TopicItem = ({topicInfo}) => {
   return (
     <div className='topic-container'>
       <div className='left-item'>
         <NoAvatar
-          avatar={props.avatar}
-          userName={props.userName}
+          avatar={topicInfo.userAvatar}
+          userName={topicInfo.userName}
         >
         </NoAvatar>
       </div>
       <div className='right-item'>
         <h1>
           <Link 
-            as={`/topicDetail/${props.id}`}
-            href={`/topicDetail?id=${props.id}`}>
+            as={`/topicDetail/${topicInfo._id}`}
+            href={`/topicDetail?id=${topicInfo._id}`}>
             <a>
-              {props.title}
+              {topicInfo.topicTitle}
             </a>
           
           </Link>
         </h1>
         <div className='bottom-info'>
-          <Tag color={props.categoryColor}>{props.categoryName}</Tag>·
-          <span className='info-item'>{props.userName}</span>·
-          <span className='info-item'>{timer(Date.parse(props.updateTime))}</span>
+          <Tag>{topicInfo.categoryName}</Tag>·
+          <span className='info-item'>{topicInfo.praiseNum || 0}赞</span>·
+          <span className='info-item'>{topicInfo.userName}</span>·
+          <span className='info-item'>{timer(Date.parse(topicInfo.updateTime))}</span>
         </div>
       </div>
+      {
+        topicInfo.commentNum ? <div className='comment-info-container'>
+          {topicInfo.commentNum}
+        </div> : <div/>
+      }
+     
     </div>
   );
 };
   
 TopicItem.propTypes = {
-  id:PropTypes.string.isRequired,
-  avatar:PropTypes.string,
-  title: PropTypes.string.isRequired,
-  categoryName: PropTypes.string.isRequired,
-  categoryColor: PropTypes.string.isRequired,
-  userName: PropTypes.string.isRequired,
-  updateTime: PropTypes.string.isRequired
+  topicInfo: PropTypes.object
 };
 
 TopicItem.defaultProps = {
-  avatar: ''
+  topicInfo: {
+    avatar: ''
+  }
 };
 
 

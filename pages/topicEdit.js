@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import Router from 'next/router';
 import TopicEditor from '../components/TopicEditor';
-import { find } from 'lodash';
 
 class TopicEdit extends PureComponent {
     static propTypes = {
@@ -18,16 +17,7 @@ class TopicEdit extends PureComponent {
       channelList: []
     }
     state = {
-      content: null,
-      categoryColor: ''
-    }
-    handleSelectCategory = (e) => {
-      const { channelList } = this.props;
-      const _category =  find(channelList, ['categoryName', e]);
-      this.setState({
-        categoryColor:_category.categoryColor
-      });
-      
+      content: null
     }
     handleSubmit = async (e) => {
       const {form} = this.props;
@@ -38,10 +28,9 @@ class TopicEdit extends PureComponent {
        
         }
         const { userInfo } = this.props;
-        const { content, categoryColor } = this.state;
+        const { content } = this.state;
      
         const _params = values;
-        _params.categoryColor = categoryColor;
         _params.userName = userInfo.userName;
         _params.userAvatar = userInfo.avatar;
         _params.status = "PUBLISH";

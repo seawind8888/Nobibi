@@ -73,11 +73,14 @@ class Login extends PureComponent {
                 valuePropName: 'checked',
                 initialValue: true,
               })(<Checkbox>记住</Checkbox>)}
-              <Link href='/'>忘记密码</Link>
+              <Link href='/'>
+                <a>忘记密码</a>
+              </Link>
               <Button type='primary' htmlType='submit' className='login-form-button'>
                 登录
               </Button>
-          Or <Link href='/login'>注册</Link>
+          或 <Link href='/login'>
+                <a>注册</a></Link>
             </Form.Item>
           </Form>
         </Fragment>

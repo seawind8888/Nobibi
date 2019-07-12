@@ -46,14 +46,15 @@ class Home extends PureComponent {
               {topicListInfo.map((e, i) => {
                 return (
                   <TopicItem
+                    topicInfo={e}
                     key={i}
-                    avatar={e.userAvatar}
-                    id={e._id}
-                    title={e.topicTitle}
-                    userName={e.userName}
-                    updateTime={e.updateTime}
-                    categoryName={e.categoryName}
-                    categoryColor={e.categoryColor}
+                    // avatar={e.userAvatar}
+                    // id={e._id}
+                    // title={e.topicTitle}
+                    // userName={e.userName}
+                    // updateTime={e.updateTime}
+                    // categoryName={e.categoryName}
+                    // praiseNum={e.praiseNum}
                   ></TopicItem>
                 );
               })

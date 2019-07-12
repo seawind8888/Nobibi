@@ -10,6 +10,7 @@ import NoAvatar from '../NoAvatar';
 class CommentList extends PureComponent {
   static propTypes = {
     topicTitle: PropTypes.string.isRequired,
+    topicId: PropTypes.string.isRequired,
     userInfo: PropTypes.object.isRequired
   };
   constructor(props) {
@@ -27,9 +28,9 @@ class CommentList extends PureComponent {
   
   }
   getCommentList = async () => {
-    const { topicTitle } = this.props;
+    const { topicId } = this.props;
     const { data } = await getCommentList({
-      topicTitle: topicTitle
+      topicId: topicId
     });
     if (data.list.length)
       this.setState({
@@ -39,7 +40,7 @@ class CommentList extends PureComponent {
  
 
   handleSubmit = async () => {
-    const { topicTitle, userInfo } = this.props;
+    const { topicTitle, topicId, userInfo } = this.props;
     if (!this.state.content) {
       return;
     }
@@ -50,7 +51,9 @@ class CommentList extends PureComponent {
 
     const { success } = await addComment({
       topicTitle: topicTitle,
+      topicId: topicId,
       userName: userInfo.userName,
+      userAvatar: userInfo.avatar,
       content: this.state.content
     });
     this.setState({
@@ -66,7 +69,7 @@ class CommentList extends PureComponent {
     return list.map(e => {
       return {
         author: e.userName,
-        avatar: e.avatar,
+        avatar: e.userAvatar,
         content: e.content,
         datetime: timer(Date.parse(e.updateTime))
       };
@@ -96,7 +99,7 @@ class CommentList extends PureComponent {
               avatar={
                 <NoAvatar
                   avatar={item.avatar}
-                  userName={item.userName}
+                  userName={item.author}
                   size={32}
                 />
               }

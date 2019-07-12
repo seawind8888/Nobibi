@@ -65,7 +65,7 @@ class NoLayout extends Component {
    
     switch (e.key) {
       case 'signOut':
-        
+      
         var res = await userLogOut();
         if (res.success) {
           message.success(res.message);
