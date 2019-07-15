@@ -43,7 +43,7 @@ class Home extends PureComponent {
     const {topicListInfo, topicListTotal} = this.props;
     return (
       <Fragment>
-        <div className='main-inside-container home-container'>
+        <div className='main-inside-container'>
           <div className='home-container'>
             <div className='list-item-container'>
               {topicListInfo.map((e, i) => {
