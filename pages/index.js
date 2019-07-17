@@ -8,8 +8,7 @@ class Home extends PureComponent {
   static propTypes = {
     topicListInfo: PropTypes.array.isRequired,
     topicListTotal: PropTypes.number,
-    dispatch: PropTypes.func.isRequired,
-    userInfo: PropTypes.object.isRequired
+    dispatch: PropTypes.func.isRequired
   }
   static defaultProps = {
     topicListTotal: 0
