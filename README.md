@@ -4,7 +4,10 @@
 
 ## 关于 Nobibi
 
-Nobibi 是一款轻量级开源社区，包含前后台，前台使用 ant-design 组件库及为优化 SEO ，使用 [next.js](https://github.com/zeit/next.js) 服务端渲染框，后台系统基于[Ant Design Pro](https://pro.ant.design/index-cn)搭建开发，后端接口为 express+mongo
+- Nobibi 是一款轻量级开源社区，包含前后台
+- 前台考虑 SEO 使用 nextjs[next.js](https://github.com/zeit/next.js)+ant-design 服务端渲结构
+- 后台系统基于[Ant Design Pro](https://pro.ant.design/index-cn)搭建开发
+- 后端接口为 express+moogoose
 
 ## 快速开始
 
@@ -59,21 +62,18 @@ npm run start
 
 ```
 BASE_URL=http://yourapihost:port // 你的api的host地址
-
 ```
 
 2. 将项目除去 node_modules 压缩，上传到服务器
 
 ```
 windows&mac有异同，请自行百度或科学Goo
-
 ```
 
 3. 在服务器项目目录下运行
 
 ```
 npm run start:pm2
-
 ```
 
 ## 技术选型
@@ -110,13 +110,14 @@ ant-cms-admin
 ## 功能模块
 
 - [x] 注册
-- [x] 登录
+- [x] 登录（持久化）
 - [x] 修改密码
 - [x] 修改资料
 - [x] 发布主题
 - [x] 评论主题
-- [x] 主题频道切换
+- [x] 频道切换
 - [x] 点赞
+- [x] 响应式布局
 - [x] 分享（待开发）
 - [x] 收藏（待开发）
 - [x] 积分系统（待开发）
