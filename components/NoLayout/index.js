@@ -2,7 +2,7 @@ import { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Header from '../Header';
 import NoFooter from '../NoFooter';
-import { Menu, Icon, message } from 'antd';
+import { Menu, Icon, message, Drawer } from 'antd';
 const { SubMenu } = Menu;
 import { userLogOut } from '../../api';
 import {connect} from 'react-redux';
@@ -29,7 +29,7 @@ class NoLayout extends Component {
     this.handleChangeCollapsed = this.handleChangeCollapsed.bind(this);
     this.handleSelectMenu = this.handleSelectMenu.bind(this);
     this.state = {
-      collapsed: true
+      collapsed: false
     };
   }
   async componentWillMount () {
@@ -91,39 +91,48 @@ class NoLayout extends Component {
     return (
       <Fragment>
         <div style={{display: 'flex'}}>
-          <Menu 
-            className='menu-group-left'
-            defaultSelectedKeys={['1']}
-            defaultOpenKeys={['sub1']}
-            mode='inline'
-            theme='light'
-            onClick={this.handleSelectMenu}
-            inlineCollapsed={this.state.collapsed}>
-            <Menu.Item 
-              key='home'>
-              <Icon type='home' />
-              <span>首页</span>
-            </Menu.Item>
-            <SubMenu
-              key='topic'
-              title={
-                <span>
-                  <Icon type='notification' />
-                  <span>主题</span>
-                </span>
-              }>
-              {
-                channelList.map(e => {
-                  return (
-                    <Menu.Item  
-                      key={e.categoryName}
-                    >{e.categoryName}</Menu.Item>
-                  );
-                })
-              }
+          <Drawer
+            placement='left'
+            closable={false}
+            onClose={this.handleChangeCollapsed}
+            visible={this.state.collapsed}
+            style={{padding:0}}
+          >
+            <Menu 
+              className='menu-group-left'
+              onClick={this.handleSelectMenu} 
+              defaultSelectedKeys={['1']}
+              defaultOpenKeys={['sub1']}
+              mode='inline'
+              theme='light'
+            >
+              <Menu.Item 
+                key='home'>
+                <Icon type='home' />
+                <span>首页</span>
+              </Menu.Item>
+              <SubMenu
+                key='topic'
+                title={
+                  <span>
+                    <Icon type='notification' />
+                    <span>频道</span>
+                  </span>
+                }>
+                {
+                  channelList.map(e => {
+                    return (
+                      <Menu.Item  
+                        key={e.categoryName}
+                      >{e.categoryName}</Menu.Item>
+                    );
+                  })
+                }
 
-            </SubMenu>
-          </Menu>
+              </SubMenu>
+            </Menu>
+          </Drawer>
+         
           
           <div style={{width: '100%'}}>
             <Header 

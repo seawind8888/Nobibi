@@ -33,7 +33,7 @@ const TopicItem = ({topicInfo}) => {
           <span className='info-item'>{timer(Date.parse(topicInfo.updateTime))}</span>
         </div>
       </div>
-      <div style={{display: 'flex', flex:1, justifyContent:'flex-end'}}>
+      <div >
         {
           topicInfo.commentNum ? <div className='comment-info-container'>
             {topicInfo.commentNum}

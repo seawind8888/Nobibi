@@ -72,7 +72,7 @@ class Header extends Component {
               title={
                 <span>
                   <Icon type='notification' />
-                  <span>主题</span>
+                  <span>频道</span>
                 </span>
               }>
               {
