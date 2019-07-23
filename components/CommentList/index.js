@@ -1,19 +1,18 @@
-import {  PureComponent } from 'react';
-import { Comment,  List,  message} from 'antd';
+import { PureComponent } from 'react';
+import { Comment, List, message } from 'antd';
 import Editor from '../Editor';
 import { getCommentList, addComment } from '../../api';
 import PropTypes from 'prop-types';
 import timer from '../../utils/timer';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import NoAvatar from '../NoAvatar';
-import Cookies from 'js-cookie';
 import Router from 'next/router';
 
 class CommentList extends PureComponent {
   static propTypes = {
     topicTitle: PropTypes.string.isRequired,
     topicId: PropTypes.string.isRequired,
-    userInfo: PropTypes.object.isRequired
+    userInfo: PropTypes.object.isRequired,
   };
   constructor(props) {
     super(props);
@@ -25,24 +24,24 @@ class CommentList extends PureComponent {
     content: '',
   };
   componentDidMount() {
-   
     this.getCommentList();
-  
   }
   getCommentList = async () => {
     const { topicId } = this.props;
     const { data } = await getCommentList({
-      topicId: topicId
+      topicId: topicId,
     });
     if (data.list.length)
       this.setState({
-        comments: this.initComment(data.list)
+        comments: this.initComment(data.list),
       });
-  }
- 
+  };
 
   handleSubmit = async () => {
-    if (!Cookies.get('username')){
+    if (
+      typeof window !== 'undefined' &&
+      !window.localStorage.getItem('Token')
+    ) {
       Router.push('/login');
       return;
     }
@@ -60,10 +59,10 @@ class CommentList extends PureComponent {
       topicId: topicId,
       userName: userInfo.userName,
       userAvatar: userInfo.avatar,
-      content: this.state.content
+      content: this.state.content,
     });
     this.setState({
-      submitting: false
+      submitting: false,
     });
     if (success) {
       message.success('bibi成功啦!');
@@ -71,18 +70,16 @@ class CommentList extends PureComponent {
     }
   };
 
-  initComment = (list) => {
+  initComment = list => {
     return list.map(e => {
       return {
         author: e.userName,
         avatar: e.userAvatar,
         content: e.content,
-        datetime: timer(Date.parse(e.updateTime))
+        datetime: timer(Date.parse(e.updateTime)),
       };
     });
-  }
-
-
+  };
 
   handleChange = e => {
     this.setState({
@@ -96,24 +93,27 @@ class CommentList extends PureComponent {
 
     return (
       <div>
-        {comments.length > 0 && <List
-          dataSource={comments}
-          header='回复'
-          itemLayout='horizontal'
-          renderItem={item => 
-            <Comment 
-              avatar={
-                <NoAvatar
-                  avatar={item.avatar}
-                  userName={item.author}
-                  size={32}
-                />
-              }
-              author={item.author}
-              content={item.content}
-              datetime={item.datetime}
-            />}
-        />}
+        {comments.length > 0 && (
+          <List
+            dataSource={comments}
+            header='回复'
+            itemLayout='horizontal'
+            renderItem={item => (
+              <Comment
+                avatar={
+                  <NoAvatar
+                    avatar={item.avatar}
+                    userName={item.author}
+                    size={32}
+                  />
+                }
+                author={item.author}
+                content={item.content}
+                datetime={item.datetime}
+              />
+            )}
+          />
+        )}
         <Comment
           avatar={
             <NoAvatar
@@ -137,5 +137,5 @@ class CommentList extends PureComponent {
 }
 
 export default connect(state => ({
-  userInfo: state.user.userInfo
+  userInfo: state.user.userInfo,
 }))(CommentList);

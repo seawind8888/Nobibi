@@ -1,108 +1,114 @@
 import fetch from '../utils/fetch';
 
-export const userLogin = (params) => {
+export const userLogin = params => {
   return fetch({
     method: 'post',
     url: '/api/user/login',
-    data: params
+    data: params,
   });
 };
 export const userLogOut = () => {
   return fetch({
     method: 'get',
-    url: '/api/user/logout'
+    useToken: true,
+    url: '/api/user/logout',
   });
 };
 
-export const userRegister = (params) => {
+export const userRegister = params => {
   return fetch({
     method: 'post',
     url: '/api/user/createUser',
-    data: params
+    data: params,
   });
 };
-export const changePassApi = (params) => {
+export const changePassApi = params => {
   return fetch({
     method: 'post',
+    useToken: true,
     url: '/api/user/changePass',
-    data: params
+    data: params,
   });
 };
-export const modifyUserApi = (params) => {
+export const modifyUserApi = params => {
   return fetch({
     method: 'patch',
     url: '/api/user/updateUser',
-    data: params
+    data: params,
   });
 };
 
-export const getUserInfo = (params) => {
+export const getUserInfo = params => {
   return fetch({
     method: 'get',
     url: '/api/user/getUserInfo',
-    params: params
+    useToken: true,
+    params: params,
   });
 };
 
-export const getTopicList = (params) => {
+export const getTopicList = params => {
   return fetch({
     method: 'get',
     url: '/api/topic/getTopicList',
-    params: params
+    params: params,
   });
 };
-export const updateTopicItem = (params) => {
+export const updateTopicItem = params => {
   return fetch({
     method: 'get',
     url: '/topic/updateTopic',
-    params: params
+    params: params,
   });
 };
 
-export const createTopic = (params) => {
+export const createTopic = params => {
   return fetch({
     method: 'post',
+    useToken: true,
     url: '/api/topic/createTopic',
-    data: params
+    data: params,
   });
 };
 
-export const getChannelList = (params) => {
+export const getChannelList = params => {
   return fetch({
     method: 'get',
     url: '/api/category/getCategoryList',
-    params: params
+    params: params,
   });
 };
 
-export const getCommentList = (params) => {
+export const getCommentList = params => {
   return fetch({
     method: 'get',
     url: '/api/comment/getCommentList',
-    params: params
+    params: params,
   });
 };
 
-export const addComment = (params) => {
+export const addComment = params => {
   return fetch({
     method: 'post',
+    useToken: true,
     url: '/api/comment/addComment',
-    data: params
+    data: params,
   });
 };
 
-export const actionPraise = (params) => {
+export const actionPraise = params => {
   return fetch({
     method: 'post',
+    useToken: true,
     url: '/api/praise/praiseAction',
-    data: params
+    data: params,
   });
 };
 
-export const getPraiseInfo = (params) => {
+export const getPraiseInfo = params => {
   return fetch({
     method: 'get',
     url: '/api/praise/getPraiseInfo',
-    params: params
+    params: params,
   });
 };
