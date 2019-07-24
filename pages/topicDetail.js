@@ -1,5 +1,5 @@
 import { PureComponent, Fragment } from 'react';
-import { Icon, message } from 'antd';
+import { Icon, message, Button } from 'antd';
 import PropTypes from 'prop-types';
 import NoAvatar from '../components/NoAvatar';
 import CommentList from '../components/CommentList';
@@ -84,7 +84,7 @@ class TopicDetail extends PureComponent {
                 dangerouslySetInnerHTML={{ __html: topicInfo.content }}
               ></div>
             </div>
-            <div className='control-container'>
+            <div className='praise-control-container'>
               <div
                 onClick={() => {
                   this.handleControlPraise('up');
@@ -104,6 +104,10 @@ class TopicDetail extends PureComponent {
                 <Icon style={{ cursor: 'pointer', fontSize: 16 }} type='down' />
               </div>
             </div>
+          </div>
+          <div className='main-control-container'>
+            <Button style={{marginRight: '5px'}} size='large' shape='circle' icon='star' />
+            <Button style={{marginRight: '5px'}} size='large' shape='circle' icon='share-alt' />
           </div>
           <CommentList
             topicTitle={topicInfo.topicTitle}
