@@ -1,5 +1,7 @@
 <h1 align="center">Nobibi</h1>
 
+简体中文 | [English](./README_en.md)
+
 > Nobibi 是一款轻量级开源社区，快速搭建属于自己的社区
 
 ## 关于 Nobibi
@@ -7,7 +9,7 @@
 - Nobibi 是一款轻量级开源社区，包含前后台
 - 前台考虑 SEO 使用 [next.js](https://github.com/zeit/next.js) + antd 服务端渲结构
 - 后台系统基于[Ant Design Pro](https://pro.ant.design/index-cn)(react + dvajs + umijs)搭建开发
-- 后端接口为 express+moogoose
+- 后端接口为 koa+moogoose
 
 ## 快速开始
 

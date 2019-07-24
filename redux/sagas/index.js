@@ -32,14 +32,13 @@ export function* userSignOut() {
 export function* topicList() {
   while (true) {
     const { payload = {}} = yield take(FETCH_TOPIC_LIST);
-   
-    if (!payload.categoryName) {
-      const { topic } = yield select();
+    const { topic } = yield select();
+    if (payload.page && !payload.categoryName) {
       if (payload.categoryName) {
         payload.categoryName = topic.categoryName;
       }
     }
-    if (payload.categoryName === 'home') {
+    if (payload.categoryName === 'all') {
       delete payload.categoryName;
     }
    

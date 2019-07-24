@@ -29,8 +29,9 @@ const TopicItem = ({topicInfo}) => {
         <div className='bottom-info'>
           <Tag>{topicInfo.categoryName}</Tag>·
           <span className='info-item'>{topicInfo.praiseNum || 0}赞</span>·
+          <span className='info-item'>{topicInfo.commentNum || 0}回复</span>·
           <span className='info-item'>{topicInfo.userName}</span>·
-          <span className='info-item'>{timer(Date.parse(topicInfo.updateTime))}</span>
+          <span className='info-item'>{timer(topicInfo.updateTime)}</span>
         </div>
       </div>
       <div >

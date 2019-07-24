@@ -1,9 +1,8 @@
 import { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import Header from '../Header';
+import NoHeader from '../NoHeader';
 import NoFooter from '../NoFooter';
-import { Menu, Icon, message, Drawer } from 'antd';
-const { SubMenu } = Menu;
+import {  message,  } from 'antd';
 import { userLogOut } from '../../api';
 import { connect } from 'react-redux';
 import Router from 'next/router';
@@ -13,22 +12,15 @@ class NoLayout extends Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
     children: PropTypes.any.isRequired,
-    channelList: PropTypes.array,
     dispatch: PropTypes.func.isRequired,
     userInfo: PropTypes.object.isRequired,
   };
-
-  static defaultProps = {
-    channelList: [],
-  };
   constructor(props) {
     super(props);
-    this.handleChangeCollapsed = this.handleChangeCollapsed.bind(this);
-    this.handleSelectMenu = this.handleSelectMenu.bind(this);
-    this.state = {
-      collapsed: false,
-    };
   }
+  state = {
+    collapsed: false,
+  };
   async componentDidMount() {
     this.props.dispatch({ type: 'FETCH_CHANNEL_LIST' });
     const _userCode = window.localStorage.getItem('username');
@@ -41,18 +33,13 @@ class NoLayout extends Component {
       });
     }
   }
-  handleChangeCollapsed() {
+  handleChangeCollapsed = () => {
     this.setState(prevState => ({
       collapsed: !prevState.collapsed,
     }));
   }
-  handleSelectMenu(e) {
-    const { dispatch } = this.props;
-    Router.push('/');
-    dispatch({
-      type: 'FETCH_TOPIC_LIST',
-      payload: { categoryName: e.key },
-    });
+  handleSelectMenu = (key) => {
+    Router.push(key);
   }
   handleSelectUserItem = async e => {
     const { dispatch } = this.props;
@@ -78,11 +65,10 @@ class NoLayout extends Component {
   };
 
   render() {
-    const { channelList } = this.props;
     return (
       <Fragment>
         <div style={{ display: 'flex' }}>
-          <Drawer
+          {/* <Drawer
             placement='left'
             closable={false}
             onClose={this.handleChangeCollapsed}
@@ -97,36 +83,19 @@ class NoLayout extends Component {
               mode='inline'
               theme='light'
             >
-              <Menu.Item key='home'>
+              <Menu.Item key='/'>
                 <Icon type='home' />
                 <span>首页</span>
               </Menu.Item>
-              <SubMenu
-                key='topic'
-                title={
-                  <span>
-                    <Icon type='notification' />
-                    <span>频道</span>
-                  </span>
-                }
-              >
-                {channelList.map(e => {
-                  return (
-                    <Menu.Item key={e.categoryName}>{e.categoryName}</Menu.Item>
-                  );
-                })}
-              </SubMenu>
             </Menu>
-          </Drawer>
+          </Drawer> */}
 
           <div style={{ width: '100%' }}>
-            <Header
+            <NoHeader
               title={this.props.title}
               onToggle={this.handleChangeCollapsed}
               isCollapsed={this.state.collapsed}
-              channelList={channelList}
               userInfo={this.props.userInfo}
-              onMenuClick={this.handleSelectMenu}
               onUserClick={this.handleSelectUserItem}
             />
             <div className='main-container'>{this.props.children}</div>

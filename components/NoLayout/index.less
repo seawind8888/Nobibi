@@ -48,10 +48,44 @@
     display: flex;
     float: right;
     flex-direction: column;
+    .user-info-container {
+      display: flex;
+      padding-bottom: 10px;
+      align-items: center;
+      border-bottom: 1px solid #dddddd;
+      &--right {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+    
+    .hot-topic-container {
+      margin-top: 20px;
+      padding-left: 5px;
+      display: flex;
+      flex-direction: column;
+      border-bottom: 1px solid #dddddd;
+      .hot-title-container {
+        color: #52c41a;
+        display: flex;
+        font-size: 22px;
+        font-weight: bold;
+        .title-start-block {
+          height: 26px;
+          width: 5px;
+          background-color: #52c41a;
+          margin-right: 10px;
+        }
+      }
+      .hot-list-container {
+        list-style: none;
+        padding-left: 15px;
+      }
+    }
     .ad-container {
       width: 100%;
-      // border: 1px #dddddd solid;
-      height: 500px;
+
+      height: 100px;
       display: flex;
       align-items: center;
       justify-content: center;

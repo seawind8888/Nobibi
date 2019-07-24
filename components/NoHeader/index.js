@@ -1,18 +1,18 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Menu, Icon, Dropdown, Button } from 'antd';
-const { SubMenu } = Menu;
+import Router from 'next/router';
+// const { SubMenu } = Menu;
 import Link from 'next/link';
 import './index.less';
+
 
 // Only holds serverRuntimeConfig and publicRuntimeConfig from next.config.js nothing else.
 
 
-class Header extends Component {
+class NoHeader extends Component {
   static propTypes = {
     onToggle: PropTypes.func.isRequired,
-    channelList: PropTypes.array.isRequired,
-    onMenuClick: PropTypes.func.isRequired,
     onUserClick: PropTypes.func.isRequired,
     userInfo: PropTypes.object.isRequired,
     isCollapsed: PropTypes.bool.isRequired
@@ -20,12 +20,12 @@ class Header extends Component {
   constructor(props) {
     super(props);
   }
-  
-
-  
+  handleGotoHome = () => {
+    Router.push('/');
+  }
 
   render() {
-    const {onToggle, onMenuClick, isCollapsed, onUserClick, channelList, userInfo} = this.props;
+    const { onUserClick, userInfo} = this.props;
     const menu = (
       <Menu
         onClick={onUserClick}>
@@ -47,46 +47,14 @@ class Header extends Component {
     return (
       <div className='header-outside'>
         <div className='header-main'>
-          <Icon
+          {/* <Icon
             className='toggle-button'
             type={isCollapsed ? 'menu-unfold' : 'menu-fold'}
             onClick={onToggle}
-          />
-          <h1 className='header-title'>
+          /> */}
+          <h1 className='header-title' onClick={this.handleGotoHome}>
             Nobibi
           </h1>
-          <Menu 
-            className='menu-group-header'
-            onClick={onMenuClick} 
-            mode='horizontal'>
-            <Menu.Item 
-              key='home'
-            >
-              <Icon type='home' />
-              <span>
-                首页
-              </span>
-            </Menu.Item>
-            <SubMenu
-              key='topic'
-              title={
-                <span>
-                  <Icon type='notification' />
-                  <span>频道</span>
-                </span>
-              }>
-              {
-                channelList.map(e => {
-                  return (
-                    <Menu.Item 
-                      onClick={onMenuClick}
-                      key={e.categoryName}>{e.categoryName}</Menu.Item>
-                  );
-                })
-              }
-            </SubMenu>
-            
-          </Menu>
           {userInfo.userName ?
             <section className='button-group'>
               <Dropdown overlay={menu}>
@@ -114,6 +82,6 @@ class Header extends Component {
   }
 }
 
-export default Header;
+export default NoHeader;
 
 
