@@ -51,8 +51,6 @@ npm run start
   ![image](/screenshot/screenshot1.png)
   ![image](/screenshot/screenshot2.png)
   ![image](/screenshot/screenshot3.png)
-- 前台（移动端）
-  ![image](/screenshot/mobile.jpg)
 - 管理后台
   ![image](/screenshot/demo.gif)
 
