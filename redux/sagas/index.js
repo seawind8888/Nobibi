@@ -1,76 +1,83 @@
 
-import {  all, call, take, put, fork, select } from 'redux-saga/effects';
-import {  getUserInfo, getTopicList, getChannelList } from '../../api';
+import {  all, call,  put, select, takeLatest } from 'redux-saga/effects';
+import {  getUserInfo, getChannelList, getTopicList, getFavoriteTopic } from '../../api';
+import { 
+  getUserInfoSuccess,
+  getUserInfoFail,
+  userSignOut
+} from '../actions/user';
+import { 
+  fetchChannelListSuccess,
+  fetchChannelListFail
+} from '../actions/channel';
+import { 
+  fetchTopicListSuccess,
+  fetchTopicListFail
+} from '../actions/topic';
 
 import {
-  FETCH_TOPIC_LIST,
-  FETCH_TOPIC_LIST_SUCCESS,
-  FETCH_CHANNEL_LIST,
-  FETCH_CHANNEL_LIST_SUCCESS,
   GET_USER_INFO,
-  GET_USER_INFO_SUCCESS,
-  USER_SIGN_OUT
+  USER_SIGN_OUT,
+  FETCH_CHANNEL_LIST,
+  FETCH_TOPIC_LIST
 } from '../../constants/ActionTypes';
+import { selectUserInfo } from '../reducers/selectors';
+
+
 
 export function* userInfo() {
-  while (true) {
-    const { payload = {}} = yield take(GET_USER_INFO);
-    const { data } = yield call(getUserInfo, payload);
-    yield put({
-      type: GET_USER_INFO_SUCCESS,
-      data
-    });
-  }
-}
-
-export function* userSignOut() {
-  while (true) {
-    yield take(USER_SIGN_OUT);
-  }
-}
-
-export function* topicList() {
-  while (true) {
-    const { payload = {}} = yield take(FETCH_TOPIC_LIST);
-    const { topic } = yield select();
-    if (payload.page && !payload.categoryName) {
-      if (payload.categoryName) {
-        payload.categoryName = topic.categoryName;
-      }
-    }
-    if (payload.categoryName === 'all') {
-      delete payload.categoryName;
-    }
-   
-    const { data } = yield call(getTopicList, payload);
-    
-    yield put({
-      type: FETCH_TOPIC_LIST_SUCCESS,
-      data: {
-        ...data,
-        categoryName: payload.categoryName
-      }
-    });
+  try {
+    const { data } = yield call(getUserInfo);
+    yield put(getUserInfoSuccess(data));
+  } catch (error) {
+    console.log(error);
+    yield put(getUserInfoFail(error));
   }
 }
 
 export function* channelList() {
-  while (true) {
-    const { payload = {}} = yield take(FETCH_CHANNEL_LIST);
-    const { data } = yield call(getChannelList, payload);
-    yield put({
-      type: FETCH_CHANNEL_LIST_SUCCESS,
-      data
-    });
+  try {
+    const { data } = yield call(getChannelList);
+    yield put(fetchChannelListSuccess(data));
+  } catch (error) {
+    console.log(error);
+    yield put(fetchChannelListFail());
   }
+}
+
+export function* topicList(action) {
+  try {
+    const { getMyTopic = false, favorite = false, categoryName = '', page = 1 } = action.payload;
+    const requestUrl = favorite ? getFavoriteTopic : getTopicList;
+    let params = {
+      categoryName,
+      page
+    };
+    if (getMyTopic || favorite) {
+      const {userName} = yield select(selectUserInfo);
+      params.userName =  userName;
+    }
+    const { data } = yield call(requestUrl, params);
+    yield put(fetchTopicListSuccess({
+      ...data,
+      page,
+      categoryName}));
+  } catch (error) {
+    console.log(error);
+    yield put(fetchTopicListFail());
+  }
+}
+
+export function* signOut() {
+  yield put(userSignOut());
 }
 
 
 export default function* rootSagas() {
   yield all([
-    fork(topicList),
-    fork(userInfo),
-    fork(userSignOut),
-    fork(channelList)
+    takeLatest(FETCH_TOPIC_LIST, topicList),
+    takeLatest(GET_USER_INFO, userInfo),
+    takeLatest(USER_SIGN_OUT, signOut),
+    takeLatest(FETCH_CHANNEL_LIST, channelList)
   ]);
 }

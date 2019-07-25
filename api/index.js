@@ -112,3 +112,21 @@ export const getPraiseInfo = params => {
     params: params,
   });
 };
+
+export const actionFavoriteTopic = params => {
+  return fetch({
+    method: 'post',
+    useToken: true,
+    url: '/api/favorite/createFavorite',
+    data: params,
+  });
+};
+
+export const getFavoriteTopic = params => {
+  return fetch({
+    method: 'get',
+    useToken: true,
+    url: '/api/favorite/getFavoriteList',
+    params: params,
+  });
+};

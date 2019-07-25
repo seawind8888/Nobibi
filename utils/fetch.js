@@ -7,11 +7,6 @@ const instance = axios.create({
 });
 
 export default function fetch(options) {
-  // if (typeof window !== 'undefined') {
-  //   options.headers = {
-  //     Authorization: window.localStorage.getItem('Token'),
-  //   };
-  // }
   if (options.useToken) {
     options.headers = {
       Authorization: 'Bearer ' + window.localStorage.getItem('Token'),
@@ -25,6 +20,10 @@ export default function fetch(options) {
       const success = status === 200 ? true : false;
       if (!success && typeof window !== 'undefined') {
         message.error(data.message);
+      }
+      if (status === 401) {
+        window.localStorage.removeItem('Token');
+        window.localStorage.removeItem('username');
       }
       return Promise.resolve({
         success: success,

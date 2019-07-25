@@ -8,13 +8,13 @@ const initialState = {
   userInfo: {}
 };
 
-const user = (state = initialState, { type, data = {} }) => {
+const user = (state = initialState, { type, payload = {} }) => {
   switch (type) {
     case GET_USER_INFO:
     case GET_USER_INFO_SUCCESS:
       return {
         ...state,
-        userInfo: data
+        userInfo: payload
       };
     case USER_SIGN_OUT:{
       return {

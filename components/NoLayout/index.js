@@ -7,6 +7,9 @@ import { userLogOut } from '../../api';
 import { connect } from 'react-redux';
 import Router from 'next/router';
 import './index.less';
+import { getUserInfo } from '../../redux/actions/user';
+import { fetchChannelList } from '../../redux/actions/channel';
+
 
 class NoLayout extends Component {
   static propTypes = {
@@ -22,15 +25,11 @@ class NoLayout extends Component {
     collapsed: false,
   };
   async componentDidMount() {
-    this.props.dispatch({ type: 'FETCH_CHANNEL_LIST' });
+    const {dispatch} = this.props;
+    dispatch(getUserInfo());
     const _userCode = window.localStorage.getItem('username');
     if (_userCode) {
-      this.props.dispatch({
-        type: 'GET_USER_INFO',
-        payload: {
-          username: _userCode,
-        },
-      });
+      dispatch(fetchChannelList());
     }
   }
   handleChangeCollapsed = () => {

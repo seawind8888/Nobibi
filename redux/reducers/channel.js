@@ -9,13 +9,13 @@ const initialState = {
   list: []
 };
       
-const channel = (state = initialState, { type, data }) => {
+const channel = (state = initialState, { type, payload = {} }) => {
   switch (type) {
     case FETCH_CHANNEL_LIST:
     case FETCH_CHANNEL_LIST_SUCCESS:
       return {
         ...state,
-        ...data
+        list: payload.list
       };
     case FETCH_CHANNEL_LIST_FAIL:
       return initialState;

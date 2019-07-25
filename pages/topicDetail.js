@@ -3,7 +3,7 @@ import { Icon, message, Button } from 'antd';
 import PropTypes from 'prop-types';
 import NoAvatar from '../components/NoAvatar';
 import CommentList from '../components/CommentList';
-import { getTopicList, getPraiseInfo, actionPraise } from '../api';
+import { getTopicList, getPraiseInfo, actionPraise, actionFavoriteTopic } from '../api';
 import timer from '../utils/timer';
 import Head from 'next/head';
 import { connect } from 'react-redux';
@@ -59,6 +59,16 @@ class TopicDetail extends PureComponent {
       this.handleGetPraiseInfo();
     }
   };
+  handleCellectTopic = async () => {
+    const { topicInfo, userInfo } = this.props;
+    const data = await actionFavoriteTopic({
+      userName: userInfo.userName,
+      topicId: topicInfo._id,
+    });
+    if (data.success) {
+      message.success(data.message);
+    } 
+  }
   render() {
     const { topicInfo } = this.props;
     return (
@@ -106,7 +116,7 @@ class TopicDetail extends PureComponent {
             </div>
           </div>
           <div className='main-control-container'>
-            <Button style={{marginRight: '5px'}} size='large' shape='circle' icon='star' />
+            <Button onClick={this.handleCellectTopic} style={{marginRight: '5px'}} size='large' shape='circle' icon='star' />
             <Button style={{marginRight: '5px'}} size='large' shape='circle' icon='share-alt' />
           </div>
           <CommentList
