@@ -10,8 +10,8 @@ const bindMiddleware = (middleware) => {
   if (process.env.NODE_ENV !== 'production') {
     const { composeWithDevTools } = require('redux-devtools-extension');
     // development use logger
-    const { logger } = require('redux-logger');
-    middleware.push(logger);
+    // const { logger } = require('redux-logger');
+    // middleware.push(logger);
     return composeWithDevTools(applyMiddleware(...middleware));
   }
   return applyMiddleware(...middleware);

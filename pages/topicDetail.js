@@ -1,5 +1,5 @@
 import { PureComponent, Fragment } from 'react';
-import { Icon, message, Button } from 'antd';
+import { Icon, message, Button, Breadcrumb } from 'antd';
 import PropTypes from 'prop-types';
 import NoAvatar from '../components/NoAvatar';
 import CommentList from '../components/CommentList';
@@ -8,6 +8,7 @@ import timer from '../utils/timer';
 import Head from 'next/head';
 import { connect } from 'react-redux';
 import Router from 'next/router';
+import Link from 'next/link';
 
 class TopicDetail extends PureComponent {
   static propTypes = {
@@ -77,6 +78,25 @@ class TopicDetail extends PureComponent {
           <title>{topicInfo.topicTitle}</title>
         </Head>
         <div className='main-inside-container topic-detail-container'>
+          <Breadcrumb style={{marginTop: '10px'}}>
+            <Breadcrumb.Item>
+              <Link href={`/`}>
+                <a href='/'>首页</a>
+              </Link>
+                 
+            </Breadcrumb.Item>
+            <Breadcrumb.Item>
+              <Link 
+                as={`/topicDetail/${topicInfo._id}`}
+                href={`/topicDetail?id=${topicInfo._id}`}>
+                <a>
+                  {topicInfo.topicTitle}
+                </a>
+          
+              </Link>
+                 
+            </Breadcrumb.Item>
+          </Breadcrumb>
           <h1 className='detail-title'>{topicInfo.topicTitle}</h1>
           <div className='main-info-container'>
             <div className='user-avatar'>

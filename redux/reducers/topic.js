@@ -6,9 +6,9 @@ import {
       
       
 const initialState = {
+  list: [],
   categoryName: '',
-  page:1,
-  list: []
+  type: ''
 };
       
 const topic = (state = initialState, { type, payload = {} }) => {

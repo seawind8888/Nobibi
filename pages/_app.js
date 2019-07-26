@@ -9,6 +9,7 @@ import NoLayout from '../components/NoLayout';
 import '../assets/self-styles.less';
 import { RouterTitle } from '../constants/ConstTypes';
 import "antd/dist/antd.less";
+import {withRouter} from 'next/router';
 
 class NextApp extends App {
   
@@ -54,4 +55,4 @@ class NextApp extends App {
   }
 }
 
-export default withRedux(createStore)(withReduxSaga({ async: true })(NextApp));
+export default withRedux(createStore)(withReduxSaga({ async: true })(withRouter(NextApp)));

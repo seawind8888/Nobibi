@@ -1,5 +1,5 @@
 
-import {  all, call,  put, select, takeLatest } from 'redux-saga/effects';
+import {  all, call,  put, select, takeLatest} from 'redux-saga/effects';
 import {  getUserInfo, getChannelList, getTopicList, getFavoriteTopic } from '../../api';
 import { 
   getUserInfoSuccess,
@@ -17,9 +17,9 @@ import {
 
 import {
   GET_USER_INFO,
-  USER_SIGN_OUT,
   FETCH_CHANNEL_LIST,
-  FETCH_TOPIC_LIST
+  FETCH_TOPIC_LIST,
+  USER_SIGN_OUT
 } from '../../constants/ActionTypes';
 import { selectUserInfo } from '../reducers/selectors';
 
@@ -47,37 +47,34 @@ export function* channelList() {
 
 export function* topicList(action) {
   try {
-    const { getMyTopic = false, favorite = false, categoryName = '', page = 1 } = action.payload;
-    const requestUrl = favorite ? getFavoriteTopic : getTopicList;
-    let params = {
+    const { type = '', categoryName = '', page = 1 } = action.payload;
+    const requestUrl = type === 'favorite' ? getFavoriteTopic : getTopicList;
+    // const _categoryName = categoryName === '全部' ? '' : categoryName;
+    const params = {
       categoryName,
       page
     };
-    if (getMyTopic || favorite) {
+    if (type === '我的发布' || type === '我的收藏') {
       const {userName} = yield select(selectUserInfo);
       params.userName =  userName;
     }
     const { data } = yield call(requestUrl, params);
     yield put(fetchTopicListSuccess({
       ...data,
-      page,
-      categoryName}));
+      type,
+      categoryName
+    }));
   } catch (error) {
     console.log(error);
     yield put(fetchTopicListFail());
   }
 }
 
-export function* signOut() {
-  yield put(userSignOut());
-}
-
-
 export default function* rootSagas() {
   yield all([
     takeLatest(FETCH_TOPIC_LIST, topicList),
     takeLatest(GET_USER_INFO, userInfo),
-    takeLatest(USER_SIGN_OUT, signOut),
+    takeLatest(USER_SIGN_OUT, userSignOut),
     takeLatest(FETCH_CHANNEL_LIST, channelList)
   ]);
 }

@@ -1,9 +1,10 @@
 import {  PureComponent, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { Form, Upload, Icon, message, Input, Button } from 'antd';
+import { Form, Upload, Icon, message, Input, Button, Breadcrumb } from 'antd';
 import {connect} from 'react-redux';
 import NoAvatar from '../components/NoAvatar';
 import { modifyUserApi } from '../api';
+import Link from 'next/link';
 
 function getBase64(img, callback) {
   const reader = new FileReader();
@@ -83,48 +84,68 @@ class ModifyUser extends PureComponent {
    
       return (
         <Fragment>
-          <Form onSubmit={this.handleSubmit}  className='login-form' >
-            <Form.Item style={{display:'flex', alignItems: 'center', flexDirection:'column'}}>
-              <Upload
-                name='avatar'
-                listType='picture-card'
-                showUploadList={false}
-                beforeUpload={beforeUpload}
-                onChange={this.handleChange}
-              >
-                {imageUrl ? <img style={{width: '64px', height: '64px', borderRadius: '64px'}} src={imageUrl} alt='avatar' /> : uploadButton}
-              </Upload>
+          <div className='main-inside-container'>
+            <Breadcrumb style={{marginTop: '10px'}}>
+              <Breadcrumb.Item>
+                <Link href={`/`}>
+                  <a>首页</a>
+                </Link>
+                 
+              </Breadcrumb.Item>
+              <Breadcrumb.Item>
+                <Link href={`/modifyUser`}>
+                  <a>修改资料</a>
+                </Link>
+                 
+              </Breadcrumb.Item>
+            </Breadcrumb>
+            <div style={{display: 'flex', justifyContent: 'center'}}>
+              <Form onSubmit={this.handleSubmit}  className='login-form' >
+                <Form.Item style={{display:'flex', alignItems: 'center', flexDirection:'column'}}>
+                  <Upload
+                    name='avatar'
+                    listType='picture-card'
+                    showUploadList={false}
+                    beforeUpload={beforeUpload}
+                    onChange={this.handleChange}
+                  >
+                    {imageUrl ? <img style={{width: '64px', height: '64px', borderRadius: '64px'}} src={imageUrl} alt='avatar' /> : uploadButton}
+                  </Upload>
              
-            </Form.Item>
-            <Form.Item>
-              {getFieldDecorator('username', {
-                initialValue: userInfo.userName,
-                rules: [{ required: true, message: '请输入用户名!' }],
-              })(
-                <Input
-                  prefix={<Icon type='user' style={{ color: 'rgba(0,0,0,.25)' }} />}
-                  placeholder='用户名'
-                />,
-              )}
-            </Form.Item>
-            <Form.Item>
-              {getFieldDecorator('email', {
-                initialValue: userInfo.email,
-                rules: [{ required: true, message: '请输入邮箱!' }],
-              })(
-                <Input
-                  prefix={<Icon type='mail' style={{ color: 'rgba(0,0,0,.25)' }} />}
-                  type='email'
-                  placeholder='邮箱'
-                />,
-              )}
-            </Form.Item>
-            <Form.Item>
-              <Button type='primary' htmlType='submit' className='login-form-button'>
+                </Form.Item>
+                <Form.Item>
+                  {getFieldDecorator('username', {
+                    initialValue: userInfo.userName,
+                    rules: [{ required: true, message: '请输入用户名!' }],
+                  })(
+                    <Input
+                      prefix={<Icon type='user' style={{ color: 'rgba(0,0,0,.25)' }} />}
+                      placeholder='用户名'
+                    />,
+                  )}
+                </Form.Item>
+                <Form.Item>
+                  {getFieldDecorator('email', {
+                    initialValue: userInfo.email,
+                    rules: [{ required: true, message: '请输入邮箱!' }],
+                  })(
+                    <Input
+                      prefix={<Icon type='mail' style={{ color: 'rgba(0,0,0,.25)' }} />}
+                      type='email'
+                      placeholder='邮箱'
+                    />,
+                  )}
+                </Form.Item>
+                <Form.Item>
+                  <Button type='primary' htmlType='submit' className='login-form-button'>
                 修改
-              </Button>
-            </Form.Item>
-          </Form>
+                  </Button>
+                </Form.Item>
+              </Form>
+            </div>
+           
+          </div>
+          
         </Fragment>
       );
     }
