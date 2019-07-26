@@ -26,10 +26,11 @@ class NoLayout extends Component {
   };
   async componentDidMount() {
     const {dispatch} = this.props;
-    dispatch(getUserInfo());
+    dispatch(fetchChannelList());
     const _userCode = window.localStorage.getItem('username');
     if (_userCode) {
-      dispatch(fetchChannelList());
+      dispatch(getUserInfo());
+     
     }
   }
   handleChangeCollapsed = () => {
