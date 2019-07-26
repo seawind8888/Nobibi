@@ -61,6 +61,10 @@ class TopicDetail extends PureComponent {
     }
   };
   handleCellectTopic = async () => {
+    if (!window.localStorage.getItem('username')) {
+      Router.push('/login');
+      return;
+    }
     const { topicInfo, userInfo } = this.props;
     const data = await actionFavoriteTopic({
       userName: userInfo.userName,
