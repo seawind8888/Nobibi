@@ -10,6 +10,7 @@ const TopicItem = ({topicInfo}) => {
     <div className='topic-container'>
       <div className='left-item'>
         <NoAvatar
+          size={46}
           avatar={topicInfo.userAvatar}
           userName={topicInfo.userName}
         >

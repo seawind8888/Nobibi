@@ -1,14 +1,35 @@
 .header-outside {
     display: flex;
-    height: 50px;
+    height: 45px;
     justify-content: center;
     border: 1px solid #e8e8e8;
     background-color: #ffffff;
   }
 .header-main {
   padding: 0 15px;
-  width: 1200px;
+  width: 1100px;
   display: flex;
+  align-items: center;
+  .header-title {
+    margin: 0;
+    cursor: pointer;
+    margin-right: 15px;
+  }
+  .header-search-container {
+    width: 200px;
+    .ant-input {
+      border-radius: 30px;
+    }
+  }
+  .button-group {
+    display: flex;
+    flex:1;
+    justify-content: flex-end;
+    align-items: center;
+    .text-button-container {
+      margin-left: 10px;
+    }
+  }
 }
 
 .toggle-button {
@@ -17,22 +38,9 @@
   margin-right: 10px;
 }
 
-.header-title {
-  margin: 0;
-  cursor: pointer;
-  line-height: 50px;
-  margin-right: 15px;
-}
 
-.button-group {
-  display: flex;
-  flex:1;
-  justify-content: flex-end;
-  align-items: center;
-  .text-button-container {
-    margin-left: 10px;
-  }
-}
+
+
 
 
 @media screen and (min-width: 769px) and (max-width: 1280px) {

@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Menu, Icon, Dropdown, Button } from 'antd';
+import { Menu, Icon, Dropdown, Button, Input } from 'antd';
+const { Search } = Input;
 import Router from 'next/router';
 // const { SubMenu } = Menu;
 import Link from 'next/link';
@@ -55,6 +56,13 @@ class NoHeader extends Component {
           <h1 className='header-title' onClick={this.handleGotoHome}>
             Nobibi
           </h1>
+          <Search
+            placeholder='搜搜bibi'
+            size='small'
+            onSearch={value => console.log(value)}
+            className='header-search-container'
+          />
+
           {userInfo.userName ?
             <section className='button-group'>
               <Dropdown overlay={menu}>
