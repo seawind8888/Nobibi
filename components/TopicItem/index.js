@@ -27,11 +27,12 @@ const TopicItem = ({topicInfo}) => {
           </Link>
         </h1>
         <div className='bottom-info'>
-          <Tag>{topicInfo.categoryName}</Tag>·
-          <span className='info-item'>{topicInfo.praiseNum || 0}赞</span>·
-          <span className='info-item'>{topicInfo.commentNum || 0}回复</span>·
-          <span className='info-item'>{topicInfo.userName}</span>·
-          <span className='info-item'>{timer(topicInfo.updateTime)}</span>
+          <Tag>{topicInfo.categoryName}</Tag>
+          <span className='info-item hide-item'>{topicInfo.praiseNum || 0}赞</span>
+          <span className='hide-item'>·</span>
+          <span className='info-item'>{topicInfo.userName}</span>
+          <span className='hide-item'>·</span>
+          <span className='info-item hide-item'>{timer(topicInfo.updateTime)}</span>
         </div>
       </div>
       <div >

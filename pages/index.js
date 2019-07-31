@@ -103,10 +103,10 @@ class Home extends PureComponent {
                 }
               </Breadcrumb>
               <div style={{marginTop:'10px'}}>
-                <Button shape='round' style={{marginRight: '5px', marginBottom: '5px'}} onClick={() => this.handleGetTopicList({showAll: true})}>全部</Button>
+                <Button shape='round' className='topic-channel-button'  onClick={() => this.handleGetTopicList({showAll: true})}>全部</Button>
                 {channelList.map(e => {
                   return (
-                    <Button shape='round' key={e._id} style={{marginRight: '5px', marginBottom: '5px'}} onClick={() => this.handleGetTopicList({categoryName: e.categoryName})}>{e.categoryName}</Button>
+                    <Button shape='round' key={e._id} className='topic-channel-button'  onClick={() => this.handleGetTopicList({categoryName: e.categoryName})}>{e.categoryName}</Button>
                   );
                 })}
               </div>
