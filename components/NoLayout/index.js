@@ -29,7 +29,9 @@ class NoLayout extends Component {
     dispatch(fetchChannelList());
     const _userCode = window.localStorage.getItem('username');
     if (_userCode) {
-      dispatch(getUserInfo());
+      dispatch(getUserInfo({
+        username: _userCode
+      }));
      
     }
   }

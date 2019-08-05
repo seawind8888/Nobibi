@@ -6,7 +6,7 @@ import {
 } from '../../constants/ActionTypes';
 
 
-export const getUserInfo = () => ({type: GET_USER_INFO});
+export const getUserInfo = (payload = {}) => ({type: GET_USER_INFO, payload});
 
 export const getUserInfoSuccess = (payload) => ({type: GET_USER_INFO_SUCCESS, payload});
 

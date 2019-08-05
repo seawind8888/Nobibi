@@ -11,6 +11,7 @@ const initialState = {
 const user = (state = initialState, { type, payload = {} }) => {
   switch (type) {
     case GET_USER_INFO:
+      return state;
     case GET_USER_INFO_SUCCESS:
       return {
         ...state,

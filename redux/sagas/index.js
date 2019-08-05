@@ -25,13 +25,15 @@ import { selectUserInfo } from '../reducers/selectors';
 
 
 
-export function* userInfo() {
+export function* userInfo(action) {
+  const { username } = action.payload;
+  console.log('username', username);
   try {
-    const { data } = yield call(getUserInfo);
+    const {data}  = yield call(getUserInfo, {username:username});
     yield put(getUserInfoSuccess(data));
   } catch (error) {
     console.log(error);
-    yield put(getUserInfoFail(error));
+    yield put(getUserInfoFail());
   }
 }
 
