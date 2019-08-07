@@ -32,7 +32,7 @@ export const changePassApi = params => {
 };
 export const modifyUserApi = params => {
   return fetch({
-    method: 'patch',
+    method: 'post',
     url: '/api/user/updateUser',
     data: params,
   });
