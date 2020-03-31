@@ -14,12 +14,12 @@ import Link from 'next/link';
 import { User, Topic } from '../@types'
 
 
-interface initProps {
+interface TopicDetailProps {
   topicInfo: Topic,
   userInfo: User
 }
 
-const TopicDetail = (props: initProps) => {
+const TopicDetail: React.FC<TopicDetailProps> = (props) => {
   const { topicInfo, userInfo } = props;
   const [praiseNum, setPraiseNum] = useState(0)
 
@@ -31,9 +31,7 @@ const TopicDetail = (props: initProps) => {
     const { data } = await fetchPraiseInfo({
       topicId: topicInfo._id,
     });
-    this.setState({
-      praiseNum: data,
-    });
+    setPraiseNum(data)
   };
   const handleControlPraise = async type => {
     if (!window.localStorage.getItem('username')) {
@@ -115,7 +113,7 @@ const TopicDetail = (props: initProps) => {
             </div>
 
             <span style={{ textAlign: 'center', fontSize: 18 }}>
-              {this.state.praiseNum}
+              {praiseNum}
             </span>
             <div
               onClick={() => {

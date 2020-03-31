@@ -13,14 +13,14 @@ import NoAvatar from '../components/NoAvatar';
 import { User, Topic } from '../@types/index'
 import { AppStateType } from '../redux/reducers'
 
-interface initProps {
+interface HomeProps {
   topicInfo: Topic,
   userInfo: User,
   channelList: [],
-  breadCrumbList: [],
+  breadCrumbList: []
 }
 
-const Home = (props: initProps) => {
+const Home = (props: HomeProps) => {
 
   const { userInfo, channelList, topicInfo, breadCrumbList } = props;
   const [hotTopicList, setHotTopicList] = useState([])

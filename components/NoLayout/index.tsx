@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Dispatch } from 'redux'
+import { useDispatch } from 'react-redux'
 import NoHeader from '../NoHeader';
 import NoFooter from '../NoFooter';
 import { message, } from 'antd';
@@ -12,17 +12,17 @@ import { fetchChannelList } from '../../redux/actions/channel';
 import { User } from '../../@types'
 import { AppStateType } from '../../redux/reducers'
 
-interface initProps {
+interface NoLayoutProps {
   title?: string,
   children?: React.ReactNode,
-  userInfo: User,
-  dispatch: Dispatch
+  userInfo: User
 }
 
-const NoLayout = (props: initProps) => {
+const NoLayout: React.FC<NoLayoutProps> = (props) => {
+  const dispatch = useDispatch()
   const [collapsed, setCollapsed] = useState(false)
   useEffect(() => {
-    const { dispatch } = props;
+   
     dispatch(fetchChannelList());
     const _userCode = window.localStorage.getItem('username');
     if (_userCode) {
@@ -39,7 +39,6 @@ const NoLayout = (props: initProps) => {
   //   Router.push(key);
   // }
   const handleSelectUserItem = async e => {
-    const { dispatch } = this.props;
     switch (e.key) {
       case 'signOut':
         var res = await userLogOut();
@@ -67,7 +66,7 @@ const NoLayout = (props: initProps) => {
             placement='left'
             closable={false}
             onClose={this.handleChangeCollapsed}
-            visible={this.state.collapsed}
+            visible={collapsed}
             style={{ padding: 0 }}
           >
             <Menu

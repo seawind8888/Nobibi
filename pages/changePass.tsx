@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dispatch } from 'redux'
+import { useDispatch } from 'react-redux'
 import Router from 'next/router';
 import { changePassApi } from '../api';
 import { Form, Input, Button, message, Breadcrumb } from 'antd';
@@ -10,15 +10,15 @@ import Link from 'next/link';
 import { AppStateType } from '../redux/reducers'
 import { User } from '../@types'
 
-interface initProps {
-  userInfo: User,
-  dispatch: Dispatch
+interface changePassProps {
+  userInfo: User
 }
 
-const changePass = (props: initProps) => {
+const changePass: React.FC<changePassProps> = (props) => {
   const [form] = Form.useForm();
+  const dispatch = useDispatch()
   const handleSubmit = async () => {
-    const { userInfo, dispatch } = props;
+    const { userInfo } = props;
     const fieldsValue = await form.validateFields()
     const _oldPass = md5(fieldsValue.oldPass);
     const _newPass = md5(fieldsValue.newPass);

@@ -21,7 +21,6 @@ const TopicEdit = (props: initProps) => {
   const handleSubmit = async () => {
     const fieldsValue = await form.validateFields()
     const { userInfo } = this.props;
-    const { content } = this.state;
     const _params = fieldsValue;
     _params.userName = userInfo.userName;
     _params.userAvatar = userInfo.avatar;

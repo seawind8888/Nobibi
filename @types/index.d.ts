@@ -12,12 +12,15 @@ export interface User {
 
 export interface Topic {
   _id?: string,
+  avatar?:string,
   topicTitle?: string,
   content?: string,
   total?: number,
   list?: object[],
   page?: number,
   type?: string,
+  commentNum?: number,
+  praiseNum?: number,
   userName?: string,
   userAvatar?: string,
   updateTime?: string,

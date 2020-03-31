@@ -1,13 +1,12 @@
 import { Avatar } from 'antd';
-import PropTypes from 'prop-types';
 
-interface initProps {
+interface NoAvatarProps {
   avatar: string,
   userName: string
   size: number | "small" | "large" | "default"
 }
 
-const NoAvatar = (props: initProps) => {
+const NoAvatar: React.FC<NoAvatarProps>  = (props) => {
   if (!props.avatar) {
     return (
       <Avatar icon='user' size={props.size} />

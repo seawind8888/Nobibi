@@ -2,11 +2,11 @@ import React from 'react';
 import { Button } from 'antd';
 import Router from 'next/router';
 
-interface initProps {
+interface ErrorPageProps {
   statusCode: number
 }
 
-const ErrorPage = (props: initProps) => {
+const ErrorPage: React.FC<ErrorPageProps> = (props) => {
 
   let RenderComp;
   switch (props.statusCode) {

@@ -24,13 +24,11 @@ const user = (state: User = initialState, { type, payload = {} }) => {
       return state;
     case GET_USER_INFO_SUCCESS:
       return {
-        ...state,
-        userInfo: payload
+        ...payload
       };
     case USER_SIGN_OUT:{
       return {
-        ...state,
-        userInfo: {}
+        ...state
       };
     }
     default:

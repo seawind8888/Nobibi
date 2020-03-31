@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux'
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import { Dispatch } from 'redux'
-import { AppStateType } from '../redux/reducers'
 import { Form, Input, Checkbox, Button, Breadcrumb } from 'antd';
 import { connect } from 'react-redux';
 import { userLogin } from '../api';
@@ -10,15 +9,11 @@ import Router from 'next/router';
 import Link from 'next/link';
 import md5 from 'md5';
 
-interface initProps {
-  dispatch: Dispatch
-}
 
-const Login = (props: initProps) => {
+const Login: React.FC<{}> = () => {
   const [form] = Form.useForm();
-
+  const dispatch = useDispatch()
   const handleSubmit = async (values) => {
-    const { dispatch } = props;
     const _userInfo = await form.validateFields()
     _userInfo.password = md5(_userInfo.password);
     window.localStorage.setItem('username', _userInfo.username);

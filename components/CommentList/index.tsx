@@ -3,7 +3,6 @@ import { Comment, List, message } from 'antd';
 import Router from 'next/router';
 import Editor from '../Editor';
 import { fetchCommentList, addComment } from '../../api';
-import PropTypes from 'prop-types';
 import timer from '../../utils/timer';
 import { connect } from 'react-redux';
 import NoAvatar from '../NoAvatar';
@@ -11,13 +10,13 @@ import NoAvatar from '../NoAvatar';
 import { AppStateType } from '../../redux/reducers'
 import { User } from '../../@types'
 
-interface initProps {
+interface CommentListProps {
   topicTitle: string,
   topicId: string,
   userInfo: User
 }
 
-const CommentList = (props: initProps) => {
+const CommentList: React.FC<CommentListProps> = (props) => {
   const [comments, setComments] = useState([])
   const [submitting, setSubmitting] = useState(false)
   const [content, setContent] = useState('')
@@ -44,7 +43,7 @@ const CommentList = (props: initProps) => {
       return;
     }
     const { topicTitle, topicId, userInfo } = this.props;
-    if (!this.state.content) {
+    if (!content) {
       return;
     }
     setSubmitting(true)
@@ -54,7 +53,7 @@ const CommentList = (props: initProps) => {
       topicId: topicId,
       userName: userInfo.userName,
       userAvatar: userInfo.avatar,
-      content: this.state.content,
+      content: content
     });
     setSubmitting(false)
     if (success) {
@@ -77,7 +76,6 @@ const CommentList = (props: initProps) => {
   const handleChange = e => {
     setContent(e.target.value)
   };
-
 
 
   return (

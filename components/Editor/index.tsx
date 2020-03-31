@@ -2,7 +2,14 @@ import PropTypes from 'prop-types';
 import {Form, Button, Input} from 'antd';
 const { TextArea } = Input;
 
-const Editor = ({ onChange, onSubmit, submitting, value }) => (
+interface EditorProps {
+  onChange: (e: any) => void;
+  onSubmit: (e: React.MouseEvent<HTMLInputElement>) => void;
+  submitting: boolean,
+  value: any
+}
+
+const Editor: React.FC<EditorProps> = ({ onChange, onSubmit, submitting, value }) => (
   <div>
     <Form.Item>
       <TextArea rows={4} onChange={onChange} value={value} />

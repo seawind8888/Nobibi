@@ -1,4 +1,5 @@
 import React from 'react';
+import { ClickParam } from 'antd/es/menu';
 import { DownOutlined } from '@ant-design/icons';
 import { Menu,  Dropdown, Button, Input } from 'antd';
 const { Search } = Input;
@@ -11,14 +12,14 @@ import './index.less';
 
 // Only holds serverRuntimeConfig and publicRuntimeConfig from next.config.js nothing else.
 
-interface initProps {
+interface NoHeaderProps {
   onToggle?: () => void,
-  onUserClick?: (e) => Promise<void>,
+  onUserClick?: (e: ClickParam) => Promise<void>,
   userInfo?: User,
   isCollapsed?: boolean
 }
 
-const NoHeader = (props: initProps) => {
+const NoHeader: React.FC<NoHeaderProps> = (props) => {
   const { onUserClick, userInfo } = props;
   const handleGotoHome = () => {
     Router.push('/');
@@ -26,7 +27,7 @@ const NoHeader = (props: initProps) => {
 
   const menu = () => (
     <Menu
-      onClick={(e) => onUserClick(e)}>
+      onClick={onUserClick}>
       <Menu.Item
         key='changeUserInfo'>
         修改资料

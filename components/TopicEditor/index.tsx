@@ -8,12 +8,12 @@ const BraftEditor = dynamic(
   { ssr: false }
 );
 
-interface initProps {
+interface TopicEditorProps {
   editorValue: object,
   editorChange: () => void
 }
 
-const TopicEditor = (props: initProps) => {
+const TopicEditor: React.FC<TopicEditorProps> = (props) => {
   const { editorValue, editorChange } = props;
   return (
     <BraftEditor

@@ -13,12 +13,12 @@ import Link from 'next/link';
 
 
 
-interface initProps {
+interface ModifyUserProps {
   userInfo: User
 }
 
 
-const ModifyUser = (props: initProps) => {
+const ModifyUser: React.FC<ModifyUserProps> = (props) => {
   const [form] = Form.useForm();
   const { userInfo } = props
   const [imageUrl, setImageUrl] = useState('')

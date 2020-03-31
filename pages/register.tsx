@@ -10,7 +10,7 @@ import { getRandomColor } from '../utils';
 import Link from 'next/link';
 
 
-const Register = () => {
+const Register: React.FC<{}> = () => {
   const [form] = Form.useForm();
   const handleSubmit = async () => {
     const fieldsValue: User = await form.validateFields()
