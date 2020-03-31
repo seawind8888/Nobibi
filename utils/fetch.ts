@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosResponse, AxiosPromise }  from 'axios';
 import { message } from 'antd';
 const instance = axios.create({
   baseURL: process.env.BASE_URL || 'http://localhost:3001',

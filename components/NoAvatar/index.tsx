@@ -1,7 +1,13 @@
 import { Avatar } from 'antd';
 import PropTypes from 'prop-types';
 
-const NoAvatar = (props) => {
+interface initProps {
+  avatar: string,
+  userName: string
+  size: number | "small" | "large" | "default"
+}
+
+const NoAvatar = (props: initProps) => {
   if (!props.avatar) {
     return (
       <Avatar icon='user' size={props.size} />
@@ -24,15 +30,5 @@ const NoAvatar = (props) => {
     >{props.userName.slice(0, 1)}</Avatar>
   );
 };
-NoAvatar.propTypes = {
-  size: PropTypes.number,
-  avatar:PropTypes.string,
-  userName: PropTypes.string,
-};
 
-NoAvatar.defaultProps = {
-  avatar: '',
-  size: 52,
-  userName: ''
-};
 export default NoAvatar;

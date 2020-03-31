@@ -21,6 +21,7 @@
     ]
   },
   "scripts": {
+    "next": "next",
     "start": "node server.js",
     "pm2": "pm2 start pm2.config.js",
     "build": "cross-env NODE_ENV=production next build",
@@ -36,9 +37,15 @@
     "redux-saga"
   ],
   "dependencies": {
+    "@types/next": "^9.0.0",
+    "@types/next-redux-wrapper": "^3.0.0",
+    "@types/react": "^16.9.17",
+    "@types/react-dom": "^16.9.4",
+    "@types/react-redux": "^7.1.6",
     "@zeit/next-css": "^1.0.1",
     "@zeit/next-less": "^1.0.1",
-    "antd": "^3.8.4",
+    "@zeit/next-typescript": "^1.1.1",
+    "antd": "^4.1.0",
     "babel-plugin-import": "^1.9.0",
     "dotenv": "^8.0.0",
     "es6-promise": "^4.2.5",
@@ -57,12 +64,14 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-no-ssr": "^1.1.0",
-    "react-redux": "^5.0.7",
+    "react-redux": "^7.2.0",
     "redux": "^4.0.0",
     "redux-logger": "^3.0.6",
     "redux-saga": "^0.16.0"
   },
   "devDependencies": {
+    "@ant-design/icons": "^4.0.5",
+    "@types/node": "^12.12.14",
     "axios": "^0.19.0",
     "babel-eslint": "^9.0.0",
     "babel-plugin-lodash": "^3.3.4",
@@ -81,6 +90,7 @@
     "prettier": "^1.15.3",
     "redux-devtools-extension": "^2.13.5",
     "terser-webpack-plugin": "^1.1.0",
+    "typescript": "^3.7.2",
     "webpack": "^4.35.3",
     "webpack-bundle-analyzer": "^3.3.2"
   }

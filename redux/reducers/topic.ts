@@ -3,15 +3,18 @@ import {
   FETCH_TOPIC_LIST_SUCCESS,
   FETCH_TOPIC_LIST_FAIL
 } from '../../constants/ActionTypes';
+
+import { Topic } from '../../@types'
       
       
 const initialState = {
   list: [],
   categoryName: '',
-  type: ''
+  type: '',
+  total: 0
 };
       
-const topic = (state = initialState, { type, payload = {} }) => {
+const topic = (state: Topic = initialState, { type, payload = {} }) => {
   switch (type) {
     case FETCH_TOPIC_LIST:
       return initialState;

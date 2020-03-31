@@ -4,12 +4,15 @@ import {
   FETCH_CHANNEL_LIST_FAIL
 } from '../../constants/ActionTypes';
       
-      
+export interface ChannelStateType {
+  list: object[]
+}
+
 const initialState = {
   list: []
 };
       
-const channel = (state = initialState, { type, payload = {} }) => {
+const channel = (state: ChannelStateType = initialState, { type, payload = {list:[]} }) => {
   switch (type) {
     case FETCH_CHANNEL_LIST:
     case FETCH_CHANNEL_LIST_SUCCESS:

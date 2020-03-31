@@ -1,49 +1,44 @@
-import { Component, Fragment } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useEffect } from 'react';
+import { Dispatch } from 'redux'
 import NoHeader from '../NoHeader';
 import NoFooter from '../NoFooter';
-import {  message,  } from 'antd';
+import { message, } from 'antd';
 import { userLogOut } from '../../api';
 import { connect } from 'react-redux';
 import Router from 'next/router';
 import './index.less';
 import { getUserInfo } from '../../redux/actions/user';
 import { fetchChannelList } from '../../redux/actions/channel';
+import { User } from '../../@types'
+import { AppStateType } from '../../redux/reducers'
 
+interface initProps {
+  title?: string,
+  children?: React.ReactNode,
+  userInfo: User,
+  dispatch: Dispatch
+}
 
-class NoLayout extends Component {
-  static propTypes = {
-    title: PropTypes.string.isRequired,
-    children: PropTypes.any.isRequired,
-    dispatch: PropTypes.func.isRequired,
-    userInfo: PropTypes.object.isRequired,
-  };
-  constructor(props) {
-    super(props);
-  }
-  state = {
-    collapsed: false,
-  };
-  async componentDidMount() {
-    const {dispatch} = this.props;
+const NoLayout = (props: initProps) => {
+  const [collapsed, setCollapsed] = useState(false)
+  useEffect(() => {
+    const { dispatch } = props;
     dispatch(fetchChannelList());
     const _userCode = window.localStorage.getItem('username');
     if (_userCode) {
       dispatch(getUserInfo({
         username: _userCode
       }));
-     
+
     }
+  }, [])
+  const handleChangeCollapsed = () => {
+    setCollapsed(!collapsed)
   }
-  handleChangeCollapsed = () => {
-    this.setState(prevState => ({
-      collapsed: !prevState.collapsed,
-    }));
-  }
-  handleSelectMenu = (key) => {
-    Router.push(key);
-  }
-  handleSelectUserItem = async e => {
+  // const handleSelectMenu = (key: any) => {
+  //   Router.push(key);
+  // }
+  const handleSelectUserItem = async e => {
     const { dispatch } = this.props;
     switch (e.key) {
       case 'signOut':
@@ -66,11 +61,9 @@ class NoLayout extends Component {
     }
   };
 
-  render() {
-    return (
-      <Fragment>
-        <div style={{ display: 'flex' }}>
-          {/* <Drawer
+  return (
+    <div style={{ display: 'flex' }}>
+      {/* <Drawer
             placement='left'
             closable={false}
             onClose={this.handleChangeCollapsed}
@@ -92,24 +85,23 @@ class NoLayout extends Component {
             </Menu>
           </Drawer> */}
 
-          <div style={{ width: '100%' }}>
-            <NoHeader
-              title={this.props.title}
-              onToggle={this.handleChangeCollapsed}
-              isCollapsed={this.state.collapsed}
-              userInfo={this.props.userInfo}
-              onUserClick={this.handleSelectUserItem}
-            />
-            <div className='main-container'>{this.props.children}</div>
-            <NoFooter />
-          </div>
-        </div>
-      </Fragment>
-    );
-  }
+      <div style={{ width: '100%' }}>
+        <NoHeader
+          onToggle={handleChangeCollapsed}
+          isCollapsed={collapsed}
+          userInfo={props.userInfo}
+          onUserClick={handleSelectUserItem}
+        />
+        <div className='main-container'>{props.children}</div>
+        <NoFooter />
+      </div>
+    </div>
+  );
 }
 
-export default connect(state => ({
-  userInfo: state.user.userInfo,
+const mapStateToProps = (state: AppStateType) => ({
   channelList: state.channel.list,
-}))(NoLayout);
+  userInfo: state.user,
+});
+
+export default connect(mapStateToProps)(NoLayout);

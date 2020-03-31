@@ -2,7 +2,7 @@
 export default function timer(time) {
   const timestamp = +new Date(time) / 1000;
 
-  var curTimestamp = parseInt(new Date().getTime() / 1000); //当前时间戳
+  var curTimestamp = Number(new Date().getTime() / 1000); //当前时间戳
   var timestampDiff = curTimestamp - timestamp; // 参数时间戳与当前时间戳相差秒数
 
   var curDate = new Date(curTimestamp * 1000); // 当前时间日期对象

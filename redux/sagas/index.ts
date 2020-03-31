@@ -1,6 +1,6 @@
 
 import {  all, call,  put, select, takeLatest} from 'redux-saga/effects';
-import {  getUserInfo, getChannelList, getTopicList, getFavoriteTopic } from '../../api';
+import {  getUserInfo, fetchChannelList, fetchTopicList, getFavoriteTopic } from '../../api';
 import { 
   getUserInfoSuccess,
   getUserInfoFail,
@@ -21,6 +21,7 @@ import {
   FETCH_TOPIC_LIST,
   USER_SIGN_OUT
 } from '../../constants/ActionTypes';
+import { Topic } from '../../@types'
 import { selectUserInfo } from '../reducers/selectors';
 
 
@@ -39,7 +40,7 @@ export function* userInfo(action) {
 
 export function* channelList() {
   try {
-    const { data } = yield call(getChannelList);
+    const { data } = yield call(fetchChannelList, {});
     yield put(fetchChannelListSuccess(data));
   } catch (error) {
     console.log(error);
@@ -50,9 +51,9 @@ export function* channelList() {
 export function* topicList(action) {
   try {
     const { type = '', categoryName = '', page = 1 } = action.payload;
-    const requestUrl = type === 'favorite' ? getFavoriteTopic : getTopicList;
+    const requestUrl = type === 'favorite' ? getFavoriteTopic : fetchTopicList;
     // const _categoryName = categoryName === '全部' ? '' : categoryName;
-    const params = {
+    const params: Topic = {
       categoryName,
       page
     };

@@ -1,9 +1,20 @@
-import { createStore, applyMiddleware } from 'redux';
-import createSagaMiddleware from 'redux-saga';
-import rootReducer from './reducers/index';
+import { createStore, applyMiddleware, Store } from 'redux';
+import createSagaMiddleware, { Task } from 'redux-saga';
+import { rootReducer, AppStateType } from './reducers';
 import rootSaga from './sagas/index';
 
 const sagaMiddleware = createSagaMiddleware();
+
+export interface RootStore extends Store<AppStateType> {
+  sagaTask: Task;
+  runSagaTask?: () => void;
+}
+
+interface IHotModule {
+  hot?: { accept: (path: string, callback: () => void) => void };
+}
+
+declare const module: IHotModule;
 
 const bindMiddleware = (middleware) => {
   // add route middleware
@@ -19,7 +30,7 @@ const bindMiddleware = (middleware) => {
 
 function configureStore (initialState) {
   
-  const store = createStore(
+  const store: RootStore = createStore(
     rootReducer,
     initialState,
     bindMiddleware([sagaMiddleware])
@@ -32,6 +43,8 @@ function configureStore (initialState) {
   };
 
   store.runSagaTask();
+
+  
 
   // Hot reload reducers (requires Webpack or Browserify HMR to be enabled)
   if (process.env.NODE_ENV !== 'production' && module.hot) {

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import PropTypes from 'prop-types';
 import timer from '../../utils/timer';
 
+
 const TopicItem = ({topicInfo}) => {
   return (
     <div className='topic-container'>
@@ -13,8 +14,7 @@ const TopicItem = ({topicInfo}) => {
           size={46}
           avatar={topicInfo.userAvatar}
           userName={topicInfo.userName}
-        >
-        </NoAvatar>
+        />
       </div>
       <div className='right-item'>
         <h1>

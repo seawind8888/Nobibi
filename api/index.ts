@@ -1,3 +1,4 @@
+import { AxiosResponse}  from 'axios';
 import fetch from '../utils/fetch';
 
 export const userLogin = params => {
@@ -47,7 +48,7 @@ export const getUserInfo = params => {
   });
 };
 
-export const getTopicList = params => {
+export const fetchTopicList = params => {
   return fetch({
     method: 'get',
     url: '/api/topic/getTopicList',
@@ -71,7 +72,7 @@ export const createTopic = params => {
   });
 };
 
-export const getChannelList = params => {
+export const fetchChannelList = (params:any): Promise<AxiosResponse> => {
   return fetch({
     method: 'get',
     url: '/api/category/getCategoryList',
@@ -79,7 +80,7 @@ export const getChannelList = params => {
   });
 };
 
-export const getCommentList = params => {
+export const fetchCommentList = params => {
   return fetch({
     method: 'get',
     url: '/api/comment/getCommentList',
@@ -105,7 +106,7 @@ export const actionPraise = params => {
   });
 };
 
-export const getPraiseInfo = params => {
+export const fetchPraiseInfo = params => {
   return fetch({
     method: 'get',
     url: '/api/praise/getPraiseInfo',
