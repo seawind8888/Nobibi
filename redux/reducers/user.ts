@@ -28,7 +28,7 @@ const user = (state: User = initialState, { type, payload = {} }) => {
       };
     case USER_SIGN_OUT:{
       return {
-        ...state
+        ...initialState
       };
     }
     default:

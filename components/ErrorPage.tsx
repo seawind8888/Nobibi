@@ -1,12 +1,13 @@
-import React from 'react';
+import { NextPage } from 'next';
 import { Button } from 'antd';
 import Router from 'next/router';
+
 
 interface ErrorPageProps {
   statusCode: number
 }
 
-const ErrorPage: React.FC<ErrorPageProps> = (props) => {
+const ErrorPage: NextPage<ErrorPageProps> = (props) => {
 
   let RenderComp;
   switch (props.statusCode) {

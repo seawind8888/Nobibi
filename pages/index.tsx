@@ -2,7 +2,7 @@
 // import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react'
 import { Pagination, Button, Breadcrumb } from 'antd';
-import { NextJSContext } from 'next-redux-wrapper';
+import { NextPage, NextJSContext } from 'next-redux-wrapper';
 import { connect, useDispatch } from 'react-redux';
 import Link from 'next/link';
 import TopicItem from '../components/TopicItem';
@@ -20,7 +20,7 @@ interface HomeProps {
   breadCrumbList: []
 }
 
-const Home = (props: HomeProps) => {
+const Home: NextPage<HomeProps> = (props) => {
 
   const { userInfo, channelList, topicInfo, breadCrumbList } = props;
   const [hotTopicList, setHotTopicList] = useState([])

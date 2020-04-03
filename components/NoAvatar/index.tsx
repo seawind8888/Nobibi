@@ -1,20 +1,22 @@
+import { NextPage } from 'next';
+import { UserOutlined } from '@ant-design/icons';
 import { Avatar } from 'antd';
 
 interface NoAvatarProps {
   avatar: string,
   userName: string
-  size: number | "small" | "large" | "default"
+  size?: number | "small" | "large" | "default"
 }
 
-const NoAvatar: React.FC<NoAvatarProps>  = (props) => {
+const NoAvatar: NextPage<NoAvatarProps>  = (props) => {
   if (!props.avatar) {
     return (
-      <Avatar icon='user' size={props.size} />
+      <Avatar icon={<UserOutlined />} size={props.size} />
     );
   } 
   if (props.avatar.length > 7) {
     return (
-      <Avatar icon='user' src={props.avatar} size={props.size} />
+      <Avatar icon={<UserOutlined />} src={props.avatar} size={props.size} />
     );
   } 
   return (

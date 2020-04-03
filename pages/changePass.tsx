@@ -1,6 +1,7 @@
 import React from 'react';
+import { NextPage } from 'next';
 import { useDispatch } from 'react-redux'
-import Router from 'next/router';
+import { useRouter } from 'next/router';
 import { changePassApi } from '../api';
 import { Form, Input, Button, message, Breadcrumb } from 'antd';
 import { LockOutlined } from '@ant-design/icons';
@@ -14,9 +15,10 @@ interface changePassProps {
   userInfo: User
 }
 
-const changePass: React.FC<changePassProps> = (props) => {
+const changePass: NextPage<changePassProps> = (props) => {
   const [form] = Form.useForm();
   const dispatch = useDispatch()
+  const router = useRouter()
   const handleSubmit = async () => {
     const { userInfo } = props;
     const fieldsValue = await form.validateFields()
@@ -32,9 +34,9 @@ const changePass: React.FC<changePassProps> = (props) => {
       dispatch({
         type: 'USER_SIGN_OUT',
       });
-      window.localStorage.removeItem('username');
+      window.localStorage.removeItem('userName');
       window.localStorage.removeItem('Token');
-      Router.push('/login');
+      router.push('/login');
     } else {
       message.error(data.message);
     }

@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import { NextPage } from 'next';
 import { Comment, List, message } from 'antd';
 import Router from 'next/router';
 import Editor from '../Editor';
@@ -16,7 +17,7 @@ interface CommentListProps {
   userInfo: User
 }
 
-const CommentList: React.FC<CommentListProps> = (props) => {
+const CommentList: NextPage<CommentListProps> = (props) => {
   const [comments, setComments] = useState([])
   const [submitting, setSubmitting] = useState(false)
   const [content, setContent] = useState('')
@@ -42,7 +43,7 @@ const CommentList: React.FC<CommentListProps> = (props) => {
       Router.push('/login');
       return;
     }
-    const { topicTitle, topicId, userInfo } = this.props;
+    const { topicTitle, topicId, userInfo } = props;
     if (!content) {
       return;
     }
@@ -58,7 +59,7 @@ const CommentList: React.FC<CommentListProps> = (props) => {
     setSubmitting(false)
     if (success) {
       message.success('bibi成功啦!');
-      this.getCommentList();
+      getCommentList();
     }
   };
 

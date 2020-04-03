@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { NextPage } from 'next';
 import { UserOutlined } from '@ant-design/icons';
 import { Form, Upload, message, Input, Button, Breadcrumb } from 'antd';
 import { connect } from 'react-redux';
@@ -18,7 +19,7 @@ interface ModifyUserProps {
 }
 
 
-const ModifyUser: React.FC<ModifyUserProps> = (props) => {
+const ModifyUser: NextPage<ModifyUserProps> = (props) => {
   const [form] = Form.useForm();
   const { userInfo } = props
   const [imageUrl, setImageUrl] = useState('')

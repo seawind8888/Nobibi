@@ -1,18 +1,17 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import {  NextPageContext } from 'next';
 import ErrorPage from '../components/ErrorPage';
 
-interface initProps {
+interface ErrorProps {
   statusCode: number
 }
 
-const Error = (props: initProps) =>  {
+const Error = (props: ErrorProps) =>  {
     return (
       <ErrorPage statusCode={props.statusCode || 200} />
     );
 }
 
-Error.getInitialProps = ({ res, err }) => {
+Error.getInitialProps = ({ res, err }: NextPageContext) => {
   const statusCode = res ? res.statusCode : err ? err.statusCode : null;
   return { statusCode };
 }

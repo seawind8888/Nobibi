@@ -23,7 +23,7 @@ export default function fetch(options) {
       }
       if (status === 401) {
         window.localStorage.removeItem('Token');
-        window.localStorage.removeItem('username');
+        window.localStorage.removeItem('userName');
       }
       return Promise.resolve({
         success: success,

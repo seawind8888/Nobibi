@@ -118,7 +118,7 @@ export const actionFavoriteTopic = params => {
   return fetch({
     method: 'post',
     useToken: true,
-    url: '/api/favorite/createFavorite',
+    url: '/api/favorite/favoriteAction',
     data: params,
   });
 };

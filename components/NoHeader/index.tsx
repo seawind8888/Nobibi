@@ -1,4 +1,5 @@
-import React from 'react';
+
+import { NextPage } from 'next';
 import { ClickParam } from 'antd/es/menu';
 import { DownOutlined } from '@ant-design/icons';
 import { Menu,  Dropdown, Button, Input } from 'antd';
@@ -19,7 +20,7 @@ interface NoHeaderProps {
   isCollapsed?: boolean
 }
 
-const NoHeader: React.FC<NoHeaderProps> = (props) => {
+const NoHeader: NextPage<NoHeaderProps> = (props) => {
   const { onUserClick, userInfo } = props;
   const handleGotoHome = () => {
     Router.push('/');

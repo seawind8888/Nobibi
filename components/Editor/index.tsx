@@ -1,3 +1,4 @@
+import { NextPage } from 'next';
 import PropTypes from 'prop-types';
 import {Form, Button, Input} from 'antd';
 const { TextArea } = Input;
@@ -9,7 +10,7 @@ interface EditorProps {
   value: any
 }
 
-const Editor: React.FC<EditorProps> = ({ onChange, onSubmit, submitting, value }) => (
+const Editor: NextPage<EditorProps> = ({ onChange, onSubmit, submitting, value }) => (
   <div>
     <Form.Item>
       <TextArea rows={4} onChange={onChange} value={value} />

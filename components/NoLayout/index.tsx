@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { NextPage } from 'next';
 import { useDispatch } from 'react-redux'
 import NoHeader from '../NoHeader';
 import NoFooter from '../NoFooter';
@@ -18,16 +19,16 @@ interface NoLayoutProps {
   userInfo: User
 }
 
-const NoLayout: React.FC<NoLayoutProps> = (props) => {
+const NoLayout: NextPage<NoLayoutProps> = (props) => {
   const dispatch = useDispatch()
   const [collapsed, setCollapsed] = useState(false)
   useEffect(() => {
    
     dispatch(fetchChannelList());
-    const _userCode = window.localStorage.getItem('username');
+    const _userCode = window.localStorage.getItem('userName');
     if (_userCode) {
       dispatch(getUserInfo({
-        username: _userCode
+        userName: _userCode
       }));
 
     }
@@ -49,7 +50,7 @@ const NoLayout: React.FC<NoLayoutProps> = (props) => {
           });
         }
         window.localStorage.removeItem('Token');
-        window.localStorage.removeItem('username');
+        window.localStorage.removeItem('userName');
         break;
       case 'changePass':
         Router.push('/changePass');
@@ -62,28 +63,6 @@ const NoLayout: React.FC<NoLayoutProps> = (props) => {
 
   return (
     <div style={{ display: 'flex' }}>
-      {/* <Drawer
-            placement='left'
-            closable={false}
-            onClose={this.handleChangeCollapsed}
-            visible={collapsed}
-            style={{ padding: 0 }}
-          >
-            <Menu
-              className='menu-group-left'
-              onClick={this.handleSelectMenu}
-              defaultSelectedKeys={['1']}
-              defaultOpenKeys={['sub1']}
-              mode='inline'
-              theme='light'
-            >
-              <Menu.Item key='/'>
-                <Icon type='home' />
-                <span>首页</span>
-              </Menu.Item>
-            </Menu>
-          </Drawer> */}
-
       <div style={{ width: '100%' }}>
         <NoHeader
           onToggle={handleChangeCollapsed}

@@ -1,7 +1,8 @@
-import React from 'react';
+import { NextPage } from 'next';
 import { Form, Input, Button, Breadcrumb } from 'antd';
 import { UserOutlined, LockOutlined, MailOutlined } from '@ant-design/icons';
 import { connect } from 'react-redux';
+import md5 from 'md5';
 import { userRegister } from '../api';
 import { message } from 'antd';
 import Router from 'next/router';
@@ -10,29 +11,18 @@ import { getRandomColor } from '../utils';
 import Link from 'next/link';
 
 
-const Register: React.FC<{}> = () => {
+const Register: NextPage<{}> = () => {
   const [form] = Form.useForm();
   const handleSubmit = async () => {
     const fieldsValue: User = await form.validateFields()
     fieldsValue.avatar = getRandomColor();
+    fieldsValue.password = md5(fieldsValue.password)
     const data = await userRegister(fieldsValue);
     if (data.success) {
       message.success('注册成功，欢迎来到Nobibi，也请别瞎bibi');
-      Router.push('/Login');
-    } else {
-      message.error(data.message);
+      Router.push('/login');
     }
-
   }
-
-  const compareToFirstPassword = (rule, value, callback) => {
-    if (value && value !== form.getFieldValue('password')) {
-
-      callback('Two passwords that you enter is inconsistent!');
-    } else {
-      callback();
-    }
-  };
 
   return (
     <div className='main-inside-container'>
@@ -56,7 +46,7 @@ const Register: React.FC<{}> = () => {
           onFinish={handleSubmit}
           className='login-form'>
           <Form.Item
-            name='username'
+            name='userName'
             rules={[{ required: true, message: 'Please input your username!' }]}>
             <Input
               prefix={<UserOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
@@ -76,9 +66,14 @@ const Register: React.FC<{}> = () => {
             name='confirm'
             rules={
               [{ required: true, message: 'Please input your Password!' },
-              {
-                validator: compareToFirstPassword,
-              }]
+              ({ getFieldValue }) => ({
+                validator(rule, value) {
+                  if (!value || getFieldValue('password') === value) {
+                    return Promise.resolve();
+                  }
+                  return Promise.reject('The two passwords that you entered do not match!');
+                },
+              })]
             }>
             <Input.Password
               prefix={<LockOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}

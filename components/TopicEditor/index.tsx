@@ -1,5 +1,6 @@
 
-import React from 'react';
+
+import { NextPage } from 'next';
 import dynamic from 'next/dynamic';
 import 'braft-editor/dist/index.css';
 
@@ -10,10 +11,10 @@ const BraftEditor = dynamic(
 
 interface TopicEditorProps {
   editorValue: object,
-  editorChange: () => void
+  editorChange: (e:any) => void
 }
 
-const TopicEditor: React.FC<TopicEditorProps> = (props) => {
+const TopicEditor: NextPage<TopicEditorProps> = (props) => {
   const { editorValue, editorChange } = props;
   return (
     <BraftEditor

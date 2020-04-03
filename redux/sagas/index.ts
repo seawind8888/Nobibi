@@ -27,10 +27,9 @@ import { selectUserInfo } from '../reducers/selectors';
 
 
 export function* userInfo(action) {
-  const { username } = action.payload;
-  console.log('username', username);
+  const { userName } = action.payload;
   try {
-    const {data}  = yield call(getUserInfo, {username:username});
+    const {data}  = yield call(getUserInfo, {username:userName});
     yield put(getUserInfoSuccess(data));
   } catch (error) {
     console.log(error);

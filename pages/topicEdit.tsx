@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+import { NextPage } from 'next';
 import { Form, Input, Select, Button, message, Breadcrumb } from 'antd';
 import { connect } from 'react-redux';
 import Router from 'next/router';
@@ -10,17 +11,17 @@ import { AppStateType } from '../redux/reducers'
 import { User, Topic } from '../@types'
 
 
-interface initProps {
+interface TopicEditProps {
   userInfo: User,
   channelList: object[]
 }
 
-const TopicEdit = (props: initProps) => {
+const TopicEdit: NextPage<TopicEditProps> = (props) => {
   const [form] = Form.useForm();
   const [content, setContent] = useState(null)
   const handleSubmit = async () => {
     const fieldsValue = await form.validateFields()
-    const { userInfo } = this.props;
+    const { userInfo } = props;
     const _params = fieldsValue;
     _params.userName = userInfo.userName;
     _params.userAvatar = userInfo.avatar;

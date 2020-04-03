@@ -1,5 +1,5 @@
-
-import {  Tag } from 'antd';
+import { NextPage } from 'next';
+import { Tag } from 'antd';
 import NoAvatar from '../NoAvatar';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
@@ -10,7 +10,7 @@ interface TopicInfoProps {
   topicInfo: Topic
 }
 
-const TopicItem: React.FC<TopicInfoProps> = ({topicInfo}) => {
+const TopicItem: NextPage<TopicInfoProps> = ({topicInfo}) => {
   return (
     <div className='topic-container'>
       <div className='left-item'>

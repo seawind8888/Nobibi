@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { NextPage } from 'next';
 import { useDispatch } from 'react-redux'
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { Form, Input, Checkbox, Button, Breadcrumb } from 'antd';
@@ -10,13 +11,13 @@ import Link from 'next/link';
 import md5 from 'md5';
 
 
-const Login: React.FC<{}> = () => {
+const Login: NextPage<{}> = () => {
   const [form] = Form.useForm();
   const dispatch = useDispatch()
   const handleSubmit = async (values) => {
     const _userInfo = await form.validateFields()
     _userInfo.password = md5(_userInfo.password);
-    window.localStorage.setItem('username', _userInfo.username);
+    window.localStorage.setItem('userName', _userInfo.username);
     const { success, data } = await userLogin(_userInfo);
     if (success) {
       message.success('来了，您呐');
@@ -24,7 +25,7 @@ const Login: React.FC<{}> = () => {
       dispatch({
         type: 'GET_USER_INFO',
         payload: {
-          username: _userInfo.username,
+          userName: _userInfo.username,
         },
       });
       Router.push('/');
@@ -33,6 +34,7 @@ const Login: React.FC<{}> = () => {
 
   return (
     <div className='main-inside-container'>
+      login
       <Breadcrumb style={{ marginTop: '10px' }}>
         <Breadcrumb.Item>
           <Link href={`/`}>
@@ -76,15 +78,15 @@ const Login: React.FC<{}> = () => {
             />
           </Form.Item>
           <Form.Item>
-            <Link href='/'>
+            {/* <Link href='/'>
               <a>忘记密码</a>
-            </Link>
+            </Link> */}
             <Button
               type='primary'
               htmlType='submit'
               className='login-form-button'
             >登录</Button>或{' '}
-            <Link href='/login'>
+            <Link href='/register'>
               <a>注册</a>
             </Link>
 
@@ -94,6 +96,8 @@ const Login: React.FC<{}> = () => {
     </div>
   );
 }
+
+
 
 
 export default connect(state => state)(Login)
