@@ -3,6 +3,7 @@
 简体中文 | [English](./README_en.md)
 
 > Nobibi 是一款轻量级开源社区，快速搭建属于自己的社区
+> 原 js 版本请访问：https://github.com/seawind8888/Nobibi/tree/js
 
 ## 关于 Nobibi
 
