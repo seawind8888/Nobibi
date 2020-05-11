@@ -101,27 +101,27 @@ const TopicDetail = (props: TopicDetailProps) => {
   }
   
 
-  // const renderShareContent = () => {
-  //   const url = 'http://www.baidu.com'
-  //   const title = '111'
-  //   console.log('[router]',router)
-  //   return (
-  //     <div>
-  //     <FacebookShareButton url={url} quote={title}>
-  //       <FacebookIcon size={40} round />
-  //     </FacebookShareButton>
-  //     <EmailShareButton url={url} >
-  //       <EmailIcon />
-  //     </EmailShareButton>
-  //     <TwitterShareButton url={url} title={title}>
-  //       <TwitterIcon />
-  //     </TwitterShareButton>
-  //     <WeiboShareButton className='share-icon' url={url} title={title} >
-  //       <WeiboIcon size={40} round />
-  //     </WeiboShareButton>
-  //   </div>
-  //   )
-  // }
+  const renderShareContent = () => {
+    const url = 'http://www.baidu.com'
+    const title = '111'
+    console.log('[router]',router)
+    return (
+      <div>
+      <FacebookShareButton url={url} quote={title}>
+        <FacebookIcon size={40} round />
+      </FacebookShareButton>
+      <EmailShareButton style={{marginLeft: '10px'}} url={url} >
+        <EmailIcon size={40} round/>
+      </EmailShareButton>
+      <TwitterShareButton style={{marginLeft: '10px'}} url={url} title={title}>
+        <TwitterIcon size={40} round/>
+      </TwitterShareButton>
+      <WeiboShareButton style={{marginLeft: '10px'}} url={url} title={title} >
+        <WeiboIcon size={40} round />
+      </WeiboShareButton>
+    </div>
+    )
+  }
 
   return (
     <>
@@ -175,10 +175,10 @@ const TopicDetail = (props: TopicDetailProps) => {
         <div className='main-control-container'>
 
           <Button onClick={handleCellectTopic} style={{ marginRight: '5px' }} size='large' shape='circle' icon={isFavorite ? <StarFilled /> : <StarOutlined />} />
-          <Button style={{ marginRight: '5px' }} size='large' shape='circle' icon={<ShareAltOutlined />} />
-          {/* <Popover content={renderShareContent()} trigger="hover">
+          {/* <Button style={{ marginRight: '5px' }} size='large' shape='circle' icon={<ShareAltOutlined />} /> */}
+          <Popover content={renderShareContent()} trigger="hover">
             <Button style={{ marginRight: '5px' }} size='large' shape='circle' icon={<ShareAltOutlined />} />
-          </Popover> */}
+          </Popover>
           
          
         </div>
