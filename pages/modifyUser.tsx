@@ -82,7 +82,7 @@ const ModifyUser: NextPage<ModifyUserProps> = (props) => {
             username: userInfo.userName,
             email: userInfo.email
           }} >
-          <Form.Item style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
+          <Form.Item style={{ display: 'flex', justifyContent: 'center' }}>
             <Upload
               name='avatar'
               listType='picture-card'

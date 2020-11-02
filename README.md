@@ -75,7 +75,7 @@ windows&mac有异同，请自行百度或科学Goo
 3. 在服务器项目目录下运行
 
 ```
-npm run build && npm run start:pm2
+npm run build && npm run pm2
 ```
 
 ## 技术选型
