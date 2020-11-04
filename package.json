@@ -47,6 +47,7 @@
     "@zeit/next-typescript": "^1.1.1",
     "antd": "^4.1.0",
     "babel-plugin-import": "^1.9.0",
+    "classnames": "^2.2.6",
     "dotenv": "^8.0.0",
     "es6-promise": "^4.2.5",
     "express": "^4.16.3",

@@ -14,7 +14,7 @@ import md5 from 'md5';
 const Login: NextPage<{}> = () => {
   const [form] = Form.useForm();
   const dispatch = useDispatch()
-  const handleSubmit = async (values) => {
+  const handleSubmit = async () => {
     const _userInfo = await form.validateFields()
     _userInfo.password = md5(_userInfo.password);
     window.localStorage.setItem('userName', _userInfo.username);

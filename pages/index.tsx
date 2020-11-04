@@ -127,7 +127,6 @@ const Home: NextPage<HomeProps> = (props) => {
             </ul>
           </div>
           <div className='ad-container'>广告位招租</div>
-
         </div>
       </div>
       <div className='topic-pagenation-container'>

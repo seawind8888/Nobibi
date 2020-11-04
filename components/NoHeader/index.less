@@ -10,6 +10,10 @@
   width: 1200px;
   display: flex;
   align-items: center;
+  .header-mobile-toggle {
+    display: none;
+    font-size: 24px;
+  }
   .header-title {
     margin: 0;
     cursor: pointer;
@@ -30,7 +34,30 @@
       margin-left: 10px;
     }
   }
+
+ 
+
 }
+.drawer-user-info-container {
+  display: flex;
+  align-items: center;
+  & > .user-info {
+    margin-left: 10px;
+  }
+ 
+}
+.drawer-cell-list {
+  .drawer-cell-item {
+    padding-left: 20px;
+    height: 40px;
+    line-height: 40px;
+    &-dashed {
+      margin: 0;
+    }
+  }
+}
+
+
 
 .toggle-button {
   display: none !important;
@@ -64,5 +91,19 @@
   }
   .toggle-button {
     display: flex !important;
+  }
+  .header-main {
+    .header-mobile-toggle {
+      display: block;
+    }
+    .header-title {
+      display: none;
+    }
+    .header-search-container {
+      display: none;
+    }
+  }
+  .mobile-collapse-container {
+    display: block;
   }
 }

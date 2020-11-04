@@ -1,8 +1,10 @@
 
+import React, { useState } from 'react';
 import { NextPage } from 'next';
 import { ClickParam } from 'antd/es/menu';
-import { DownOutlined } from '@ant-design/icons';
-import { Menu,  Dropdown, Button, Input } from 'antd';
+import { DownOutlined, MenuOutlined } from '@ant-design/icons';
+import { Menu, Dropdown, Button, Input, Avatar, Drawer, Divider } from 'antd';
+import cls from 'classnames';
 const { Search } = Input;
 import Router from 'next/router';
 import { User } from '../../@types'
@@ -20,13 +22,33 @@ interface NoHeaderProps {
   isCollapsed?: boolean
 }
 
+const data = [
+  { title: '修改资料' },
+  { title: '修改密码' },
+  { title: '退出登录' }
+]
+
 const NoHeader: NextPage<NoHeaderProps> = (props) => {
   const { onUserClick, userInfo } = props;
+  const [collapse, setCollapse] = useState(false)
   const handleGotoHome = () => {
     Router.push('/');
   }
 
-  const menu = () => (
+  const handleToggleMenu = (visible = false) => {
+    setCollapse(visible)
+  }
+
+  const renderUserInfo = () => (
+    <div className='drawer-user-info-container'>
+      <Avatar size={48} />
+      <div className='user-info'>
+        {userInfo ? userInfo.userName : '点击登录'}
+      </div>
+    </div>
+  )
+
+  const renderMenu = () => (
     <Menu
       onClick={onUserClick}>
       <Menu.Item
@@ -44,14 +66,28 @@ const NoHeader: NextPage<NoHeaderProps> = (props) => {
         </Menu.Item>
     </Menu>
   );
+
   return (
     <div className='header-outside'>
       <div className='header-main'>
-        {/* <Icon
-            className='toggle-button'
-            type={isCollapsed ? 'menu-unfold' : 'menu-fold'}
-            onClick={onToggle}
-          /> */}
+        <MenuOutlined className="header-mobile-toggle" onClick={() => handleToggleMenu(true)} />
+        <Drawer
+          title={renderUserInfo()}
+          placement="left"
+          closable={false}
+          visible={collapse}
+          onClose={() => handleToggleMenu(false)}
+        >
+          <div className='drawer-cell-list'>
+            <div className='drawer-cell-item'>修改资料</div>
+            <Divider className='drawer-cell-item-dashed' />
+            <div className='drawer-cell-item'>修改密码</div>
+            <Divider className='drawer-cell-item-dashed' />
+            <div className='drawer-cell-item'>退出登录</div>
+          </div>
+
+
+        </Drawer>
         <h1 className='header-title' onClick={handleGotoHome}>
           Nobibi
           </h1>
@@ -64,7 +100,7 @@ const NoHeader: NextPage<NoHeaderProps> = (props) => {
 
         {userInfo.userName ?
           <section className='button-group'>
-            <Dropdown overlay={menu}>
+            <Dropdown overlay={renderMenu}>
               <a className='ant-dropdown-link' href='#'>
                 {userInfo.userName} <DownOutlined />
               </a>
