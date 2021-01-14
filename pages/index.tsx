@@ -59,7 +59,7 @@ const Home: NextPage<HomeProps> = (props) => {
 
 
   return (
-    <div className='main-inside-container'>
+    <div className='main-nside-container'>
       <div className='home-container'>
         <div className='list-item-container'>
           <Breadcrumb>

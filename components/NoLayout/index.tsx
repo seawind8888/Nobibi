@@ -39,8 +39,8 @@ const NoLayout: NextPage<NoLayoutProps> = (props) => {
   // const handleSelectMenu = (key: any) => {
   //   Router.push(key);
   // }
-  const handleSelectUserItem = async e => {
-    switch (e.key) {
+  const handleSelectUserItem = async type => {
+    switch (type) {
       case 'signOut':
         var res = await userLogOut();
         if (res.success) {
@@ -68,7 +68,7 @@ const NoLayout: NextPage<NoLayoutProps> = (props) => {
           onToggle={handleChangeCollapsed}
           isCollapsed={collapsed}
           userInfo={props.userInfo}
-          onUserClick={handleSelectUserItem}
+          selectMenu={handleSelectUserItem}
         />
         <div className='main-container'>{props.children}</div>
         <NoFooter />

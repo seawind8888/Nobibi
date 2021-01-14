@@ -1,23 +1,26 @@
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/router'
 import { NextPage } from 'next';
 import { ClickParam } from 'antd/es/menu';
 import { DownOutlined, MenuOutlined } from '@ant-design/icons';
-import { Menu, Dropdown, Button, Input, Avatar, Drawer, Divider } from 'antd';
-import cls from 'classnames';
-const { Search } = Input;
+import { Menu, Dropdown, Button, Input, Drawer, Divider } from 'antd';
+import NoAvatar from '../../components/NoAvatar';
+
 import Router from 'next/router';
 import { User } from '../../@types'
 // const { SubMenu } = Menu;
 import Link from 'next/link';
 import './index.less';
 
+const { Search } = Input;
+
 
 // Only holds serverRuntimeConfig and publicRuntimeConfig from next.config.js nothing else.
 
 interface NoHeaderProps {
   onToggle?: () => void,
-  onUserClick?: (e: ClickParam) => Promise<void>,
+  selectMenu?: (type: String) => void,
   userInfo?: User,
   isCollapsed?: boolean
 }
@@ -29,11 +32,9 @@ const data = [
 ]
 
 const NoHeader: NextPage<NoHeaderProps> = (props) => {
-  const { onUserClick, userInfo } = props;
+  const router = useRouter()
+  const { selectMenu, userInfo } = props;
   const [collapse, setCollapse] = useState(false)
-  const handleGotoHome = () => {
-    Router.push('/');
-  }
 
   const handleToggleMenu = (visible = false) => {
     setCollapse(visible)
@@ -41,7 +42,11 @@ const NoHeader: NextPage<NoHeaderProps> = (props) => {
 
   const renderUserInfo = () => (
     <div className='drawer-user-info-container'>
-      <Avatar size={48} />
+      <NoAvatar
+        avatar={userInfo.avatar}
+        userName={userInfo.userName}
+        size={56}
+      />
       <div className='user-info'>
         {userInfo ? userInfo.userName : '点击登录'}
       </div>
@@ -50,7 +55,7 @@ const NoHeader: NextPage<NoHeaderProps> = (props) => {
 
   const renderMenu = () => (
     <Menu
-      onClick={onUserClick}>
+      onClick={e => selectMenu(e.key)}>
       <Menu.Item
         key='changeUserInfo'>
         修改资料
@@ -67,6 +72,15 @@ const NoHeader: NextPage<NoHeaderProps> = (props) => {
     </Menu>
   );
 
+  const handleGotoPage = (path) => {
+    router.push(path)
+  }
+
+  const onDrawerItemClick = type => {
+    setCollapse(false)
+    selectMenu(type)
+  }
+
   return (
     <div className='header-outside'>
       <div className='header-main'>
@@ -78,17 +92,20 @@ const NoHeader: NextPage<NoHeaderProps> = (props) => {
           visible={collapse}
           onClose={() => handleToggleMenu(false)}
         >
-          <div className='drawer-cell-list'>
-            <div className='drawer-cell-item'>修改资料</div>
+          {renderMenu()}
+          {/* {userInfo.userName &&   <div className='drawer-cell-list'>
+            <div onClick={() => onDrawerItemClick('changeUserInfo')} className='drawer-cell-item'>修改资料</div>
             <Divider className='drawer-cell-item-dashed' />
-            <div className='drawer-cell-item'>修改密码</div>
+            <div onClick={() => onDrawerItemClick('changePass')} className='drawer-cell-item'>修改密码</div>
             <Divider className='drawer-cell-item-dashed' />
-            <div className='drawer-cell-item'>退出登录</div>
-          </div>
+            <div onClick={() => onDrawerItemClick('signOut')} className='drawer-cell-item'>退出登录</div>
+          </div>} */}
+
+        
 
 
         </Drawer>
-        <h1 className='header-title' onClick={handleGotoHome}>
+        <h1 className='header-title' onClick={() => handleGotoPage('/')}>
           Nobibi
           </h1>
         <Search
