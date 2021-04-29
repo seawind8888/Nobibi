@@ -7,8 +7,8 @@ import Router from 'next/router';
 import Link from 'next/link';
 import { createTopic } from '../api';
 import TopicEditor from '../components/TopicEditor';
-import { AppStateType } from '../redux/reducers'
-import { User, Topic } from '../@types'
+import { AppStateType } from '../redux/reducers';
+import { User, Topic } from '../@types';
 
 
 interface TopicEditProps {
@@ -18,9 +18,9 @@ interface TopicEditProps {
 
 const TopicEdit: NextPage<TopicEditProps> = (props) => {
   const [form] = Form.useForm();
-  const [content, setContent] = useState(null)
+  const [content, setContent] = useState(null);
   const handleSubmit = async () => {
-    const fieldsValue = await form.validateFields()
+    const fieldsValue = await form.validateFields();
     const { userInfo } = props;
     const _params = fieldsValue;
     _params.userName = userInfo.userName;
@@ -37,10 +37,10 @@ const TopicEdit: NextPage<TopicEditProps> = (props) => {
       message.success('发布成功');
       Router.push('/');
     }
-  }
+  };
   const handleEditorChange = (e: any) => {
-    setContent(e)
-  }
+    setContent(e);
+  };
   const { channelList } = props;
   return (
     <div className='main-inside-container'>
@@ -97,7 +97,7 @@ const TopicEdit: NextPage<TopicEditProps> = (props) => {
       </div>
     </div>
   );
-}
+};
 
 const mapStateToProps = (state: AppStateType) => ({
   userInfo: state.user,

@@ -15,14 +15,14 @@ import {
   WeiboShareButton,
   WeiboIcon
 } from "react-share";
-import { getFavoriteTopic } from '../api'
-import { AppStateType } from '../redux/reducers'
+import { getFavoriteTopic } from '../api';
+import { AppStateType } from '../redux/reducers';
 import NoAvatar from '../components/NoAvatar';
 import CommentList from '../components/CommentList';
 import { fetchTopicList, fetchPraiseInfo, actionPraise, actionFavoriteTopic } from '../api';
 import timer from '../utils/timer';
 import Head from 'next/head';
-import { User, Topic } from '../@types'
+import { User, Topic } from '../@types';
 
 
 interface TopicDetailProps {
@@ -32,41 +32,43 @@ interface TopicDetailProps {
 
 const TopicDetail = (props: TopicDetailProps) => {
   const { topicInfo, userInfo } = props;
-  const router = useRouter()
-  const [praiseNum, setPraiseNum] = useState(0)
-  const [isFavorite, setIsFavorite] = useState(false)
+  const router = useRouter();
+  const [praiseNum, setPraiseNum] = useState(0);
+  const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
     handleGetPraiseInfo();
-    handleGetFavoriteInfo()
-  }, [])
+    handleGetFavoriteInfo();
+  }, []);
 
   const getUserName = () => {
-    return userInfo.userName || window.localStorage.getItem('userName')
-  }
+    return userInfo.userName || window.localStorage.getItem('userName');
+  };
 
   const handleGetPraiseInfo = async () => {
     const { data } = await fetchPraiseInfo({
       topicId: topicInfo._id,
     });
-    setPraiseNum(data)
+    setPraiseNum(data);
   };
 
   const handleGetFavoriteInfo = async () => {
     const { data } = await getFavoriteTopic({
       userName: getUserName()
-    })
+    });
     if (!data.list.length) {
-      setIsFavorite(false)
+      setIsFavorite(false);
     }
     data.list.forEach(element => {
       if (element._id === topicInfo._id) {
-        setIsFavorite(true)
+        setIsFavorite(true);
+      } else if (isFavorite) {
+        setIsFavorite(false);
       }
     });
 
 
-  }
+  };
 
   const handleControlPraise = async type => {
     if (!window.localStorage.getItem('userName')) {
@@ -96,32 +98,31 @@ const TopicDetail = (props: TopicDetailProps) => {
     });
     if (data.success) {
       message.success(data.message);
-      handleGetFavoriteInfo()
+      handleGetFavoriteInfo();
     }
-  }
+  };
   
 
   const renderShareContent = () => {
-    const url = 'http://www.baidu.com'
-    const title = '111'
-    console.log('[router]',router)
+    const url = typeof window !== 'undefined' ? window.location.href : '';
+    const title = topicInfo.topicTitle;
     return (
       <div>
-      <FacebookShareButton url={url} quote={title}>
-        <FacebookIcon size={40} round />
-      </FacebookShareButton>
-      <EmailShareButton style={{marginLeft: '10px'}} url={url} >
-        <EmailIcon size={40} round/>
-      </EmailShareButton>
-      <TwitterShareButton style={{marginLeft: '10px'}} url={url} title={title}>
-        <TwitterIcon size={40} round/>
-      </TwitterShareButton>
-      <WeiboShareButton style={{marginLeft: '10px'}} url={url} title={title} >
-        <WeiboIcon size={40} round />
-      </WeiboShareButton>
-    </div>
-    )
-  }
+        <FacebookShareButton url={url} quote={title}>
+          <FacebookIcon size={40} round />
+        </FacebookShareButton>
+        <EmailShareButton style={{marginLeft: '10px'}} url={url} >
+          <EmailIcon size={40} round/>
+        </EmailShareButton>
+        <TwitterShareButton style={{marginLeft: '10px'}} url={url} title={title}>
+          <TwitterIcon size={40} round/>
+        </TwitterShareButton>
+        <WeiboShareButton style={{marginLeft: '10px'}} url={url} title={title} >
+          <WeiboIcon size={40} round />
+        </WeiboShareButton>
+      </div>
+    );
+  };
 
   return (
     <>
@@ -167,16 +168,15 @@ const TopicDetail = (props: TopicDetailProps) => {
             <span style={{ textAlign: 'center', fontSize: 18 }}>
               {praiseNum}
             </span>
-            <div onClick={() => { handleControlPraise('down') }}>
+            <div onClick={() => { handleControlPraise('down'); }}>
               <DownOutlined style={{ cursor: 'pointer', fontSize: 16 }} />
             </div>
           </div>
         </div>
         <div className='main-control-container'>
-
           <Button onClick={handleCellectTopic} style={{ marginRight: '5px' }} size='large' shape='circle' icon={isFavorite ? <StarFilled /> : <StarOutlined />} />
           {/* <Button style={{ marginRight: '5px' }} size='large' shape='circle' icon={<ShareAltOutlined />} /> */}
-          <Popover content={renderShareContent()} trigger="hover">
+          <Popover content={renderShareContent()} trigger='hover'>
             <Button style={{ marginRight: '5px' }} size='large' shape='circle' icon={<ShareAltOutlined />} />
           </Popover>
           
@@ -189,14 +189,14 @@ const TopicDetail = (props: TopicDetailProps) => {
       </div>
     </>
   );
-}
+};
 
 TopicDetail.getInitialProps = async ({ query }: NextJSContext) => {
   const _topic = await fetchTopicList({
     _id: query.id,
   });
   return { topicInfo: _topic.data.list[0] };
-}
+};
 
 const mapStateToProps = (state: AppStateType) => ({
   userInfo: state.user,

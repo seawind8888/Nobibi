@@ -1,6 +1,5 @@
 
-// import PropTypes from 'prop-types';
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import { Pagination, Button, Breadcrumb } from 'antd';
 import { NextPage, NextJSContext } from 'next-redux-wrapper';
 import { connect, useDispatch } from 'react-redux';
@@ -10,8 +9,8 @@ import { fetchTopicList } from '../api';
 import { fetchTopiclList } from '../redux/actions/topic';
 import Router from 'next/router';
 import NoAvatar from '../components/NoAvatar';
-import { User, Topic } from '../@types/index'
-import { AppStateType } from '../redux/reducers'
+import { User, Topic } from '../@types/index';
+import { AppStateType } from '../redux/reducers';
 
 interface HomeProps {
   topicInfo: Topic,
@@ -20,23 +19,23 @@ interface HomeProps {
   breadCrumbList: []
 }
 
-const Home: NextPage<HomeProps> = (props) => {
+const Home: NextPage = (props: HomeProps) => {
 
   const { userInfo, channelList, topicInfo, breadCrumbList } = props;
-  const [hotTopicList, setHotTopicList] = useState([])
+  const [hotTopicList, setHotTopicList] = useState([]);
   const dispatch = useDispatch();
 
 
   useEffect(() => {
-    handleGetHotTopicList()
-  }, [])
+    handleGetHotTopicList();
+  }, []);
 
   const handleGetHotTopicList = async () => {
     const { data } = await fetchTopicList({
       hot: true
     });
     setHotTopicList(data.list);
-  }
+  };
 
   const handleGetTopicList = async ({
     showAll = false,
@@ -54,12 +53,12 @@ const Home: NextPage<HomeProps> = (props) => {
     const params = { _type, _categoryName, page };
     Router.push(`/?type=${_type}&categoryName=${_categoryName}&page=${page}`);
     dispatch(fetchTopiclList(params));
-  }
+  };
 
 
 
   return (
-    <div className='main-nside-container'>
+    <div className='main-inside-container'>
       <div className='home-container'>
         <div className='list-item-container'>
           <Breadcrumb>
@@ -76,7 +75,6 @@ const Home: NextPage<HomeProps> = (props) => {
                   {e}
                 </Breadcrumb.Item>
               ))
-
             }
           </Breadcrumb>
           <div style={{ marginTop: '10px' }}>
@@ -138,12 +136,12 @@ const Home: NextPage<HomeProps> = (props) => {
             showQuickJumper
           />
         ) : (
-            <div />
-          )}
+          <div />
+        )}
       </div>
     </div>
   );
-}
+};
 
 Home.getInitialProps = ({ store, query }: NextJSContext) => {
   // const { store, query, isServer } = ctx;
@@ -155,7 +153,8 @@ Home.getInitialProps = ({ store, query }: NextJSContext) => {
     }),
     userInfo: {}
   };
-}
+};
+
 
 const mapStateToProps = (state: AppStateType) => ({
   topicInfo: state.topic,

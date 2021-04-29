@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { NextPage } from 'next';
-import { useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { Form, Input, Checkbox, Button, Breadcrumb } from 'antd';
 import { connect } from 'react-redux';
@@ -13,9 +13,9 @@ import md5 from 'md5';
 
 const Login: NextPage<{}> = () => {
   const [form] = Form.useForm();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const handleSubmit = async () => {
-    const _userInfo = await form.validateFields()
+    const _userInfo = await form.validateFields();
     _userInfo.password = md5(_userInfo.password);
     window.localStorage.setItem('userName', _userInfo.username);
     const { success, data } = await userLogin(_userInfo);
@@ -34,7 +34,6 @@ const Login: NextPage<{}> = () => {
 
   return (
     <div className='main-inside-container'>
-      login
       <Breadcrumb style={{ marginTop: '10px' }}>
         <Breadcrumb.Item>
           <Link href={`/`}>
@@ -95,10 +94,10 @@ const Login: NextPage<{}> = () => {
       </div>
     </div>
   );
-}
+};
 
 
 
 
-export default connect(state => state)(Login)
+export default connect(state => state)(Login);
 
