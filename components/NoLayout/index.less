@@ -44,7 +44,6 @@
     .topic-channel-button {
       margin-right: 5px;
       margin-bottom: 5px;
-      height: 28px;
       font-size: 14px
     }
   }
@@ -54,6 +53,10 @@
     display: flex;
     float: right;
     flex-direction: column;
+    .right-top-box {
+      display: flex;
+      flex-direction: column;
+    }
     .user-info-container {
       display: flex;
       padding-bottom: 10px;
@@ -130,6 +133,7 @@
         align-items: center;
         font-size: 12px;
         .bottom-tag {
+          cursor: pointer;
           border-radius: 3px;
         }
         .info-item {

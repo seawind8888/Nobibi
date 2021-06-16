@@ -109,13 +109,6 @@ const NoHeader: NextPage<NoHeaderProps> = props => {
                 {userInfo.userName} <DownOutlined />
               </a>
             </Dropdown>
-            <Button
-              style={{ marginLeft: '10px' }}
-              type="primary"
-              href="/topicEdit"
-            >
-              Bibi一下
-            </Button>
           </section>
         ) : (
           <section className="button-group">

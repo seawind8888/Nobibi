@@ -22,16 +22,6 @@ const NextApp: NextPage<NextContext> = (props) => {
         <meta charSet='utf-8' />
         <title>Nobibi-next</title>
         <link rel='shortcut icon' href='/static/favicon.ico' type='image/ico' />
-        <style jsx global>{`
-            * {
-              margin: 0;
-              padding: 0;
-            }
-            body {
-              font-family: Helvetica, 'Hiragino Sans GB', 'Microsoft Yahei', '微软雅黑', Arial, sans-serif;
-            }
-          `}
-        </style>
       </Head>
       <NoLayout>
         <Component {...pageProps} />

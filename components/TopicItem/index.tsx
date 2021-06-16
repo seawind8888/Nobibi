@@ -4,64 +4,71 @@ import NoAvatar from '../NoAvatar';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 import timer from '../../utils/timer';
-import { Topic } from '../../@types'
+import { Topic } from '../../@types';
 
 interface TopicInfoProps {
-  topicInfo: Topic
+  topicInfo: Topic;
+  onTagClick: (params: object) => void;
 }
 
-const TopicItem: NextPage<TopicInfoProps> = ({topicInfo}) => {
+const TopicItem: NextPage<TopicInfoProps> = ({ topicInfo, onTagClick }) => {
   return (
-    <div className='topic-container'>
-      <div className='left-item'>
+    <div className="topic-container">
+      <div className="left-item">
         <NoAvatar
           size={46}
           avatar={topicInfo.userAvatar}
           userName={topicInfo.userName}
         />
       </div>
-      <div className='right-item'>
+      <div className="right-item">
         <h1>
-          <Link 
+          <Link
             as={`/topicDetail/${topicInfo._id}`}
-            href={`/topicDetail?id=${topicInfo._id}`}>
-            <a>
-              {topicInfo.topicTitle}
-            </a>
-          
+            href={`/topicDetail?id=${topicInfo._id}`}
+          >
+            <a>{topicInfo.topicTitle}</a>
           </Link>
         </h1>
-        <div className='bottom-info'>
-          <Tag className='bottom-tag'>{topicInfo.categoryName}</Tag>
-          <span className='info-item hide-item'>{topicInfo.praiseNum || 0}赞</span>
-          <span className='hide-item'>·</span>
-          <span className='info-item'>{topicInfo.userName}</span>
-          <span className='hide-item'>·</span>
-          <span className='info-item hide-item'>{timer(topicInfo.updateTime)}</span>
+        <div className="bottom-info">
+          <Tag
+            onClick={() => onTagClick({ categoryName: topicInfo.categoryName })}
+            className="bottom-tag"
+          >
+            {topicInfo.categoryName}
+          </Tag>
+          <span className="info-item hide-item">
+            {topicInfo.praiseNum || 0}赞
+          </span>
+          <span className="hide-item">·</span>
+          <span className="info-item">{topicInfo.userName}</span>
+          <span className="hide-item">·</span>
+          <span className="info-item hide-item">
+            {timer(topicInfo.updateTime)}
+          </span>
         </div>
       </div>
-      <div >
-        {
-          topicInfo.commentNum ? <div className='comment-info-container'>
-            {topicInfo.commentNum}
-          </div> : <div/>
-        }
+      <div>
+        {topicInfo.commentNum ? (
+          <div className="comment-info-container">{topicInfo.commentNum}</div>
+        ) : (
+          <div />
+        )}
       </div>
-     
-     
     </div>
   );
 };
-  
+
 TopicItem.propTypes = {
-  topicInfo: PropTypes.object
+  topicInfo: PropTypes.object,
+  onTagClick: PropTypes.func,
 };
 
 TopicItem.defaultProps = {
   topicInfo: {
-    avatar: ''
-  }
+    avatar: '',
+  },
+  onTagClick: () => {},
 };
-
 
 export default TopicItem;
